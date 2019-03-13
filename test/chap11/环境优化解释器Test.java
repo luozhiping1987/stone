@@ -44,8 +44,7 @@ public class 环境优化解释器Test extends EnvOptInterpreter {
     while (词法分析器.peek(0) != Token.EOF) {
       ASTree 树 = 基本分析器.parse(词法分析器);
       if (!(树 instanceof NullStmnt)) {
-        ((EnvOptimizer.ASTreeOptEx)树).lookup(
-            ((EnvOptimizer.EnvEx2)环境).symbols());
+        ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
         终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
       }
     }
