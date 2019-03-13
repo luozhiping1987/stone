@@ -38,7 +38,7 @@ public class 基本语法分析器Test {
 
   @Test
   public void test分析程序() throws ParseException, IOException {
-    String 源码 = 文件功用.readFile("测试源码/分奇偶加.txt", StandardCharsets.UTF_8);
+    String 源码 = 文件功用.读文件("测试源码/分奇偶加.txt", StandardCharsets.UTF_8);
     Lexer l = 词法分析功用.新建词法分析器(源码);
 
     BasicParser 语法分析器 = new BasicParser();

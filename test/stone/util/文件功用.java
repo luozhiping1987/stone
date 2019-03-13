@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class 文件功用 {
-  public static String readFile(String path, Charset encoding)
+  public static String 读文件(String path, Charset encoding)
       throws IOException
     {
       byte[] encoded = Files.readAllBytes(Paths.get(path));

@@ -2,17 +2,12 @@ package chap6;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.StringReader;
-
 import org.junit.Test;
 
 import javassist.gluonj.util.UTester;
 import stone.BasicParser;
-import stone.Lexer;
 import stone.ParseException;
-import stone.Token;
-import stone.ast.ASTree;
-import stone.ast.NullStmnt;
+import stone.util.解释器功用;
 
 // 测试方式参考: https://github.com/chibash/gluonj/blob/fc453d9a187e60dfdaa1084a8974b8a4ba072aae/src/javassist/gluonj/util/UTester.java#L36
 public class 基本解释器Test extends BasicInterpreter {
@@ -28,19 +23,7 @@ public class 基本解释器Test extends BasicInterpreter {
   private static final String 求值 = "sum";
 
   public static Object 求值(String 源代码) throws ParseException {
-    return 求值(new BasicParser(), new BasicEnv(), 源代码);
-  }
-
-  public static Object 求值(BasicParser 基本分析器, Environment 环境, String 源代码) throws ParseException {
-    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
-    Object 终值 = null;
-    while (词法分析器.peek(0) != Token.EOF) {
-      ASTree 树 = 基本分析器.parse(词法分析器);
-      if (!(树 instanceof NullStmnt)) {
-        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
-      }
-    }
-    return 终值;
+    return 解释器功用.求值(new BasicParser(), new BasicEnv(), 源代码);
   }
 
   @Test
