@@ -2,6 +2,7 @@ package stone.util;
 
 import java.io.StringReader;
 
+import chap11.EnvOptimizer;
 import chap6.BasicEvaluator;
 import chap6.Environment;
 import stone.BasicParser;
@@ -18,6 +19,19 @@ public class 解释器功用 {
     while (词法分析器.peek(0) != Token.EOF) {
       ASTree 树 = 基本分析器.parse(词法分析器);
       if (!(树 instanceof NullStmnt)) {
+        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
+      }
+    }
+    return 终值;
+  }
+
+  public static Object 环境优化求值(BasicParser 基本分析器, Environment 环境, String 源代码) throws ParseException {
+    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
+    Object 终值 = null;
+    while (词法分析器.peek(0) != Token.EOF) {
+      ASTree 树 = 基本分析器.parse(词法分析器);
+      if (!(树 instanceof NullStmnt)) {
+        ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
         终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
       }
     }

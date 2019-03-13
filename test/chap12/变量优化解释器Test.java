@@ -41,6 +41,7 @@ public class 变量优化解释器Test extends ObjOptInterpreter {
     if (UTester.runTestWith("chap12.ObjOptimizer", "chap8.NativeEvaluator"))
       return;
 
+    // TODO: 为确认正确性, 只需fib(15)
     Object 值 = 求值(斐波那契计时_无this);
     assertTrue((值 instanceof Integer ? (Integer) 值 : -1) > 0);
     assertEquals(0, 求值(斐波那契计时_无this + 换行 + 打印 + " + \" 变量优化 无this\""));

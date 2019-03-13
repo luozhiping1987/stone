@@ -4,23 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap6.BasicEvaluator;
-import chap6.Environment;
 import chap8.Natives;
 import javassist.gluonj.util.UTester;
-import stone.BasicParser;
 import stone.ClosureParser;
-import stone.Lexer;
 import stone.ParseException;
-import stone.Token;
-import stone.ast.ASTree;
-import stone.ast.NullStmnt;
 import stone.util.文件功用;
+import stone.util.解释器功用;
 
 public class 环境优化解释器Test extends EnvOptInterpreter {
 
@@ -35,21 +28,9 @@ public class 环境优化解释器Test extends EnvOptInterpreter {
   }
 
   public static Object 求值(String 源代码) throws ParseException {
-    return 求值(new ClosureParser(), new Natives().environment(new ResizableArrayEnv()), 源代码);
+    return 解释器功用.环境优化求值(new ClosureParser(), new Natives().environment(new ResizableArrayEnv()), 源代码);
   }
 
-  public static Object 求值(BasicParser 基本分析器, Environment 环境, String 源代码) throws ParseException {
-    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
-    Object 终值 = null;
-    while (词法分析器.peek(0) != Token.EOF) {
-      ASTree 树 = 基本分析器.parse(词法分析器);
-      if (!(树 instanceof NullStmnt)) {
-        ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
-        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
-      }
-    }
-    return 终值;
-  }
 
   @Test
   public void 例程() throws Throwable {
