@@ -18,7 +18,7 @@ import stone.util.解释器功用;
 public class 原生解释器Test extends NativeInterpreter {
 
   private static final String 换行 = "\n";
-  private static final String 打印 = "print cost + \" 毫秒\"";
+  private static final String 打印 = "print cost + \" 毫秒 支持原生\"";
   private static String 斐波那契计时 = "";
   static {
     try {

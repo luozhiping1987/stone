@@ -18,7 +18,7 @@ import stone.util.解释器功用;
 public class 环境优化解释器Test extends EnvOptInterpreter {
 
   private static final String 换行 = "\n";
-  private static final String 打印 = "print \"优化后: \" + cost + \" 毫秒\"";
+  private static final String 打印 = "print cost + \" 毫秒 环境优化\"";
   private static String 斐波那契计时 = "";
   static {
     try {

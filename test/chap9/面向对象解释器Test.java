@@ -17,8 +17,6 @@ import stone.util.解释器功用;
 
 public class 面向对象解释器Test extends ClassInterpreter {
 
-  private static final String 换行 = "\n";
-  private static final String 打印 = "print sum";
   private static String 位置类 = "";
   static {
     try {
@@ -36,6 +34,5 @@ public class 面向对象解释器Test extends ClassInterpreter {
     if (UTester.runTestWith("chap9.ClassEvaluator", "chap8.NativeEvaluator", "chap7.ClosureEvaluator"))
       return;
     assertEquals(14, 求值(位置类));
-    assertEquals(0, 求值(位置类 + 换行 + 打印));
   }
 }

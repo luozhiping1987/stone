@@ -15,5 +15,5 @@ class Fib {
 }
 t = currentTime()
 f = Fib.new
-f.fib 33
+f.fib 20
 cost = currentTime() - t
