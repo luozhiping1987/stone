@@ -16,8 +16,8 @@ import stone.ParseException;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
-// 耐心: 本机测试耗时15秒.
-public class 内联缓存解释器Test extends ObjOptInterpreter {
+//耐心: 本机测试耗时15秒.
+public class 变量优化解释器Test extends ObjOptInterpreter {
 
   private static final String 换行 = "\n";
   private static final String 打印 = "print cost + \" 毫秒\"";
@@ -31,23 +31,23 @@ public class 内联缓存解释器Test extends ObjOptInterpreter {
     }
   }
 
+
   public static Object 求值(String 源代码) throws ParseException {
     return 解释器功用.求值(new ClassParser(), new Natives().environment(new ResizableArrayEnv()), 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap12.InlineCache", "chap8.NativeEvaluator"))
+    if (UTester.runTestWith("chap12.ObjOptimizer", "chap8.NativeEvaluator"))
       return;
 
-    // TODO: 两个版本是否理解有误?
     Object 值 = 求值(斐波那契计时_无this);
     assertTrue((值 instanceof Integer ? (Integer) 值 : -1) > 0);
-    assertEquals(0, 求值(斐波那契计时_无this + 换行 + 打印 + " + \" 内联缓存 无this\""));
+    assertEquals(0, 求值(斐波那契计时_无this + 换行 + 打印 + " + \" 变量优化 无this\""));
 
     值 = 求值(斐波那契计时_this);
     assertTrue((值 instanceof Integer ? (Integer) 值 : -1) > 0);
-    assertEquals(0, 求值(斐波那契计时_this + 换行 + 打印 + " + \" 内联缓存 this\""));
+    assertEquals(0, 求值(斐波那契计时_this + 换行 + 打印 + " + \" 变量优化 this\""));
   }
 
 }
