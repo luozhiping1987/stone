@@ -6,5 +6,5 @@ def fib (n) {
     }
 }
 t = currentTime()
-fib 20
+fib 33
 cost = currentTime() - t

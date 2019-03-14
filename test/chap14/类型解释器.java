@@ -28,7 +28,7 @@ public class 类型解释器 extends TypedInterpreter {
   private static final String 换行 = "\n";
   private static final String 打印 = "print cost + \" 毫秒 静态类型\"";
   private static final String 计时 = "t = currentTime()";
-  private static final String 求值 = "fib(20)";
+  private static final String 求值 = "fib(33)";
   private static final String 计时结束 = "cost = currentTime() - t";
   private static String 斐波那契 = "";
   static {
@@ -66,7 +66,7 @@ public class 类型解释器 extends TypedInterpreter {
     if (UTester.runTestWith("chap14.ToJava", "chap14.InferFuncTypes", "chap8.NativeEvaluator"))
       return;
     带类型返回值 值 = 求值(斐波那契 + 换行 + 计时 + 换行 + 求值);
-    assertEquals(6765, 值.返回值);
+    assertEquals(3524578, 值.返回值);
     值 = 求值(斐波那契 + 换行 + 计时 + 换行 + 求值 + 换行 + 计时结束 + 换行 + 打印);
     assertEquals(0, 值.返回值);
   }
