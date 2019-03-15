@@ -11,14 +11,13 @@ import org.junit.Test;
 import chap11.可变长度数组环境类;
 import chap8.原生类;
 import javassist.gluonj.util.UTester;
-import stone.类语法分析器类;
 import stone.分析例外;
+import stone.类语法分析器类;
 import stone.util.文件功用;
 import stone.util.类路径常量;
 import stone.util.解释器功用;
 
-//耐心: 本机测试耗时15秒.
-public class 变量优化解释器Test extends ObjOptInterpreter {
+public class 对象优化器类Test extends 对象优化解释器类 {
 
   private static final String 换行 = "\n";
   private static final String 打印 = "print cost + \" 毫秒\"";
@@ -39,7 +38,7 @@ public class 变量优化解释器Test extends ObjOptInterpreter {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap12.ObjOptimizer", 类路径常量.原生求值器))
+    if (UTester.runTestWith(类路径常量.对象优化器, 类路径常量.原生求值器))
       return;
 
     // TODO: 为确认正确性, 只需fib(15)

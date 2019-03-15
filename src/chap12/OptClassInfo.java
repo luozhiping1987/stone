@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import stone.ast.ClassStmnt;
 import stone.ast.DefStmnt;
 import chap11.Symbols;
-import chap12.ObjOptimizer.DefStmntEx2;
+import chap12.对象优化器类.DefStmntEx2;
 import chap6.Environment;
 import chap9.ClassInfo;
 

@@ -18,7 +18,7 @@ import chap11.环境优化器类.ParamsEx;
 import chap12.OptStoneObject.AccessException;
 
 @Require(环境优化器类.class)
-@Reviser public class ObjOptimizer {
+@Reviser public class 对象优化器类 {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {}

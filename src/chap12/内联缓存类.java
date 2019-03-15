@@ -6,9 +6,9 @@ import stone.ast.Dot;
 import chap6.Environment;
 import javassist.gluonj.*;
 
-@Require(ObjOptimizer.class)
-@Reviser public class InlineCache {
-    @Reviser public static class DotEx2 extends ObjOptimizer.DotEx {
+@Require(对象优化器类.class)
+@Reviser public class 内联缓存类 {
+    @Reviser public static class DotEx2 extends 对象优化器类.DotEx {
         protected OptClassInfo classInfo = null;
         protected boolean isField;
         protected int index;
@@ -44,7 +44,7 @@ import javassist.gluonj.*;
             throw new StoneException("bad member access: " + member, this);
         }
     }
-    @Reviser public static class AssignEx2 extends ObjOptimizer.AssignEx {
+    @Reviser public static class AssignEx2 extends 对象优化器类.AssignEx {
         protected OptClassInfo classInfo = null;
         protected int index;
         public AssignEx2(List<语法树类> c) { super(c); }

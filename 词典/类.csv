@@ -24,3 +24,5 @@ ClassInterpreter,类解释器类
 ClassParser,类语法分析器类
 ArrayEvaluator,数组求值器类
 EnvOptimizer,环境优化器类
+InlineCache,内联缓存类
+ObjOptimizer,对象优化器类

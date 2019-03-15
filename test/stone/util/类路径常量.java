@@ -8,4 +8,6 @@ public class 类路径常量 {
   public static final String 类求值器 = "chap9.类求值器类";
   public static final String 数组求值器 = "chap10.数组求值器类";
   public static final String 环境优化器 = "chap11.环境优化器类";
+  public static final String 内联缓存 = "chap12.内联缓存类";
+  public static final String 对象优化器 = "chap12.对象优化器类";
 }
