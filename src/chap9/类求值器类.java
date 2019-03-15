@@ -16,7 +16,7 @@ import chap9.StoneObject.AccessException;
 @Reviser public class 类求值器类 {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             ClassInfo ci = new ClassInfo(this, env);
             ((EnvEx)env).put(name(), ci);
             return name();
@@ -24,15 +24,15 @@ import chap9.StoneObject.AccessException;
     }
     @Reviser public static class ClassBodyEx extends ClassBody {
         public ClassBodyEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             for (语法树类 t: this)
-                ((语法树执行类)t).eval(env);
+                ((语法树执行类)t).求值(env);
             return null;
         }
     }
     @Reviser public static class DotEx extends Dot {
         public DotEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env, Object value) {
+        public Object 求值(环境类 env, Object value) {
             String member = name();
             if (value instanceof ClassInfo) {
                 if ("new".equals(member)) {
@@ -54,7 +54,7 @@ import chap9.StoneObject.AccessException;
         protected void initObject(ClassInfo ci, 环境类 env) {
             if (ci.superClass() != null)
                 initObject(ci.superClass(), env);
-            ((ClassBodyEx)ci.body()).eval(env);
+            ((ClassBodyEx)ci.body()).求值(env);
         }
     }
     @Reviser public static class AssignEx extends 基本求值器类.BinaryEx {

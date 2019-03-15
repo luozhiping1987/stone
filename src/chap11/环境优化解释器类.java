@@ -25,7 +25,7 @@ public class 环境优化解释器类 {
             if (!(t instanceof 空声明类)) {
                 ((环境优化器类.语法树优化执行类)t).lookup(
                         ((环境优化器类.环境执行类2)env).symbols());
-                Object r = ((基本求值器类.语法树执行类)t).eval(env);
+                Object r = ((基本求值器类.语法树执行类)t).求值(env);
                 System.out.println("=> " + r);
             }
         }

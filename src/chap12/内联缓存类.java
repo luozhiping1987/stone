@@ -13,7 +13,7 @@ import javassist.gluonj.*;
         protected boolean isField;
         protected int index;
         public DotEx2(List<语法树类> c) { super(c); }
-        @Override public Object eval(环境类 env, Object value) {
+        @Override public Object 求值(环境类 env, Object value) {
             if (value instanceof OptStoneObject) {
                 OptStoneObject target = (OptStoneObject)value;
                 if (target.classInfo() != classInfo)
@@ -24,7 +24,7 @@ import javassist.gluonj.*;
                     return target.method(index);
             }
             else
-                return super.eval(env, value);
+                return super.求值(env, value);
         }
         protected void updateCache(OptStoneObject target) {
             String member = name();

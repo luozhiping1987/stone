@@ -11,9 +11,9 @@ import chap7.函数求值器类;
 @Reviser public class 原生求值器类 {
     @Reviser public static class NativeArgEx extends 函数求值器类.ArgumentsEx {
         public NativeArgEx(List<语法树类> c) { super(c); }
-        @Override public Object eval(环境类 callerEnv, Object value) {
+        @Override public Object 求值(环境类 callerEnv, Object value) {
             if (!(value instanceof NativeFunction))
-                return super.eval(callerEnv, value);
+                return super.求值(callerEnv, value);
 
             NativeFunction func = (NativeFunction)value;
             int nparams = func.numOfParameters();
@@ -23,7 +23,7 @@ import chap7.函数求值器类;
             int num = 0;
             for (语法树类 a: this) {
                 语法树执行类 ae = (语法树执行类)a;
-                args[num++] = ae.eval(callerEnv);
+                args[num++] = ae.求值(callerEnv);
             }
             return func.invoke(args, this);
         }

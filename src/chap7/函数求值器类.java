@@ -17,7 +17,7 @@ import chap6.基本求值器类.BlockEx;
     }
     @Reviser public static class DefStmntEx extends DefStmnt {
         public DefStmntEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             ((EnvEx)env).putNew(name(), new Function(parameters(), body(), env));
             return name();
         }
@@ -29,25 +29,25 @@ import chap6.基本求值器类.BlockEx;
             return (Postfix)子(子个数() - nest - 1);
         }
         public boolean hasPostfix(int nest) { return 子个数() - nest > 1; } 
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             return evalSubExpr(env, 0);
         }
         public Object evalSubExpr(环境类 env, int nest) {
             if (hasPostfix(nest)) {
                 Object target = evalSubExpr(env, nest + 1);
-                return ((PostfixEx)postfix(nest)).eval(env, target);
+                return ((PostfixEx)postfix(nest)).求值(env, target);
             }
             else
-                return ((语法树执行类)operand()).eval(env);
+                return ((语法树执行类)operand()).求值(env);
         }
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
         public PostfixEx(List<语法树类> c) { super(c); }
-        public abstract Object eval(环境类 env, Object value);
+        public abstract Object 求值(环境类 env, Object value);
     }
     @Reviser public static class ArgumentsEx extends Arguments {
         public ArgumentsEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 callerEnv, Object value) {
+        public Object 求值(环境类 callerEnv, Object value) {
             if (!(value instanceof Function))
                 throw new StoneException("bad function", this);
             Function func = (Function)value;
@@ -57,14 +57,14 @@ import chap6.基本求值器类.BlockEx;
             环境类 newEnv = func.makeEnv();
             int num = 0;
             for (语法树类 a: this)
-                ((ParamsEx)params).eval(newEnv, num++,
-                                        ((语法树执行类)a).eval(callerEnv));
-            return ((BlockEx)func.body()).eval(newEnv);
+                ((ParamsEx)params).求值(newEnv, num++,
+                                        ((语法树执行类)a).求值(callerEnv));
+            return ((BlockEx)func.body()).求值(newEnv);
         }
     }
     @Reviser public static class ParamsEx extends ParameterList {
         public ParamsEx(List<语法树类> c) { super(c); }
-        public void eval(环境类 env, int index, Object value) {
+        public void 求值(环境类 env, int index, Object value) {
             ((EnvEx)env).putNew(name(index), value);
         }
     }

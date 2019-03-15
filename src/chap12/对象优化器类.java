@@ -22,7 +22,7 @@ import chap12.OptStoneObject.AccessException;
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {}
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             Symbols methodNames = new MemberSymbols(((环境执行类2)env).symbols(),
                                                     MemberSymbols.METHOD);
             Symbols fieldNames = new MemberSymbols(methodNames,
@@ -42,10 +42,10 @@ import chap12.OptStoneObject.AccessException;
     }
     @Reviser public static class ClassBodyEx extends ClassBody {
         public ClassBodyEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             for (语法树类 t: this)
                 if (!(t instanceof DefStmnt))
-                    ((语法树执行类)t).eval(env);
+                    ((语法树执行类)t).求值(env);
             return null;
         }
         public void lookup(Symbols syms, Symbols methodNames,
@@ -80,7 +80,7 @@ import chap12.OptStoneObject.AccessException;
     }
     @Reviser public static class DotEx extends Dot {
         public DotEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env, Object value) {
+        public Object 求值(环境类 env, Object value) {
             String member = name();
             if (value instanceof OptClassInfo) {
                 if ("new".equals(member)) {
@@ -104,12 +104,12 @@ import chap12.OptStoneObject.AccessException;
         {
             if (ci.superClass() != null)
                 initObject(ci.superClass(), obj, env);
-            ((ClassBodyEx)ci.body()).eval(env);
+            ((ClassBodyEx)ci.body()).求值(env);
         }
     }
     @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         public NameEx2(词类 t) { super(t); }
-        @Override public Object eval(环境类 env) {
+        @Override public Object 求值(环境类 env) {
             if (index == UNKNOWN)
                 return env.get(name());
             else if (nest == MemberSymbols.FIELD)

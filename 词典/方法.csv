@@ -5,7 +5,7 @@ ASTLeaf.token,词
 Lexer.peek,瞄
 ASTree.parse,分析
 Natives.environment,环境
-ASTreeEx.eval,求值
+*.eval,求值
 ASTreeOptEx.lookup,查找
 EnvEx2.symbols,所有符号
 ASTreeTypeEx.typeCheck,类型检查

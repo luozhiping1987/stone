@@ -29,7 +29,7 @@ import stone.ast.*;
     }
     @Reviser public static class DefStmntVmEx extends 环境优化器类.DefStmntEx {
         public DefStmntVmEx(List<语法树类> c) { super(c); }
-        @Override public Object eval(环境类 env) {
+        @Override public Object 求值(环境类 env) {
             String funcName = name();
             EnvEx3 vmenv = (EnvEx3)env;
             Code code = vmenv.code();
@@ -55,7 +55,7 @@ import stone.ast.*;
     }
     @Reviser public static class ParamsEx2 extends 环境优化器类.ParamsEx {
         public ParamsEx2(List<语法树类> c) { super(c); }
-        @Override public void eval(环境类 env, int index, Object value) {
+        @Override public void 求值(环境类 env, int index, Object value) {
             StoneVM vm = ((EnvEx3)env).stoneVM();
             vm.stack()[offsets[index]] = value;
         }
@@ -195,7 +195,7 @@ import stone.ast.*;
             c.add(encodeOffset(c.frameSize));
             c.add(encodeRegister(c.nextReg++));
         }
-        public Object eval(环境类 env, Object value) {
+        public Object 求值(环境类 env, Object value) {
             if (!(value instanceof VmFunction))
                 throw new StoneException("bad function", this);
             VmFunction func = (VmFunction)value;
@@ -204,7 +204,7 @@ import stone.ast.*;
                 throw new StoneException("bad number of arguments", this);
             int num = 0;
             for (语法树类 a: this)
-                ((ParamsEx2)params).eval(env, num++, ((语法树执行类)a).eval(env)); 
+                ((ParamsEx2)params).求值(env, num++, ((语法树执行类)a).求值(env)); 
             StoneVM svm = ((EnvEx3)env).stoneVM();
             svm.run(func.entry());
             return svm.stack()[0];

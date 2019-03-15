@@ -36,7 +36,7 @@ import chap7.闭包求值器类;
             index = syms.putNew(name());
             size = FunEx.lookup(syms, parameters(), body());
         }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             ((环境执行类2)env).put(0, index, new OptFunction(parameters(), body(),
                                                         env, size));
             return name();
@@ -48,7 +48,7 @@ import chap7.闭包求值器类;
         public void lookup(Symbols syms) {
             size = lookup(syms, parameters(), body());
         }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             return new OptFunction(parameters(), body(), env, size);
         }
         public static int lookup(Symbols syms, ParameterList params,
@@ -69,7 +69,7 @@ import chap7.闭包求值器类;
             for (int i = 0; i < s; i++)
                 offsets[i] = syms.putNew(name(i));
         }
-        public void eval(环境类 env, int index, Object value) {
+        public void 求值(环境类 env, int index, Object value) {
             ((环境执行类2)env).put(0, offsets[index], value);
         }
     }
@@ -91,7 +91,7 @@ import chap7.闭包求值器类;
             nest = loc.nest;
             index = loc.index;
         }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             if (index == UNKNOWN)
                 return env.get(name());
             else

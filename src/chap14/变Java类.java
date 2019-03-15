@@ -218,7 +218,7 @@ import static javassist.gluonj.GluonJ.revise;
     }
     @Reviser public static class DefStmntEx3 extends 类型检查器类.DefStmntEx2 {
         public DefStmntEx3(List<语法树类> c) { super(c); }
-        @Override public Object eval(环境类 env) {
+        @Override public Object 求值(环境类 env) {
             String funcName = name();
             JavaFunction func = new JavaFunction(funcName, translate(null),
                                                  ((EnvEx3)env).javaLoader());
@@ -285,7 +285,7 @@ import static javassist.gluonj.GluonJ.revise;
                                           funcType.parameterTypes[i]));
             return code.append(')').toString();
         }
-        public Object eval(环境类 env, Object value) {
+        public Object 求值(环境类 env, Object value) {
             if (!(value instanceof JavaFunction))
                 throw new StoneException("bad function", this);
             JavaFunction func = (JavaFunction)value;
@@ -293,7 +293,7 @@ import static javassist.gluonj.GluonJ.revise;
             args[0] = env;
             int num = 1;
             for (语法树类 a: this)
-                args[num++] = ((chap6.基本求值器类.语法树执行类)a).eval(env); 
+                args[num++] = ((chap6.基本求值器类.语法树执行类)a).求值(env); 
             return func.invoke(args);
         }
     }

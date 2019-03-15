@@ -9,7 +9,7 @@ import chap6.环境类;
 @Reviser public class 闭包求值器类 {
     @Reviser public static class FunEx extends Fun {
         public FunEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             return new Function(parameters(), body(), env);
         }
     }

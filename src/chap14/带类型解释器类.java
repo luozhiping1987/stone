@@ -30,7 +30,7 @@ public class 带类型解释器类 {
                                         ((环境优化器类.环境执行类2)env).symbols());
                 类型信息类 type
                     = ((类型检查器类.语法树类型执行类)tree).typeCheck(typeEnv);
-                Object r = ((基本求值器类.语法树执行类)tree).eval(env);
+                Object r = ((基本求值器类.语法树执行类)tree).求值(env);
                 System.out.println("=> " + r + " : " + type);
             }
         }

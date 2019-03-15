@@ -14,20 +14,20 @@ import chap7.函数求值器类.PrimaryEx;
 @Reviser public class 数组求值器类 {
     @Reviser public static class ArrayLitEx extends ArrayLiteral {
         public ArrayLitEx(List<语法树类> list) { super(list); }
-        public Object eval(环境类 env) {
+        public Object 求值(环境类 env) {
             int s = 子个数();
             Object[] res = new Object[s];
             int i = 0;
             for (语法树类 t: this)
-                res[i++] = ((语法树执行类)t).eval(env);
+                res[i++] = ((语法树执行类)t).求值(env);
             return res;
         }
     }
     @Reviser public static class ArrayRefEx extends ArrayRef {
         public ArrayRefEx(List<语法树类> c) { super(c); }
-        public Object eval(环境类 env, Object value) {
+        public Object 求值(环境类 env, Object value) {
             if (value instanceof Object[]) {
-                Object index = ((语法树执行类)index()).eval(env);
+                Object index = ((语法树执行类)index()).求值(env);
                 if (index instanceof Integer)
                     return ((Object[])value)[(Integer)index];
             }
@@ -46,7 +46,7 @@ import chap7.函数求值器类.PrimaryEx;
                     Object a = ((PrimaryEx)le).evalSubExpr(env, 1);
                     if (a instanceof Object[]) {
                         ArrayRef aref = (ArrayRef)p.postfix(0);
-                        Object index = ((语法树执行类)aref.index()).eval(env);
+                        Object index = ((语法树执行类)aref.index()).求值(env);
                         if (index instanceof Integer) {
                             ((Object[])a)[(Integer)index] = rvalue;
                             return rvalue;

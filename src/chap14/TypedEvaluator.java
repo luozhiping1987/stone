@@ -35,8 +35,8 @@ import chap6.基本求值器类.语法树执行类;
             index = syms.putNew(name());
             ((语法树优化执行类)initializer()).lookup(syms);
         }
-        public Object eval(环境类 env) {
-            Object value = ((语法树执行类)initializer()).eval(env);
+        public Object 求值(环境类 env) {
+            Object value = ((语法树执行类)initializer()).求值(env);
             ((环境优化器类.环境执行类2)env).put(0, index, value);
             return value;
         }
