@@ -2,7 +2,7 @@ package stone.util;
 
 import java.io.StringReader;
 
-import chap11.EnvOptimizer;
+import chap11.环境优化器类;
 import chap14.TypeChecker;
 import chap14.TypeEnv;
 import chap14.TypeException;
@@ -35,7 +35,7 @@ public class 解释器功用 {
     while (词法分析器.瞄(0) != 词类.EOF) {
       语法树类 树 = 基本分析器.分析(词法分析器);
       if (!(树 instanceof NullStmnt)) {
-        ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
+        ((环境优化器类.ASTreeOptEx) 树).lookup(((环境优化器类.EnvEx2) 环境).symbols());
         终值 = ((基本求值器类.ASTreeEx) 树).eval(环境);
       }
     }
@@ -50,7 +50,7 @@ public class 解释器功用 {
     while (词法分析器.瞄(0) != 词类.EOF) {
       语法树类 树 = 基本分析器.分析(词法分析器);
       if (!(树 instanceof NullStmnt)) {
-        ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
+        ((环境优化器类.ASTreeOptEx) 树).lookup(((环境优化器类.EnvEx2) 环境).symbols());
 
         类型 = ((TypeChecker.ASTreeTypeEx) 树).typeCheck(类型环境);
         终值 = ((基本求值器类.ASTreeEx) 树).eval(环境);

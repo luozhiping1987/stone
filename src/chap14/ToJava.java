@@ -2,7 +2,7 @@ package chap14;
 import java.util.ArrayList;
 import java.util.List;
 import chap11.ArrayEnv;
-import chap11.EnvOptimizer;
+import chap11.环境优化器类;
 import chap6.Environment;
 import chap7.函数求值器类;
 import stone.StoneException;
@@ -48,7 +48,7 @@ import static javassist.gluonj.GluonJ.revise;
             return RESULT + "=0;";
     }
 
-    @Reviser public static interface EnvEx3 extends EnvOptimizer.EnvEx2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.EnvEx2 {
         JavaLoader javaLoader();
     }
     @Reviser public static class ArrayEnvEx extends ArrayEnv {

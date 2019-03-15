@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap11.ResizableArrayEnv;
+import chap11.可变长度数组环境类;
 import javassist.gluonj.util.UTester;
 import stone.TypedParser;
 import stone.分析例外;
@@ -34,7 +34,7 @@ public class 类型解释器 extends TypedInterpreter {
   public static 带类型返回值 求值(String 源代码) throws 分析例外, TypeException {
     TypeEnv te = new TypeEnv();
     return 解释器功用.带类型求值(new TypedParser(),
-        new TypedNatives(te).环境(new ResizableArrayEnv()), te, 源代码);
+        new TypedNatives(te).环境(new 可变长度数组环境类()), te, 源代码);
   }
 
   @Test

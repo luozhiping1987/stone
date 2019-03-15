@@ -10,14 +10,14 @@ import chap6.基本求值器类;
 import chap6.基本求值器类.ASTreeEx;
 import chap7.函数求值器类.PrimaryEx;
 import chap11.ArrayEnv;
-import chap11.EnvOptimizer;
+import chap11.环境优化器类;
 import chap11.Symbols;
-import chap11.EnvOptimizer.ASTreeOptEx;
-import chap11.EnvOptimizer.EnvEx2;
-import chap11.EnvOptimizer.ParamsEx;
+import chap11.环境优化器类.ASTreeOptEx;
+import chap11.环境优化器类.EnvEx2;
+import chap11.环境优化器类.ParamsEx;
 import chap12.OptStoneObject.AccessException;
 
-@Require(EnvOptimizer.class)
+@Require(环境优化器类.class)
 @Reviser public class ObjOptimizer {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
@@ -67,7 +67,7 @@ import chap12.OptStoneObject.AccessException;
             }
         }
     }
-    @Reviser public static class DefStmntEx2 extends EnvOptimizer.DefStmntEx {
+    @Reviser public static class DefStmntEx2 extends 环境优化器类.DefStmntEx {
         public DefStmntEx2(List<语法树类> c) { super(c); }
         public int locals() { return size; }
         public void lookupAsMethod(Symbols syms) {
@@ -107,7 +107,7 @@ import chap12.OptStoneObject.AccessException;
             ((ClassBodyEx)ci.body()).eval(env);
         }
     }
-    @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
+    @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         public NameEx2(词类 t) { super(t); }
         @Override public Object eval(Environment env) {
             if (index == UNKNOWN)

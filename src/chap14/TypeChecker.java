@@ -1,7 +1,7 @@
 package chap14;
 import java.util.List;
 import chap7.函数求值器类;
-import chap11.EnvOptimizer;
+import chap11.环境优化器类;
 import stone.词类;
 import static javassist.gluonj.GluonJ.revise;
 import stone.ast.*;
@@ -26,7 +26,7 @@ import javassist.gluonj.*;
             return TypeInfo.STRING;
         }
     }
-    @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
+    @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         protected TypeInfo type;
         public NameEx2(词类 t) { super(t); }
         public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {

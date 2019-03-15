@@ -1,7 +1,7 @@
 package chap13;
-import chap11.ResizableArrayEnv;
+import chap11.可变长度数组环境类;
 
-public class StoneVMEnv extends ResizableArrayEnv implements HeapMemory {
+public class StoneVMEnv extends 可变长度数组环境类 implements HeapMemory {
     protected StoneVM svm;
     protected Code code;
     public StoneVMEnv(int codeSize, int stackSize, int stringsSize) {

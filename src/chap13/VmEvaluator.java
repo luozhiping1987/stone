@@ -2,7 +2,7 @@ package chap13;
 import java.util.List;
 import stone.StoneException;
 import stone.词类;
-import chap11.EnvOptimizer;
+import chap11.环境优化器类;
 import chap6.Environment;
 import chap6.基本求值器类.ASTreeEx;
 import chap7.函数求值器类;
@@ -11,9 +11,9 @@ import static chap13.Opcode.*;
 import static javassist.gluonj.GluonJ.revise;
 import stone.ast.*;
 
-@Require(EnvOptimizer.class)
+@Require(环境优化器类.class)
 @Reviser public class VmEvaluator {
-    @Reviser public static interface EnvEx3 extends EnvOptimizer.EnvEx2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.EnvEx2 {
         StoneVM stoneVM();
         Code code();
     }
@@ -27,7 +27,7 @@ import stone.ast.*;
                 ((ASTreeVmEx)t).compile(c);
         }
     }
-    @Reviser public static class DefStmntVmEx extends EnvOptimizer.DefStmntEx {
+    @Reviser public static class DefStmntVmEx extends 环境优化器类.DefStmntEx {
         public DefStmntVmEx(List<语法树类> c) { super(c); }
         @Override public Object eval(Environment env) {
             String funcName = name();
@@ -53,7 +53,7 @@ import stone.ast.*;
             c.add(RETURN);
         }
     }
-    @Reviser public static class ParamsEx2 extends EnvOptimizer.ParamsEx {
+    @Reviser public static class ParamsEx2 extends 环境优化器类.ParamsEx {
         public ParamsEx2(List<语法树类> c) { super(c); }
         @Override public void eval(Environment env, int index, Object value) {
             StoneVM vm = ((EnvEx3)env).stoneVM();
@@ -84,7 +84,7 @@ import stone.ast.*;
             c.add(encodeRegister(c.nextReg++));
         }
     }
-    @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
+    @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         public NameEx2(词类 t) { super(t); }
         public void compile(Code c) {
             if (nest > 0) {

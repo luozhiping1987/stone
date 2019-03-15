@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap11.ResizableArrayEnv;
+import chap11.可变长度数组环境类;
 import chap8.原生类;
 import javassist.gluonj.util.UTester;
 import stone.类语法分析器类;
@@ -33,7 +33,7 @@ public class 内联缓存解释器Test extends ObjOptInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new 类语法分析器类(), new 原生类().环境(new ResizableArrayEnv()), 源代码);
+    return 解释器功用.求值(new 类语法分析器类(), new 原生类().环境(new 可变长度数组环境类()), 源代码);
   }
 
   @Test

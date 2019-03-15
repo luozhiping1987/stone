@@ -23,3 +23,4 @@ ClassEvaluator,类求值器类
 ClassInterpreter,类解释器类
 ClassParser,类语法分析器类
 ArrayEvaluator,数组求值器类
+EnvOptimizer,环境优化器类

@@ -1,6 +1,6 @@
 package chap11;
 import stone.StoneException;
-import chap11.EnvOptimizer.EnvEx2;
+import chap11.环境优化器类.EnvEx2;
 import chap6.Environment;
 
 public class ArrayEnv implements Environment {

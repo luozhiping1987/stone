@@ -11,7 +11,7 @@ import chap6.基本求值器类;
 import chap7.闭包求值器类;
 
 @Require(闭包求值器类.class)
-@Reviser public class EnvOptimizer {
+@Reviser public class 环境优化器类 {
     @Reviser public static interface EnvEx2 extends Environment {
         Symbols symbols();
         void put(int nest, int index, Object value);

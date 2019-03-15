@@ -1,11 +1,11 @@
 package chap11;
 import java.util.Arrays;
 import chap6.Environment;
-import chap11.EnvOptimizer.EnvEx2;
+import chap11.环境优化器类.EnvEx2;
 
-public class ResizableArrayEnv extends ArrayEnv {
+public class 可变长度数组环境类 extends ArrayEnv {
     protected Symbols names;
-    public ResizableArrayEnv() {
+    public 可变长度数组环境类() {
         super(10, null);
         names = new Symbols();
     }
