@@ -5,11 +5,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import chap7.嵌套环境类;
-import chap8.Natives;
+import chap8.原生类;
 import chap9.ClassInterpreter;
 import javassist.gluonj.util.UTester;
 import stone.ClassParser;
 import stone.分析例外;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 public class 数组解释器Test extends ClassInterpreter {
@@ -23,13 +24,13 @@ public class 数组解释器Test extends ClassInterpreter {
   private static final String 多层数组取值 = "b[1][0] + \": \" + b[1][1]";
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClassParser(), new Natives().environment(new 嵌套环境类()), 源代码);
+    return 解释器功用.求值(new ClassParser(), new 原生类().环境(new 嵌套环境类()), 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
     if (UTester.runTestWith("chap9.ClassEvaluator", "chap10.ArrayEvaluator",
-        "chap8.NativeEvaluator", "chap7.闭包求值器类"))
+        类路径常量.原生求值器, 类路径常量.闭包求值器))
       return;
     // assertEquals("a", 求值(数字数组));
     assertEquals(3, 求值(数字数组 + 换行 + 数字数组取值));

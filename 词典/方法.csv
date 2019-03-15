@@ -4,3 +4,4 @@ ASTree.child,子
 ASTLeaf.token,词
 Lexer.peek,瞄
 ASTree.parse,分析
+Natives.environment,环境

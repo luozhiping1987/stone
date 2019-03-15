@@ -11,6 +11,7 @@ import javassist.gluonj.util.UTester;
 import stone.分析例外;
 import stone.闭包语法分析器类;
 import stone.util.文件功用;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 public class 闭包解释器Test extends 闭包解释器类 {
@@ -35,7 +36,7 @@ public class 闭包解释器Test extends 闭包解释器类 {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap7.闭包求值器类"))
+    if (UTester.runTestWith(类路径常量.闭包求值器))
       return;
     // assertEquals("counter", 求值(闭包累加函数));
     assertEquals(1, 求值(嵌套闭包累加函数 + 换行 + 求值1));

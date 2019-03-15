@@ -7,11 +7,12 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap8.Natives;
+import chap8.原生类;
 import javassist.gluonj.util.UTester;
 import stone.函数语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 public class 虚拟机解释器Test extends VmInterpreter {
@@ -31,12 +32,12 @@ public class 虚拟机解释器Test extends VmInterpreter {
 
   public static Object 求值(String 源代码) throws 分析例外 {
     return 解释器功用.环境优化求值(new 函数语法分析器类(),
-        new Natives().environment(new StoneVMEnv(100000, 100000, 1000)), 源代码);
+        new 原生类().环境(new StoneVMEnv(100000, 100000, 1000)), 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap13.VmEvaluator", "chap8.NativeEvaluator"))
+    if (UTester.runTestWith("chap13.VmEvaluator", 类路径常量.原生求值器))
       return;
     assertEquals(6765, 求值(斐波那契 + 换行 + 计时 + 换行 + 求值));
     assertEquals(0, 求值(斐波那契 + 换行 + 计时 + 换行 + 求值 + 换行 + 计时结束 + 换行 + 打印));

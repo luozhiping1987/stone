@@ -4,17 +4,17 @@ import javax.swing.JOptionPane;
 import stone.StoneException;
 import chap6.Environment;
 
-public class Natives {
-    public Environment environment(Environment env) {
+public class 原生类 {
+    public Environment 环境(Environment env) {
         appendNatives(env);
         return env;
     }
     protected void appendNatives(Environment env) {
-        append(env, "print", Natives.class, "print", Object.class);
-        append(env, "read", Natives.class, "read");
-        append(env, "length", Natives.class, "length", String.class);
-        append(env, "toInt", Natives.class, "toInt", Object.class);
-        append(env, "currentTime", Natives.class, "currentTime");
+        append(env, "print", 原生类.class, "print", Object.class);
+        append(env, "read", 原生类.class, "read");
+        append(env, "length", 原生类.class, "length", String.class);
+        append(env, "toInt", 原生类.class, "toInt", Object.class);
+        append(env, "currentTime", 原生类.class, "currentTime");
     }
     protected void append(Environment env, String name, Class<?> clazz,
                           String methodName, Class<?> ... params) {

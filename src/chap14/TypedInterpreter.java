@@ -16,7 +16,7 @@ public class TypedInterpreter {
     public static void main(String[] args) throws 分析例外, TypeException {
         TypeEnv te = new TypeEnv();
         run(new TypedParser(),
-            new TypedNatives(te).environment(new ResizableArrayEnv()),
+            new TypedNatives(te).环境(new ResizableArrayEnv()),
             te);
     }
     public static void run(基本语法分析器类 bp, Environment env, TypeEnv typeEnv)

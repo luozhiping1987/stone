@@ -11,6 +11,7 @@ import javassist.gluonj.util.UTester;
 import stone.函数语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 public class 函数解释器Test extends 函数解释器类 {
@@ -31,7 +32,7 @@ public class 函数解释器Test extends 函数解释器类 {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap7.函数求值器类"))
+    if (UTester.runTestWith(类路径常量.函数求值器))
       return;
     assertEquals("fib", 求值(斐波那契函数));
     assertEquals(6765, 求值(斐波那契函数 + 换行 + 求值));

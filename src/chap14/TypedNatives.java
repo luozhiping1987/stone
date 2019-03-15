@@ -1,9 +1,9 @@
 package chap14;
 import chap6.Environment;
-import chap8.Natives;
+import chap8.原生类;
 import chap11.EnvOptimizer.EnvEx2;
 
-public class TypedNatives extends Natives {
+public class TypedNatives extends 原生类 {
     protected TypeEnv typeEnv;
     public TypedNatives(TypeEnv te) { typeEnv = te; }
     protected void append(Environment env, String name, Class<?> clazz,

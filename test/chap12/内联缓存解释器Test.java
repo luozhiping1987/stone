@@ -9,11 +9,12 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
 import chap11.ResizableArrayEnv;
-import chap8.Natives;
+import chap8.原生类;
 import javassist.gluonj.util.UTester;
 import stone.ClassParser;
 import stone.分析例外;
 import stone.util.文件功用;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 // 耐心: 本机测试耗时15秒.
@@ -32,12 +33,12 @@ public class 内联缓存解释器Test extends ObjOptInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClassParser(), new Natives().environment(new ResizableArrayEnv()), 源代码);
+    return 解释器功用.求值(new ClassParser(), new 原生类().环境(new ResizableArrayEnv()), 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap12.InlineCache", "chap8.NativeEvaluator"))
+    if (UTester.runTestWith("chap12.InlineCache", 类路径常量.原生求值器))
       return;
 
     // TODO: 两个版本是否理解有误?

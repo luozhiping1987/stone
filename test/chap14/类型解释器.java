@@ -9,10 +9,11 @@ import org.junit.Test;
 
 import chap11.ResizableArrayEnv;
 import javassist.gluonj.util.UTester;
-import stone.分析例外;
 import stone.TypedParser;
+import stone.分析例外;
 import stone.util.带类型返回值;
 import stone.util.文件功用;
+import stone.util.类路径常量;
 import stone.util.解释器功用;
 
 public class 类型解释器 extends TypedInterpreter {
@@ -33,12 +34,12 @@ public class 类型解释器 extends TypedInterpreter {
   public static 带类型返回值 求值(String 源代码) throws 分析例外, TypeException {
     TypeEnv te = new TypeEnv();
     return 解释器功用.带类型求值(new TypedParser(),
-        new TypedNatives(te).environment(new ResizableArrayEnv()), te, 源代码);
+        new TypedNatives(te).环境(new ResizableArrayEnv()), te, 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap14.ToJava", "chap14.InferFuncTypes", "chap8.NativeEvaluator"))
+    if (UTester.runTestWith("chap14.ToJava", "chap14.InferFuncTypes", 类路径常量.原生求值器))
       return;
     带类型返回值 值 = 求值(斐波那契 + 换行 + 计时 + 换行 + 求值);
     assertEquals(6765, 值.返回值);

@@ -8,7 +8,7 @@ import chap6.基本求值器类.ASTreeEx;
 import chap7.函数求值器类;
 
 @Require(函数求值器类.class)
-@Reviser public class NativeEvaluator {
+@Reviser public class 原生求值器类 {
     @Reviser public static class NativeArgEx extends 函数求值器类.ArgumentsEx {
         public NativeArgEx(List<语法树类> c) { super(c); }
         @Override public Object eval(Environment callerEnv, Object value) {
