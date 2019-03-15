@@ -31,7 +31,7 @@ public class 面向对象解释器Test extends ClassInterpreter {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap9.ClassEvaluator", "chap8.NativeEvaluator", "chap7.ClosureEvaluator"))
+    if (UTester.runTestWith("chap9.ClassEvaluator", "chap8.NativeEvaluator", "chap7.闭包求值器类"))
       return;
     assertEquals(14, 求值(位置类));
   }

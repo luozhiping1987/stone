@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import chap7.嵌套环境类;
 import javassist.gluonj.util.UTester;
-import stone.闭包语法分析器类;
 import stone.分析例外;
+import stone.闭包语法分析器类;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
@@ -33,7 +33,7 @@ public class 原生解释器Test extends NativeInterpreter {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap8.NativeEvaluator", "chap7.ClosureEvaluator"))
+    if (UTester.runTestWith("chap8.NativeEvaluator", "chap7.闭包求值器类"))
       return;
     Object 值 = 求值(斐波那契计时);
     assertTrue((值 instanceof Integer ? (Integer) 值 : -1) > 0);

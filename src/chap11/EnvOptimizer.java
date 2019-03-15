@@ -8,9 +8,9 @@ import stone.ast.*;
 import chap11.Symbols.Location;
 import chap6.Environment;
 import chap6.基本求值器类;
-import chap7.ClosureEvaluator;
+import chap7.闭包求值器类;
 
-@Require(ClosureEvaluator.class)
+@Require(闭包求值器类.class)
 @Reviser public class EnvOptimizer {
     @Reviser public static interface EnvEx2 extends Environment {
         Symbols symbols();

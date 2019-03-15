@@ -6,7 +6,7 @@ import stone.ast.Fun;
 import chap6.Environment;
 
 @Require(函数求值器类.class)
-@Reviser public class ClosureEvaluator {
+@Reviser public class 闭包求值器类 {
     @Reviser public static class FunEx extends Fun {
         public FunEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env) {

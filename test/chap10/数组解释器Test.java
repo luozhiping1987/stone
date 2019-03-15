@@ -29,7 +29,7 @@ public class 数组解释器Test extends ClassInterpreter {
   @Test
   public void 例程() throws Throwable {
     if (UTester.runTestWith("chap9.ClassEvaluator", "chap10.ArrayEvaluator",
-        "chap8.NativeEvaluator", "chap7.ClosureEvaluator"))
+        "chap8.NativeEvaluator", "chap7.闭包求值器类"))
       return;
     // assertEquals("a", 求值(数字数组));
     assertEquals(3, 求值(数字数组 + 换行 + 数字数组取值));

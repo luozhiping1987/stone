@@ -15,3 +15,4 @@ NestedEnv,嵌套环境类
 FuncEvaluator,函数求值器类
 ClosureInterpreter,闭包解释器类
 ClosureParser,闭包语法分析器类
+ClosureEvaluator,闭包求值器类
