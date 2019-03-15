@@ -4,7 +4,7 @@ BasicParser,基本语法分析器类
 ASTree,语法树类
 BinaryExpr,二元表达式
 ASTLeaf,语法树叶类
-WhileStmnt,While声明
+WhileStmnt,While声明类
 ParseException,分析例外
 BasicInterpreter,基本解释器类
 BasicEnv,基本环境类
@@ -35,3 +35,12 @@ TypedParser,带类型语法分析器类
 TypedNatives,带类型原生类
 ToJava,变Java
 InferFuncTypes,推导函数类型类
+TypeException,类型例外
+TypeInfo,类型信息类
+Environment,环境类
+NullStmnt,空声明类
+ASTreeEx,语法树执行类
+ASTreeOptEx,语法树优化执行类
+EnvEx2,环境执行类2
+TypeChecker,类型检查器类
+ASTreeTypeEx,语法树类型执行类

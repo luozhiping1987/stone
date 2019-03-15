@@ -4,9 +4,9 @@ import javassist.gluonj.*;
 import stone.ast.*;
 import chap11.环境优化器类;
 import chap11.Symbols;
-import chap11.环境优化器类.ASTreeOptEx;
-import chap6.Environment;
-import chap6.基本求值器类.ASTreeEx;
+import chap11.环境优化器类.语法树优化执行类;
+import chap6.环境类;
+import chap6.基本求值器类.语法树执行类;
 
 @Require(环境优化器类.class)
 @Reviser public class TypedEvaluator {
@@ -22,7 +22,7 @@ import chap6.基本求值器类.ASTreeEx;
     @Reviser public static class ParamListEx extends 环境优化器类.ParamsEx {
         public ParamListEx(List<语法树类> c) { super(c); }
         @Override public String name(int i) {
-            return ((语法树叶类)子(i).子(0)).词().getText();
+            return ((语法树叶类)子(i).子(0)).词().取文本();
         }
         public TypeTag typeTag(int i) {
             return (TypeTag)子(i).子(1);
@@ -33,11 +33,11 @@ import chap6.基本求值器类.ASTreeEx;
         public VarStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {
             index = syms.putNew(name());
-            ((ASTreeOptEx)initializer()).lookup(syms);
+            ((语法树优化执行类)initializer()).lookup(syms);
         }
-        public Object eval(Environment env) {
-            Object value = ((ASTreeEx)initializer()).eval(env);
-            ((环境优化器类.EnvEx2)env).put(0, index, value);
+        public Object eval(环境类 env) {
+            Object value = ((语法树执行类)initializer()).eval(env);
+            ((环境优化器类.环境执行类2)env).put(0, index, value);
             return value;
         }
     }

@@ -12,7 +12,7 @@ public class 分析例外 extends Exception {
         if (t == 词类.EOF)
             return "the last line";
         else
-            return "\"" + t.getText() + "\" at line " + t.getLineNumber();
+            return "\"" + t.取文本() + "\" at line " + t.getLineNumber();
     }
     public 分析例外(IOException e) {
         super(e);

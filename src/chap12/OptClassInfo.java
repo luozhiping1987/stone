@@ -4,13 +4,13 @@ import stone.ast.ClassStmnt;
 import stone.ast.DefStmnt;
 import chap11.Symbols;
 import chap12.对象优化器类.DefStmntEx2;
-import chap6.Environment;
+import chap6.环境类;
 import chap9.ClassInfo;
 
 public class OptClassInfo extends ClassInfo {
     protected Symbols methods, fields;
     protected DefStmnt[] methodDefs;
-    public OptClassInfo(ClassStmnt cs, Environment env, Symbols methods,
+    public OptClassInfo(ClassStmnt cs, 环境类 env, Symbols methods,
                         Symbols fields)
     {
         super(cs, env);

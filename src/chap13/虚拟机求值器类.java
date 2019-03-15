@@ -3,8 +3,8 @@ import java.util.List;
 import stone.StoneException;
 import stone.词类;
 import chap11.环境优化器类;
-import chap6.Environment;
-import chap6.基本求值器类.ASTreeEx;
+import chap6.环境类;
+import chap6.基本求值器类.语法树执行类;
 import chap7.函数求值器类;
 import javassist.gluonj.*;
 import static chap13.Opcode.*;
@@ -13,7 +13,7 @@ import stone.ast.*;
 
 @Require(环境优化器类.class)
 @Reviser public class 虚拟机求值器类 {
-    @Reviser public static interface EnvEx3 extends 环境优化器类.EnvEx2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.环境执行类2 {
         StoneVM stoneVM();
         Code code();
     }
@@ -29,7 +29,7 @@ import stone.ast.*;
     }
     @Reviser public static class DefStmntVmEx extends 环境优化器类.DefStmntEx {
         public DefStmntVmEx(List<语法树类> c) { super(c); }
-        @Override public Object eval(Environment env) {
+        @Override public Object eval(环境类 env) {
             String funcName = name();
             EnvEx3 vmenv = (EnvEx3)env;
             Code code = vmenv.code();
@@ -55,7 +55,7 @@ import stone.ast.*;
     }
     @Reviser public static class ParamsEx2 extends 环境优化器类.ParamsEx {
         public ParamsEx2(List<语法树类> c) { super(c); }
-        @Override public void eval(Environment env, int index, Object value) {
+        @Override public void eval(环境类 env, int index, Object value) {
             StoneVM vm = ((EnvEx3)env).stoneVM();
             vm.stack()[offsets[index]] = value;
         }
@@ -195,7 +195,7 @@ import stone.ast.*;
             c.add(encodeOffset(c.frameSize));
             c.add(encodeRegister(c.nextReg++));
         }
-        public Object eval(Environment env, Object value) {
+        public Object eval(环境类 env, Object value) {
             if (!(value instanceof VmFunction))
                 throw new StoneException("bad function", this);
             VmFunction func = (VmFunction)value;
@@ -204,7 +204,7 @@ import stone.ast.*;
                 throw new StoneException("bad number of arguments", this);
             int num = 0;
             for (语法树类 a: this)
-                ((ParamsEx2)params).eval(env, num++, ((ASTreeEx)a).eval(env)); 
+                ((ParamsEx2)params).eval(env, num++, ((语法树执行类)a).eval(env)); 
             StoneVM svm = ((EnvEx3)env).stoneVM();
             svm.run(func.entry());
             return svm.stack()[0];
@@ -253,7 +253,7 @@ import stone.ast.*;
             c.set(encodeShortOffset(c.position() - pos2), pos2 + 1);
         }
     }
-    @Reviser public static class WhileEx extends While声明 {
+    @Reviser public static class WhileEx extends While声明类 {
         public WhileEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             int oldReg = c.nextReg;

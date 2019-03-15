@@ -1,7 +1,7 @@
 package chap11;
 import java.util.Arrays;
-import chap6.Environment;
-import chap11.环境优化器类.EnvEx2;
+import chap6.环境类;
+import chap11.环境优化器类.环境执行类2;
 
 public class 可变长度数组环境类 extends ArrayEnv {
     protected Symbols names;
@@ -21,21 +21,21 @@ public class 可变长度数组环境类 extends ArrayEnv {
             return values[i];
     }
     @Override public void put(String name, Object value) {
-        Environment e = where(name);
+        环境类 e = where(name);
         if (e == null)
             e = this;
-        ((EnvEx2)e).putNew(name, value);
+        ((环境执行类2)e).putNew(name, value);
     }
     @Override public void putNew(String name, Object value) {
         assign(names.putNew(name), value);
     }
-    @Override public Environment where(String name) {
+    @Override public 环境类 where(String name) {
         if (names.find(name) != null)
             return this;
         else if (outer == null)
             return null;
         else
-            return ((EnvEx2)outer).where(name);
+            return ((环境执行类2)outer).where(name);
     }
     @Override public void put(int nest, int index, Object value) {
         if (nest == 0)

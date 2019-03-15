@@ -5,15 +5,15 @@ import static javassist.gluonj.GluonJ.revise;
 import javassist.gluonj.*;
 import stone.*;
 import stone.ast.*;
-import chap6.Environment;
+import chap6.环境类;
 import chap6.基本求值器类;
-import chap6.基本求值器类.ASTreeEx;
+import chap6.基本求值器类.语法树执行类;
 import chap7.函数求值器类.PrimaryEx;
 import chap11.ArrayEnv;
 import chap11.环境优化器类;
 import chap11.Symbols;
-import chap11.环境优化器类.ASTreeOptEx;
-import chap11.环境优化器类.EnvEx2;
+import chap11.环境优化器类.语法树优化执行类;
+import chap11.环境优化器类.环境执行类2;
 import chap11.环境优化器类.ParamsEx;
 import chap12.OptStoneObject.AccessException;
 
@@ -22,14 +22,14 @@ import chap12.OptStoneObject.AccessException;
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {}
-        public Object eval(Environment env) {
-            Symbols methodNames = new MemberSymbols(((EnvEx2)env).symbols(),
+        public Object eval(环境类 env) {
+            Symbols methodNames = new MemberSymbols(((环境执行类2)env).symbols(),
                                                     MemberSymbols.METHOD);
             Symbols fieldNames = new MemberSymbols(methodNames,
                                                    MemberSymbols.FIELD);
             OptClassInfo ci = new OptClassInfo(this, env, methodNames,
                                                fieldNames);
-            ((EnvEx2)env).put(name(), ci);
+            ((环境执行类2)env).put(name(), ci);
             ArrayList<DefStmnt> methods = new ArrayList<DefStmnt>();
             if (ci.superClass() != null)
                 ci.superClass().copyTo(fieldNames, methodNames, methods);
@@ -42,10 +42,10 @@ import chap12.OptStoneObject.AccessException;
     }
     @Reviser public static class ClassBodyEx extends ClassBody {
         public ClassBodyEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             for (语法树类 t: this)
                 if (!(t instanceof DefStmnt))
-                    ((ASTreeEx)t).eval(env);
+                    ((语法树执行类)t).eval(env);
             return null;
         }
         public void lookup(Symbols syms, Symbols methodNames,
@@ -63,7 +63,7 @@ import chap12.OptStoneObject.AccessException;
                     ((DefStmntEx2)def).lookupAsMethod(fieldNames);
                 }
                 else
-                    ((ASTreeOptEx)t).lookup(syms);
+                    ((语法树优化执行类)t).lookup(syms);
             }
         }
     }
@@ -74,13 +74,13 @@ import chap12.OptStoneObject.AccessException;
             Symbols newSyms = new Symbols(syms);
             newSyms.putNew(SymbolThis.NAME);
             ((ParamsEx)parameters()).lookup(newSyms);
-            ((ASTreeOptEx)revise(body())).lookup(newSyms);
+            ((语法树优化执行类)revise(body())).lookup(newSyms);
             size = newSyms.size();
         }
     }
     @Reviser public static class DotEx extends Dot {
         public DotEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env, Object value) {
+        public Object eval(环境类 env, Object value) {
             String member = name();
             if (value instanceof OptClassInfo) {
                 if ("new".equals(member)) {
@@ -100,7 +100,7 @@ import chap12.OptStoneObject.AccessException;
             throw new StoneException("bad member access: " + member, this);
         }
         protected void initObject(OptClassInfo ci, OptStoneObject obj,
-                                  Environment env)
+                                  环境类 env)
         {
             if (ci.superClass() != null)
                 initObject(ci.superClass(), obj, env);
@@ -109,7 +109,7 @@ import chap12.OptStoneObject.AccessException;
     }
     @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         public NameEx2(词类 t) { super(t); }
-        @Override public Object eval(Environment env) {
+        @Override public Object eval(环境类 env) {
             if (index == UNKNOWN)
                 return env.get(name());
             else if (nest == MemberSymbols.FIELD)
@@ -117,9 +117,9 @@ import chap12.OptStoneObject.AccessException;
             else if (nest == MemberSymbols.METHOD)
                 return getThis(env).method(index);
             else
-                return ((EnvEx2)env).get(nest, index);
+                return ((环境执行类2)env).get(nest, index);
         }
-        @Override public void evalForAssign(Environment env, Object value) {
+        @Override public void evalForAssign(环境类 env, Object value) {
             if (index == UNKNOWN)
                 env.put(name(), value);
             else if (nest == MemberSymbols.FIELD)
@@ -128,16 +128,16 @@ import chap12.OptStoneObject.AccessException;
                 throw new StoneException("cannot update a method: " + name(),
                                          this);
             else
-                ((EnvEx2)env).put(nest, index, value);
+                ((环境执行类2)env).put(nest, index, value);
         }
-        protected OptStoneObject getThis(Environment env) {
-            return (OptStoneObject)((EnvEx2)env).get(0, 0);
+        protected OptStoneObject getThis(环境类 env) {
+            return (OptStoneObject)((环境执行类2)env).get(0, 0);
         }
     }
     @Reviser public static class AssignEx extends 基本求值器类.BinaryEx {
         public AssignEx(List<语法树类> c) { super(c); }
         @Override
-        protected Object computeAssign(Environment env, Object rvalue) {
+        protected Object computeAssign(环境类 env, Object rvalue) {
             语法树类 le = left();
             if (le instanceof PrimaryExpr) {
                 PrimaryEx p = (PrimaryEx)le;

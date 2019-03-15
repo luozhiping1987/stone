@@ -8,32 +8,32 @@ import java.util.List;
 @Reviser public class 基本求值器类 {
     public static final int TRUE = 1;
     public static final int FALSE = 0;
-    @Reviser public static abstract class ASTreeEx extends 语法树类 {
-        public abstract Object eval(Environment env);
+    @Reviser public static abstract class 语法树执行类 extends 语法树类 {
+        public abstract Object eval(环境类 env);
     }
     @Reviser public static class ASTListEx extends ASTList {
         public ASTListEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             throw new StoneException("cannot eval: " + toString(), this);
         }
     }
     @Reviser public static class ASTLeafEx extends 语法树叶类 {
         public ASTLeafEx(词类 t) { super(t); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             throw new StoneException("cannot eval: " + toString(), this);
         }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
         public NumberEx(词类 t) { super(t); }
-        public Object eval(Environment e) { return value(); }
+        public Object eval(环境类 e) { return value(); }
     }
     @Reviser public static class StringEx extends StringLiteral {
         public StringEx(词类 t) { super(t); }
-        public Object eval(Environment e) { return value(); }
+        public Object eval(环境类 e) { return value(); }
     }
     @Reviser public static class NameEx extends Name {
         public NameEx(词类 t) { super(t); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             Object value = env.get(name());
             if (value == null)
                 throw new StoneException("undefined name: " + name(), this);
@@ -43,8 +43,8 @@ import java.util.List;
     }
     @Reviser public static class NegativeEx extends NegativeExpr {
         public NegativeEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
-            Object v = ((ASTreeEx)operand()).eval(env);
+        public Object eval(环境类 env) {
+            Object v = ((语法树执行类)operand()).eval(env);
             if (v instanceof Integer)
                 return new Integer(-((Integer)v).intValue());
             else
@@ -53,19 +53,19 @@ import java.util.List;
     }
     @Reviser public static class BinaryEx extends 二元表达式 {
         public BinaryEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             String op = operator();
             if ("=".equals(op)) {
-                Object right = ((ASTreeEx)right()).eval(env);
+                Object right = ((语法树执行类)right()).eval(env);
                 return computeAssign(env, right);
             }
             else {
-                Object left = ((ASTreeEx)left()).eval(env);
-                Object right = ((ASTreeEx)right()).eval(env);
+                Object left = ((语法树执行类)left()).eval(env);
+                Object right = ((语法树执行类)right()).eval(env);
                 return computeOp(left, op, right);
             }
         }
-        protected Object computeAssign(Environment env, Object rvalue) {
+        protected Object computeAssign(环境类 env, Object rvalue) {
             语法树类 l = left();
             if (l instanceof Name) {
                 env.put(((Name)l).name(), rvalue);
@@ -115,40 +115,40 @@ import java.util.List;
     }
     @Reviser public static class BlockEx extends BlockStmnt {
         public BlockEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             Object result = 0;
             for (语法树类 t: this) {
-                if (!(t instanceof NullStmnt))
-                    result = ((ASTreeEx)t).eval(env);
+                if (!(t instanceof 空声明类))
+                    result = ((语法树执行类)t).eval(env);
             }
             return result;
         }
     }
     @Reviser public static class IfEx extends IfStmnt {
         public IfEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
-            Object c = ((ASTreeEx)condition()).eval(env);
+        public Object eval(环境类 env) {
+            Object c = ((语法树执行类)condition()).eval(env);
             if (c instanceof Integer && ((Integer)c).intValue() != FALSE)
-                return ((ASTreeEx)thenBlock()).eval(env);
+                return ((语法树执行类)thenBlock()).eval(env);
             else {
                 语法树类 b = elseBlock();
                 if (b == null)
                     return 0;
                 else
-                    return ((ASTreeEx)b).eval(env);
+                    return ((语法树执行类)b).eval(env);
             }
         }
     }
-    @Reviser public static class WhileEx extends While声明 {
+    @Reviser public static class WhileEx extends While声明类 {
         public WhileEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             Object result = 0;
             for (;;) {
-                Object c = ((ASTreeEx)condition()).eval(env);
+                Object c = ((语法树执行类)condition()).eval(env);
                 if (c instanceof Integer && ((Integer)c).intValue() == FALSE)
                     return result;
                 else
-                    result = ((ASTreeEx)body()).eval(env);
+                    result = ((语法树执行类)body()).eval(env);
             }
         }
     }

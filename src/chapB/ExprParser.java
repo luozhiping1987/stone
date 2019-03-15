@@ -36,7 +36,7 @@ public class ExprParser {
         }
         else {
             词类 t = lexer.读();
-            if (t.isNumber()) {
+            if (t.为数()) {
                 NumberLiteral n = new NumberLiteral(t);
                 return n;
             }
@@ -46,12 +46,12 @@ public class ExprParser {
     }
     void token(String name) throws 分析例外 {
         词类 t = lexer.读();
-        if (!(t.isIdentifier() && name.equals(t.getText())))
+        if (!(t.为标识符() && name.equals(t.取文本())))
             throw new 分析例外(t);
     }
     boolean isToken(String name) throws 分析例外 {
         词类 t = lexer.瞄(0);
-        return t.isIdentifier() && name.equals(t.getText());
+        return t.为标识符() && name.equals(t.取文本());
     }
 
     public static void main(String[] args) throws 分析例外 {

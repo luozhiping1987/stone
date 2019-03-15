@@ -4,20 +4,20 @@ import javassist.gluonj.*;
 import stone.StoneException;
 import stone.ast.*;
 import chap6.基本求值器类;
-import chap6.Environment;
-import chap6.基本求值器类.ASTreeEx;
+import chap6.环境类;
+import chap6.基本求值器类.语法树执行类;
 import chap6.基本求值器类.BlockEx;
 
 @Require(基本求值器类.class)
 @Reviser public class 函数求值器类 {
-    @Reviser public static interface EnvEx extends Environment {
+    @Reviser public static interface EnvEx extends 环境类 {
         void putNew(String name, Object value);
-        Environment where(String name);
-        void setOuter(Environment e);
+        环境类 where(String name);
+        void setOuter(环境类 e);
     }
     @Reviser public static class DefStmntEx extends DefStmnt {
         public DefStmntEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             ((EnvEx)env).putNew(name(), new Function(parameters(), body(), env));
             return name();
         }
@@ -29,42 +29,42 @@ import chap6.基本求值器类.BlockEx;
             return (Postfix)子(子个数() - nest - 1);
         }
         public boolean hasPostfix(int nest) { return 子个数() - nest > 1; } 
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             return evalSubExpr(env, 0);
         }
-        public Object evalSubExpr(Environment env, int nest) {
+        public Object evalSubExpr(环境类 env, int nest) {
             if (hasPostfix(nest)) {
                 Object target = evalSubExpr(env, nest + 1);
                 return ((PostfixEx)postfix(nest)).eval(env, target);
             }
             else
-                return ((ASTreeEx)operand()).eval(env);
+                return ((语法树执行类)operand()).eval(env);
         }
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
         public PostfixEx(List<语法树类> c) { super(c); }
-        public abstract Object eval(Environment env, Object value);
+        public abstract Object eval(环境类 env, Object value);
     }
     @Reviser public static class ArgumentsEx extends Arguments {
         public ArgumentsEx(List<语法树类> c) { super(c); }
-        public Object eval(Environment callerEnv, Object value) {
+        public Object eval(环境类 callerEnv, Object value) {
             if (!(value instanceof Function))
                 throw new StoneException("bad function", this);
             Function func = (Function)value;
             ParameterList params = func.parameters();
             if (size() != params.size())
                 throw new StoneException("bad number of arguments", this);
-            Environment newEnv = func.makeEnv();
+            环境类 newEnv = func.makeEnv();
             int num = 0;
             for (语法树类 a: this)
                 ((ParamsEx)params).eval(newEnv, num++,
-                                        ((ASTreeEx)a).eval(callerEnv));
+                                        ((语法树执行类)a).eval(callerEnv));
             return ((BlockEx)func.body()).eval(newEnv);
         }
     }
     @Reviser public static class ParamsEx extends ParameterList {
         public ParamsEx(List<语法树类> c) { super(c); }
-        public void eval(Environment env, int index, Object value) {
+        public void eval(环境类 env, int index, Object value) {
             ((EnvEx)env).putNew(name(index), value);
         }
     }

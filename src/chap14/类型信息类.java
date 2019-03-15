@@ -3,39 +3,39 @@ package chap14;
 import stone.ast.语法树类;
 import stone.ast.TypeTag;
 
-public class TypeInfo {
-    public static final TypeInfo ANY = new TypeInfo() {
+public class 类型信息类 {
+    public static final 类型信息类 ANY = new 类型信息类() {
         @Override public String toString() { return "Any"; } 
     };
-    public static final TypeInfo INT = new TypeInfo() {
+    public static final 类型信息类 INT = new 类型信息类() {
         @Override public String toString() { return "Int"; } 
     };
-    public static final TypeInfo STRING = new TypeInfo() {
+    public static final 类型信息类 STRING = new 类型信息类() {
         @Override public String toString() { return "String"; } 
     };
 
-    public TypeInfo type() { return this; }
-    public boolean match(TypeInfo obj) {
+    public 类型信息类 type() { return this; }
+    public boolean match(类型信息类 obj) {
         return type() == obj.type();
     }
-    public boolean subtypeOf(TypeInfo superType) {
+    public boolean subtypeOf(类型信息类 superType) {
         superType = superType.type();
         return type() == superType || superType == ANY;
     }
-    public void assertSubtypeOf(TypeInfo type, 类型环境类 env, 语法树类 where)
-        throws TypeException
+    public void assertSubtypeOf(类型信息类 type, 类型环境类 env, 语法树类 where)
+        throws 类型例外
     {
         if (!subtypeOf(type))
-            throw new TypeException("type mismatch: cannot convert from "
+            throw new 类型例外("type mismatch: cannot convert from "
                                     + this + " to " + type, where);
     }
-    public TypeInfo union(TypeInfo right, 类型环境类 tenv) {
+    public 类型信息类 union(类型信息类 right, 类型环境类 tenv) {
         if (match(right))
             return type();
         else
             return ANY;
     }
-    public TypeInfo plus(TypeInfo right, 类型环境类 tenv) {
+    public 类型信息类 plus(类型信息类 right, 类型环境类 tenv) {
         if (INT.match(this) && INT.match(right))
             return INT;
         else if (STRING.match(this) || STRING.match(right))
@@ -43,7 +43,7 @@ public class TypeInfo {
         else
             return ANY;
     }
-    public static TypeInfo get(TypeTag tag) throws TypeException {
+    public static 类型信息类 get(TypeTag tag) throws 类型例外 {
         String tname = tag.type();
         if (INT.toString().equals(tname))
             return INT;
@@ -54,31 +54,31 @@ public class TypeInfo {
         else if (TypeTag.UNDEF.equals(tname))
             return new UnknownType();
         else
-            throw new TypeException("unknown type " + tname, tag);
+            throw new 类型例外("unknown type " + tname, tag);
     }
-    public static FunctionType function(TypeInfo ret, TypeInfo... params) {
+    public static FunctionType function(类型信息类 ret, 类型信息类... params) {
         return new FunctionType(ret, params);
     }
     public boolean isFunctionType() { return false; }
     public FunctionType toFunctionType() { return null; }
     public boolean isUnknownType() { return false; }
     public UnknownType toUnknownType() { return null; }
-    public static class UnknownType extends TypeInfo {
-        @Override public TypeInfo type() { return ANY; }
+    public static class UnknownType extends 类型信息类 {
+        @Override public 类型信息类 type() { return ANY; }
         @Override public String toString() { return type().toString(); }
         @Override public boolean isUnknownType() { return true; }
         @Override public UnknownType toUnknownType() { return this; }
     }
-    public static class FunctionType extends TypeInfo {
-        public TypeInfo returnType;
-        public TypeInfo[] parameterTypes;
-        public FunctionType(TypeInfo ret, TypeInfo... params) {
+    public static class FunctionType extends 类型信息类 {
+        public 类型信息类 returnType;
+        public 类型信息类[] parameterTypes;
+        public FunctionType(类型信息类 ret, 类型信息类... params) {
             returnType = ret;
             parameterTypes = params;
         }
         @Override public boolean isFunctionType() { return true; }
         @Override public FunctionType toFunctionType() { return this; }
-        @Override public boolean match(TypeInfo obj) {
+        @Override public boolean match(类型信息类 obj) {
             if (!(obj instanceof FunctionType))
                 return false;
             FunctionType func = (FunctionType)obj;

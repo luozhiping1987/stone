@@ -3,7 +3,7 @@ import java.util.List;
 import stone.StoneException;
 import stone.ast.语法树类;
 import stone.ast.Dot;
-import chap6.Environment;
+import chap6.环境类;
 import javassist.gluonj.*;
 
 @Require(对象优化器类.class)
@@ -13,7 +13,7 @@ import javassist.gluonj.*;
         protected boolean isField;
         protected int index;
         public DotEx2(List<语法树类> c) { super(c); }
-        @Override public Object eval(Environment env, Object value) {
+        @Override public Object eval(环境类 env, Object value) {
             if (value instanceof OptStoneObject) {
                 OptStoneObject target = (OptStoneObject)value;
                 if (target.classInfo() != classInfo)

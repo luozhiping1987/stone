@@ -4,13 +4,13 @@ import stone.StoneException;
 
 public class 类型环境类 {
     protected 类型环境类 outer;
-    protected TypeInfo[] types;
+    protected 类型信息类[] types;
     public 类型环境类() { this(8, null); }
     public 类型环境类(int size, 类型环境类 out) {
         outer = out;
-        types = new TypeInfo[size];
+        types = new 类型信息类[size];
     }
-    public TypeInfo get(int nest, int index) {
+    public 类型信息类 get(int nest, int index) {
         if (nest == 0)
             if (index < types.length)
                 return types[index];
@@ -21,8 +21,8 @@ public class 类型环境类 {
         else
             return outer.get(nest - 1, index);
     }
-    public TypeInfo put(int nest, int index, TypeInfo value) {
-        TypeInfo oldValue;
+    public 类型信息类 put(int nest, int index, 类型信息类 value) {
+        类型信息类 oldValue;
         if (nest == 0) {
             access(index);
             oldValue = types[index];

@@ -19,12 +19,12 @@ public class 词法分析功用 {
   }
 
   public static void 词为数(String 名, 词类 词) {
-    assertEquals(名, 词.getText());
-    assertEquals(true, 词.isNumber());
+    assertEquals(名, 词.取文本());
+    assertEquals(true, 词.为数());
   }
 
   public static void 词为标识符(String 名, 词类 词) {
-    assertEquals(名, 词.getText());
-    assertEquals(true, 词.isIdentifier());
+    assertEquals(名, 词.取文本());
+    assertEquals(true, 词.为标识符());
   }
 }

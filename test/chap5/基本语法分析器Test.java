@@ -17,7 +17,7 @@ import stone.词类;
 import stone.ast.语法树叶类;
 import stone.ast.语法树类;
 import stone.ast.二元表达式;
-import stone.ast.While声明;
+import stone.ast.While声明类;
 import stone.util.文件功用;
 import stone.util.词法分析功用;
 
@@ -51,7 +51,7 @@ public class 基本语法分析器Test {
     assertTrue(所有语法树.get(0) instanceof 二元表达式);
     assertTrue(所有语法树.get(1) instanceof 二元表达式);
     assertTrue(所有语法树.get(2) instanceof 二元表达式);
-    assertTrue(所有语法树.get(3) instanceof While声明);
+    assertTrue(所有语法树.get(3) instanceof While声明类);
     assertTrue(所有语法树.get(4) instanceof 二元表达式);
   }
 }

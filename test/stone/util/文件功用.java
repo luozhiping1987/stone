@@ -6,10 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class 文件功用 {
-  public static String 读文件(String path, Charset encoding)
+  public static String 读文件(String 路径, Charset 编码)
       throws IOException
     {
-      byte[] encoded = Files.readAllBytes(Paths.get(path));
-      return new String(encoded, encoding);
+      byte[] 内容 = Files.readAllBytes(Paths.get(路径));
+      return new String(内容, 编码);
     }
 }

@@ -6,27 +6,27 @@ import stone.词类;
 import stone.StoneException;
 import stone.ast.*;
 import chap11.Symbols.Location;
-import chap6.Environment;
+import chap6.环境类;
 import chap6.基本求值器类;
 import chap7.闭包求值器类;
 
 @Require(闭包求值器类.class)
 @Reviser public class 环境优化器类 {
-    @Reviser public static interface EnvEx2 extends Environment {
+    @Reviser public static interface 环境执行类2 extends 环境类 {
         Symbols symbols();
         void put(int nest, int index, Object value);
         Object get(int nest, int index);
         void putNew(String name, Object value);
-        Environment where(String name);
+        环境类 where(String name);
     }
-    @Reviser public static abstract class ASTreeOptEx extends 语法树类 {
+    @Reviser public static abstract class 语法树优化执行类 extends 语法树类 {
         public void lookup(Symbols syms) {}
     }
     @Reviser public static class ASTListEx extends ASTList {
         public ASTListEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {
             for (语法树类 t: this)
-                ((ASTreeOptEx)t).lookup(syms);
+                ((语法树优化执行类)t).lookup(syms);
         }
     }
     @Reviser public static class DefStmntEx extends DefStmnt {
@@ -36,8 +36,8 @@ import chap7.闭包求值器类;
             index = syms.putNew(name());
             size = FunEx.lookup(syms, parameters(), body());
         }
-        public Object eval(Environment env) {
-            ((EnvEx2)env).put(0, index, new OptFunction(parameters(), body(),
+        public Object eval(环境类 env) {
+            ((环境执行类2)env).put(0, index, new OptFunction(parameters(), body(),
                                                         env, size));
             return name();
         }
@@ -48,7 +48,7 @@ import chap7.闭包求值器类;
         public void lookup(Symbols syms) {
             size = lookup(syms, parameters(), body());
         }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             return new OptFunction(parameters(), body(), env, size);
         }
         public static int lookup(Symbols syms, ParameterList params,
@@ -56,7 +56,7 @@ import chap7.闭包求值器类;
         {
             Symbols newSyms = new Symbols(syms);
             ((ParamsEx)params).lookup(newSyms);
-            ((ASTreeOptEx)revise(body)).lookup(newSyms);
+            ((语法树优化执行类)revise(body)).lookup(newSyms);
             return newSyms.size();
         }
     }
@@ -69,8 +69,8 @@ import chap7.闭包求值器类;
             for (int i = 0; i < s; i++)
                 offsets[i] = syms.putNew(name(i));
         }
-        public void eval(Environment env, int index, Object value) {
-            ((EnvEx2)env).put(0, offsets[index], value);
+        public void eval(环境类 env, int index, Object value) {
+            ((环境执行类2)env).put(0, offsets[index], value);
         }
     }
     @Reviser public static class NameEx extends Name {
@@ -91,17 +91,17 @@ import chap7.闭包求值器类;
             nest = loc.nest;
             index = loc.index;
         }
-        public Object eval(Environment env) {
+        public Object eval(环境类 env) {
             if (index == UNKNOWN)
                 return env.get(name());
             else
-                return ((EnvEx2)env).get(nest, index);
+                return ((环境执行类2)env).get(nest, index);
         }
-        public void evalForAssign(Environment env, Object value) {
+        public void evalForAssign(环境类 env, Object value) {
             if (index == UNKNOWN)
                 env.put(name(), value);
             else
-                ((EnvEx2)env).put(nest, index, value);
+                ((环境执行类2)env).put(nest, index, value);
         }
     }
     @Reviser public static class BinaryEx2 extends 基本求值器类.BinaryEx {
@@ -111,15 +111,15 @@ import chap7.闭包求值器类;
             if ("=".equals(operator())) {
                 if (left instanceof Name) {
                     ((NameEx)left).lookupForAssign(syms);
-                    ((ASTreeOptEx)right()).lookup(syms);
+                    ((语法树优化执行类)right()).lookup(syms);
                     return;
                 }
             }
-            ((ASTreeOptEx)left).lookup(syms);
-            ((ASTreeOptEx)right()).lookup(syms);
+            ((语法树优化执行类)left).lookup(syms);
+            ((语法树优化执行类)right()).lookup(syms);
         }
         @Override
-        protected Object computeAssign(Environment env, Object rvalue) {
+        protected Object computeAssign(环境类 env, Object rvalue) {
             语法树类 l = left();
             if (l instanceof Name) {
                 ((NameEx)l).evalForAssign(env, rvalue);

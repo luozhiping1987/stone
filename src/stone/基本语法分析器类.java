@@ -26,10 +26,10 @@ public class 基本语法分析器类 {
     Parser statement = statement0.or(
             rule(IfStmnt.class).sep("if").ast(expr).ast(block)
                                .option(rule().sep("else").ast(block)),
-            rule(While声明.class).sep("while").ast(expr).ast(block),
+            rule(While声明类.class).sep("while").ast(expr).ast(block),
             simple);
 
-    Parser program = rule().or(statement, rule(NullStmnt.class))
+    Parser program = rule().or(statement, rule(空声明类.class))
                            .sep(";", 词类.EOL);
 
     public 基本语法分析器类() {

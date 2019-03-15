@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import chap11.ArrayEnv;
 import chap11.环境优化器类;
-import chap6.Environment;
+import chap6.环境类;
 import chap7.函数求值器类;
 import stone.StoneException;
 import stone.词类;
@@ -12,7 +12,7 @@ import javassist.gluonj.Require;
 import javassist.gluonj.Reviser;
 import static javassist.gluonj.GluonJ.revise;
 
-@Require(TypeChecker.class)
+@Require(类型检查器类.class)
 @Reviser public class 变Java类 {
     public static final String METHOD = "m";
     public static final String LOCAL = "v";
@@ -20,54 +20,54 @@ import static javassist.gluonj.GluonJ.revise;
     public static final String RESULT = "res";
     public static final String ENV_TYPE = "chap11.ArrayEnv";
 
-    public static String translateExpr(语法树类 ast, TypeInfo from, TypeInfo to) {
+    public static String translateExpr(语法树类 ast, 类型信息类 from, 类型信息类 to) {
         return translateExpr(((ASTreeEx)ast).translate(null), from, to);
     }
-    public static String translateExpr(String expr, TypeInfo from,
-                                       TypeInfo to)
+    public static String translateExpr(String expr, 类型信息类 from,
+                                       类型信息类 to)
     {
         from = from.type();
         to = to.type();
-        if (from == TypeInfo.INT) {
-            if (to == TypeInfo.ANY)
+        if (from == 类型信息类.INT) {
+            if (to == 类型信息类.ANY)
                 return "new Integer(" + expr + ")";
-            else if (to == TypeInfo.STRING)
+            else if (to == 类型信息类.STRING)
                 return "Integer.toString(" + expr + ")";
         }
-        else if (from == TypeInfo.ANY)
-            if (to == TypeInfo.STRING)
+        else if (from == 类型信息类.ANY)
+            if (to == 类型信息类.STRING)
                 return expr + ".toString()";
-            else if (to == TypeInfo.INT)
+            else if (to == 类型信息类.INT)
                 return "((Integer)" + expr + ").intValue()";
         return expr;
     }
-    public static String returnZero(TypeInfo to) {
-        if (to.type() == TypeInfo.ANY)
+    public static String returnZero(类型信息类 to) {
+        if (to.type() == 类型信息类.ANY)
             return RESULT + "=new Integer(0);";
         else
             return RESULT + "=0;";
     }
 
-    @Reviser public static interface EnvEx3 extends 环境优化器类.EnvEx2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.环境执行类2 {
         JavaLoader javaLoader();
     }
     @Reviser public static class ArrayEnvEx extends ArrayEnv {
-        public ArrayEnvEx(int size, Environment out) { super(size, out); }
+        public ArrayEnvEx(int size, 环境类 out) { super(size, out); }
         protected JavaLoader jloader = new JavaLoader();
         public JavaLoader javaLoader() { return jloader; }
     }
     @Reviser public static abstract class ASTreeEx extends 语法树类 {
-        public String translate(TypeInfo result) { return ""; }
+        public String translate(类型信息类 result) { return ""; }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
         public NumberEx(词类 t) { super(t); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             return Integer.toString(value());
         }
     }
     @Reviser public static class StringEx extends StringLiteral {
         public StringEx(词类 t) { super(t); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             StringBuilder code = new StringBuilder();
             String literal = value();
             code.append('"');
@@ -86,19 +86,19 @@ import static javassist.gluonj.GluonJ.revise;
             return code.toString();
         }
     }
-    @Reviser public static class NameEx3 extends TypeChecker.NameEx2 {
+    @Reviser public static class NameEx3 extends 类型检查器类.NameEx2 {
         public NameEx3(词类 t) { super(t); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             if (type.isFunctionType())
                 return JavaFunction.className(name()) + "." + METHOD;
             else if (nest == 0)
                 return LOCAL + index;
             else {
                 String expr = ENV + ".get(0," + index + ")";
-                return translateExpr(expr, TypeInfo.ANY, type);
+                return translateExpr(expr, 类型信息类.ANY, type);
             }
         }
-        public String translateAssign(TypeInfo valueType, 语法树类 right) {
+        public String translateAssign(类型信息类 valueType, 语法树类 right) {
             if (nest == 0)
                 return "(" + LOCAL + index + "="
                        + translateExpr(right, valueType, type) + ")";
@@ -111,25 +111,25 @@ import static javassist.gluonj.GluonJ.revise;
     }
     @Reviser public static class NegativeEx extends NegativeExpr {
         public NegativeEx(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             return "-" + ((ASTreeEx)operand()).translate(null);
         }
     }
-    @Reviser public static class BinaryEx2 extends TypeChecker.BinaryEx {
+    @Reviser public static class BinaryEx2 extends 类型检查器类.BinaryEx {
         public BinaryEx2(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             String op = operator();
             if ("=".equals(op))
                 return ((NameEx3)left()).translateAssign(rightType, right());
-            else if (leftType.type() != TypeInfo.INT
-                     || rightType.type() != TypeInfo.INT) {
-                String e1 = translateExpr(left(), leftType, TypeInfo.ANY);
-                String e2 = translateExpr(right(), rightType, TypeInfo.ANY);
+            else if (leftType.type() != 类型信息类.INT
+                     || rightType.type() != 类型信息类.INT) {
+                String e1 = translateExpr(left(), leftType, 类型信息类.ANY);
+                String e2 = translateExpr(right(), rightType, 类型信息类.ANY);
                 if ("==".equals(op))
                     return "chap14.Runtime.eq(" + e1 + "," + e2 + ")";
                 else if ("+".equals(op)) {
-                    if (leftType.type() == TypeInfo.STRING
-                        || rightType.type() == TypeInfo.STRING)
+                    if (leftType.type() == 类型信息类.STRING
+                        || rightType.type() == 类型信息类.STRING)
                         return e1 + "+" + e2;
                     else
                         return "chap14.Runtime.plus(" + e1 + "," + e2 + ")";
@@ -147,12 +147,12 @@ import static javassist.gluonj.GluonJ.revise;
             }
         }
     }
-    @Reviser public static class BlockEx2 extends TypeChecker.BlockEx {
+    @Reviser public static class BlockEx2 extends 类型检查器类.BlockEx {
         public BlockEx2(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             ArrayList<语法树类> body = new ArrayList<语法树类>();
             for (语法树类 t: this)
-                if (!(t instanceof NullStmnt))
+                if (!(t instanceof 空声明类))
                     body.add(t);
             StringBuilder code = new StringBuilder();
             if (result != null && body.size() < 1)
@@ -164,7 +164,7 @@ import static javassist.gluonj.GluonJ.revise;
             return code.toString();
         }
         protected void translateStmnt(StringBuilder code, 语法树类 tree,
-                                      TypeInfo result, boolean last)
+                                      类型信息类 result, boolean last)
         {
             if (isControlStmnt(tree))
                 code.append(((ASTreeEx)tree).translate(last ? result : null));
@@ -184,12 +184,12 @@ import static javassist.gluonj.GluonJ.revise;
         }
         protected static boolean isControlStmnt(语法树类 tree) {
             return tree instanceof BlockStmnt || tree instanceof IfStmnt
-                   || tree instanceof While声明;
+                   || tree instanceof While声明类;
         }
     }
     @Reviser public static class IfEx extends IfStmnt {
         public IfEx(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             StringBuilder code = new StringBuilder();       
             code.append("if(");
             code.append(((ASTreeEx)condition()).translate(null));
@@ -204,9 +204,9 @@ import static javassist.gluonj.GluonJ.revise;
             return code.append("}\n").toString();
         }
     }
-    @Reviser public static class WhileEx extends While声明 {
+    @Reviser public static class WhileEx extends While声明类 {
         public WhileEx(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             String code = "while(" + ((ASTreeEx)condition()).translate(null)
                           + "!=0){\n" + ((ASTreeEx)body()).translate(result)
                           + "}\n";
@@ -216,18 +216,18 @@ import static javassist.gluonj.GluonJ.revise;
                 return returnZero(result) + "\n" + code;
         }
     }
-    @Reviser public static class DefStmntEx3 extends TypeChecker.DefStmntEx2 {
+    @Reviser public static class DefStmntEx3 extends 类型检查器类.DefStmntEx2 {
         public DefStmntEx3(List<语法树类> c) { super(c); }
-        @Override public Object eval(Environment env) {
+        @Override public Object eval(环境类 env) {
             String funcName = name();
             JavaFunction func = new JavaFunction(funcName, translate(null),
                                                  ((EnvEx3)env).javaLoader());
             ((EnvEx3)env).putNew(funcName, func);
             return funcName;
         }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             StringBuilder code = new StringBuilder("public static ");
-            TypeInfo returnType = funcType.returnType;
+            类型信息类 returnType = funcType.returnType;
             code.append(javaType(returnType)).append(' ');
             code.append(METHOD).append("(chap11.ArrayEnv ").append(ENV);
             for (int i = 0; i < funcType.parameterTypes.length; i++) {
@@ -238,9 +238,9 @@ import static javassist.gluonj.GluonJ.revise;
             code.append(javaType(returnType)).append(' ').append(RESULT)
                 .append(";\n");
             for (int i = funcType.parameterTypes.length; i < size; i++) {
-                TypeInfo t = bodyEnv.get(0, i);
+                类型信息类 t = bodyEnv.get(0, i);
                 code.append(javaType(t)).append(' ').append(LOCAL).append(i);
-                if (t.type() == TypeInfo.INT)
+                if (t.type() == 类型信息类.INT)
                     code.append("=0;\n");
                 else
                     code.append("=null;\n");
@@ -249,10 +249,10 @@ import static javassist.gluonj.GluonJ.revise;
             code.append("return ").append(RESULT).append(";}");
             return code.toString();
         }
-        protected String javaType(TypeInfo t) {
-            if (t.type() == TypeInfo.INT)
+        protected String javaType(类型信息类 t) {
+            if (t.type() == 类型信息类.INT)
                 return "int";
-            else if (t.type() == TypeInfo.STRING)
+            else if (t.type() == 类型信息类.STRING)
                 return "String";
             else
                 return "Object";
@@ -260,7 +260,7 @@ import static javassist.gluonj.GluonJ.revise;
     }
     @Reviser public static class PrimaryEx2 extends 函数求值器类.PrimaryEx {
         public PrimaryEx2(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) { return translate(0); }
+        public String translate(类型信息类 result) { return translate(0); }
         public String translate(int nest) {
             if (hasPostfix(nest)) {
                 String expr = translate(nest + 1);
@@ -274,7 +274,7 @@ import static javassist.gluonj.GluonJ.revise;
         public PostfixEx(List<语法树类> c) { super(c); }
         public abstract String translate(String expr);
     }
-    @Reviser public static class ArgumentsEx extends TypeChecker.ArgumentsEx {
+    @Reviser public static class ArgumentsEx extends 类型检查器类.ArgumentsEx {
         public ArgumentsEx(List<语法树类> c) { super(c); }
         public String translate(String expr) {
             StringBuilder code = new StringBuilder(expr);
@@ -285,7 +285,7 @@ import static javassist.gluonj.GluonJ.revise;
                                           funcType.parameterTypes[i]));
             return code.append(')').toString();
         }
-        public Object eval(Environment env, Object value) {
+        public Object eval(环境类 env, Object value) {
             if (!(value instanceof JavaFunction))
                 throw new StoneException("bad function", this);
             JavaFunction func = (JavaFunction)value;
@@ -293,13 +293,13 @@ import static javassist.gluonj.GluonJ.revise;
             args[0] = env;
             int num = 1;
             for (语法树类 a: this)
-                args[num++] = ((chap6.基本求值器类.ASTreeEx)a).eval(env); 
+                args[num++] = ((chap6.基本求值器类.语法树执行类)a).eval(env); 
             return func.invoke(args);
         }
     }
-    @Reviser public static class VarStmntEx3 extends TypeChecker.VarStmntEx2 {
+    @Reviser public static class VarStmntEx3 extends 类型检查器类.VarStmntEx2 {
         public VarStmntEx3(List<语法树类> c) { super(c); }
-        public String translate(TypeInfo result) {
+        public String translate(类型信息类 result) {
             return LOCAL + index + "="
                    + translateExpr(initializer(), valueType, varType);
         }

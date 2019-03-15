@@ -5,3 +5,10 @@ ASTLeaf.token,词
 Lexer.peek,瞄
 ASTree.parse,分析
 Natives.environment,环境
+ASTreeEx.eval,求值
+ASTreeOptEx.lookup,查找
+EnvEx2.symbols,所有符号
+ASTreeTypeEx.typeCheck,类型检查
+Token.getText,取文本
+Token.isNumber,为数
+Token.isIdentifier,为标识符

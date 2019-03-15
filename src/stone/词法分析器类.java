@@ -106,8 +106,8 @@ public class 词法分析器类 {
             super(line);
             value = v;
         }
-        public boolean isNumber() { return true; }
-        public String getText() { return Integer.toString(value); }
+        public boolean 为数() { return true; }
+        public String 取文本() { return Integer.toString(value); }
         public int getNumber() { return value; }
     }
 
@@ -117,8 +117,8 @@ public class 词法分析器类 {
             super(line);
             text = id;
         }
-        public boolean isIdentifier() { return true; }
-        public String getText() { return text; }
+        public boolean 为标识符() { return true; }
+        public String 取文本() { return text; }
     }
 
     protected static class StrToken extends 词类 {
@@ -128,6 +128,6 @@ public class 词法分析器类 {
             literal = str;
         }
         public boolean isString() { return true; }
-        public String getText() { return literal; }
+        public String 取文本() { return literal; }
     }
 }

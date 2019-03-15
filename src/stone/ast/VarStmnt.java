@@ -3,7 +3,7 @@ import java.util.List;
 
 public class VarStmnt extends ASTList {
     public VarStmnt(List<语法树类> c) { super(c); }
-    public String name() { return ((语法树叶类)子(0)).词().getText(); }
+    public String name() { return ((语法树叶类)子(0)).词().取文本(); }
     public TypeTag type() { return (TypeTag)子(1); }
     public 语法树类 initializer() { return 子(2); }
     public String toString() {

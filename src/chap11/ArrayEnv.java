@@ -1,12 +1,12 @@
 package chap11;
 import stone.StoneException;
-import chap11.环境优化器类.EnvEx2;
-import chap6.Environment;
+import chap11.环境优化器类.环境执行类2;
+import chap6.环境类;
 
-public class ArrayEnv implements Environment {
+public class ArrayEnv implements 环境类 {
     protected Object[] values;
-    protected Environment outer;
-    public ArrayEnv(int size, Environment out) {
+    protected 环境类 outer;
+    public ArrayEnv(int size, 环境类 out) {
         values = new Object[size];
         outer = out;
     }
@@ -17,7 +17,7 @@ public class ArrayEnv implements Environment {
         else if (outer == null)
             return null;
         else
-            return ((EnvEx2)outer).get(nest - 1, index);
+            return ((环境执行类2)outer).get(nest - 1, index);
     }
     public void put(int nest, int index, Object value) {
         if (nest == 0)
@@ -25,13 +25,13 @@ public class ArrayEnv implements Environment {
         else if (outer == null)
             throw new StoneException("no outer environment");
         else
-            ((EnvEx2)outer).put(nest - 1, index, value);
+            ((环境执行类2)outer).put(nest - 1, index, value);
     }
     public Object get(String name) { error(name); return null; }
     public void put(String name, Object value) { error(name); }
     public void putNew(String name, Object value) { error(name); }
-    public Environment where(String name) { error(name); return null; }
-    public void setOuter(Environment e) { outer = e; }
+    public 环境类 where(String name) { error(name); return null; }
+    public void setOuter(环境类 e) { outer = e; }
     private void error(String name) {
         throw new StoneException("cannot access by name: " + name);
     }

@@ -111,13 +111,13 @@ public class Parser {
             reserved = r != null ? r : new HashSet<String>();
         }
         protected boolean test(词类 t) {
-            return t.isIdentifier() && !reserved.contains(t.getText());
+            return t.为标识符() && !reserved.contains(t.取文本());
         }
     }
 
     protected static class NumToken extends AToken {
         protected NumToken(Class<? extends 语法树叶类> type) { super(type); }
-        protected boolean test(词类 t) { return t.isNumber(); }
+        protected boolean test(词类 t) { return t.为数(); }
     }
 
     protected static class StrToken extends AToken {
@@ -132,9 +132,9 @@ public class Parser {
             throws 分析例外
         {
             词类 t = lexer.读();
-            if (t.isIdentifier())
+            if (t.为标识符())
                 for (String token: tokens)
-                    if (token.equals(t.getText())) {
+                    if (token.equals(t.取文本())) {
                         find(res, t);
                         return;
                     }
@@ -149,9 +149,9 @@ public class Parser {
         }
         protected boolean match(词法分析器类 lexer) throws 分析例外 {
             词类 t = lexer.瞄(0);
-            if (t.isIdentifier())
+            if (t.为标识符())
                 for (String token: tokens)
-                    if (token.equals(t.getText()))
+                    if (token.equals(t.取文本()))
                         return true;
 
             return false;
@@ -215,8 +215,8 @@ public class Parser {
         }
         private Precedence nextOperator(词法分析器类 lexer) throws 分析例外 {
             词类 t = lexer.瞄(0);
-            if (t.isIdentifier())
-                return ops.get(t.getText());
+            if (t.为标识符())
+                return ops.get(t.取文本());
             else
                 return null;
         }

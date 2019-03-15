@@ -2,21 +2,21 @@ package chap8;
 import java.lang.reflect.Method;
 import javax.swing.JOptionPane;
 import stone.StoneException;
-import chap6.Environment;
+import chap6.环境类;
 
 public class 原生类 {
-    public Environment 环境(Environment env) {
+    public 环境类 环境(环境类 env) {
         appendNatives(env);
         return env;
     }
-    protected void appendNatives(Environment env) {
+    protected void appendNatives(环境类 env) {
         append(env, "print", 原生类.class, "print", Object.class);
         append(env, "read", 原生类.class, "read");
         append(env, "length", 原生类.class, "length", String.class);
         append(env, "toInt", 原生类.class, "toInt", Object.class);
         append(env, "currentTime", 原生类.class, "currentTime");
     }
-    protected void append(Environment env, String name, Class<?> clazz,
+    protected void append(环境类 env, String name, Class<?> clazz,
                           String methodName, Class<?> ... params) {
         Method m;
         try {

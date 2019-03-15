@@ -31,7 +31,7 @@ public class 带类型解释器Test extends 带类型解释器类 {
     }
   }
 
-  public static 带类型返回值 求值(String 源代码) throws 分析例外, TypeException {
+  public static 带类型返回值 求值(String 源代码) throws 分析例外, 类型例外 {
     类型环境类 类型环境 = new 类型环境类();
     return 解释器功用.带类型求值(new 带类型语法分析器类(), new 带类型原生类(类型环境).环境(new 可变长度数组环境类()), 类型环境, 源代码);
   }
