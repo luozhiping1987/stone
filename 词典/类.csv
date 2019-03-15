@@ -19,3 +19,6 @@ ClosureEvaluator,闭包求值器类
 NativeInterpreter,原生解释器类
 NativeEvaluator,原生求值器类
 Natives,原生类
+ClassEvaluator,类求值器类
+ClassInterpreter,类解释器类
+ClassParser,类语法分析器类

@@ -11,7 +11,7 @@ import org.junit.Test;
 import chap11.ResizableArrayEnv;
 import chap8.原生类;
 import javassist.gluonj.util.UTester;
-import stone.ClassParser;
+import stone.类语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.类路径常量;
@@ -34,7 +34,7 @@ public class 变量优化解释器Test extends ObjOptInterpreter {
 
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClassParser(), new 原生类().环境(new ResizableArrayEnv()), 源代码);
+    return 解释器功用.求值(new 类语法分析器类(), new 原生类().环境(new ResizableArrayEnv()), 源代码);
   }
 
   @Test

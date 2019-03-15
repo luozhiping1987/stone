@@ -13,7 +13,7 @@ import chap7.函数求值器类.PrimaryEx;
 import chap9.StoneObject.AccessException;
 
 @Require(函数求值器类.class)
-@Reviser public class ClassEvaluator {
+@Reviser public class 类求值器类 {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env) {
