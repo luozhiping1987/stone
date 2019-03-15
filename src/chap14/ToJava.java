@@ -6,7 +6,7 @@ import chap11.EnvOptimizer;
 import chap6.Environment;
 import chap7.FuncEvaluator;
 import stone.StoneException;
-import stone.Token;
+import stone.词类;
 import stone.ast.*;
 import javassist.gluonj.Require;
 import javassist.gluonj.Reviser;
@@ -60,13 +60,13 @@ import static javassist.gluonj.GluonJ.revise;
         public String translate(TypeInfo result) { return ""; }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
-        public NumberEx(Token t) { super(t); }
+        public NumberEx(词类 t) { super(t); }
         public String translate(TypeInfo result) {
             return Integer.toString(value());
         }
     }
     @Reviser public static class StringEx extends StringLiteral {
-        public StringEx(Token t) { super(t); }
+        public StringEx(词类 t) { super(t); }
         public String translate(TypeInfo result) {
             StringBuilder code = new StringBuilder();
             String literal = value();
@@ -87,7 +87,7 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static class NameEx3 extends TypeChecker.NameEx2 {
-        public NameEx3(Token t) { super(t); }
+        public NameEx3(词类 t) { super(t); }
         public String translate(TypeInfo result) {
             if (type.isFunctionType())
                 return JavaFunction.className(name()) + "." + METHOD;

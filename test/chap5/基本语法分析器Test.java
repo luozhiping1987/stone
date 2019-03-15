@@ -11,9 +11,9 @@ import java.util.List;
 import org.junit.Test;
 
 import stone.BasicParser;
-import stone.Lexer;
+import stone.词法分析器类;
 import stone.ParseException;
-import stone.Token;
+import stone.词类;
 import stone.ast.ASTLeaf;
 import stone.ast.ASTree;
 import stone.ast.BinaryExpr;
@@ -25,7 +25,7 @@ public class 基本语法分析器Test {
   
   @Test
   public void test分析赋值() throws ParseException {
-    Lexer l = 词法分析功用.新建词法分析器("i0 = 1");
+    词法分析器类 l = 词法分析功用.新建词法分析器("i0 = 1");
     BasicParser bp = new BasicParser();
     ASTree ast = bp.parse(l);
     
@@ -39,11 +39,11 @@ public class 基本语法分析器Test {
   @Test
   public void test分析程序() throws ParseException, IOException {
     String 源码 = 文件功用.读文件("测试源码/chap5/分奇偶加.txt", StandardCharsets.UTF_8);
-    Lexer l = 词法分析功用.新建词法分析器(源码);
+    词法分析器类 l = 词法分析功用.新建词法分析器(源码);
 
     BasicParser 语法分析器 = new BasicParser();
     List<ASTree> 所有语法树 = new ArrayList<>();
-    while (l.peek(0) != Token.EOF) {
+    while (l.peek(0) != 词类.EOF) {
       所有语法树.add(语法分析器.parse(l));
     }
 

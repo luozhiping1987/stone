@@ -6,30 +6,30 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Lexer {
+public class 词法分析器类 {
     public static String regexPat
         = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")"
           + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?";
     private Pattern pattern = Pattern.compile(regexPat);
-    private ArrayList<Token> queue = new ArrayList<Token>();
+    private ArrayList<词类> queue = new ArrayList<词类>();
     private boolean hasMore;
     private LineNumberReader reader;
 
-    public Lexer(Reader r) {
+    public 词法分析器类(Reader r) {
         hasMore = true;
         reader = new LineNumberReader(r);
     }
-    public Token read() throws ParseException {
+    public 词类 读() throws ParseException {
         if (fillQueue(0))
             return queue.remove(0);
         else
-            return Token.EOF;
+            return 词类.EOF;
     }
-    public Token peek(int i) throws ParseException {
+    public 词类 peek(int i) throws ParseException {
         if (fillQueue(i))
             return queue.get(i);
         else
-            return Token.EOF; 
+            return 词类.EOF; 
     }
     private boolean fillQueue(int i) throws ParseException {
         while (i >= queue.size())
@@ -64,13 +64,13 @@ public class Lexer {
             else
                 throw new ParseException("bad token at line " + lineNo);
         }
-        queue.add(new IdToken(lineNo, Token.EOL));
+        queue.add(new IdToken(lineNo, 词类.EOL));
     }
     protected void addToken(int lineNo, Matcher matcher) {
         String m = matcher.group(1);
         if (m != null) // if not a space
             if (matcher.group(2) == null) { // if not a comment
-                Token token;
+                词类 token;
                 if (matcher.group(3) != null)
                     token = new NumToken(lineNo, Integer.parseInt(m));
                 else if (matcher.group(4) != null)
@@ -99,7 +99,7 @@ public class Lexer {
         return sb.toString();
     }
 
-    protected static class NumToken extends Token {
+    protected static class NumToken extends 词类 {
         private int value;
 
         protected NumToken(int line, int v) {
@@ -111,7 +111,7 @@ public class Lexer {
         public int getNumber() { return value; }
     }
 
-    protected static class IdToken extends Token {
+    protected static class IdToken extends 词类 {
         private String text; 
         protected IdToken(int line, String id) {
             super(line);
@@ -121,7 +121,7 @@ public class Lexer {
         public String getText() { return text; }
     }
 
-    protected static class StrToken extends Token {
+    protected static class StrToken extends 词类 {
         private String literal;
         StrToken(int line, String str) {
             super(line);

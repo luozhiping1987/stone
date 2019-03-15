@@ -12,20 +12,20 @@ import stone.ast.ASTList;
 
 public class Parser {
     protected static abstract class Element {
-        protected abstract void parse(Lexer lexer, List<ASTree> res)
+        protected abstract void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException;
-        protected abstract boolean match(Lexer lexer) throws ParseException;
+        protected abstract boolean match(词法分析器类 lexer) throws ParseException;
     }
 
     protected static class Tree extends Element {
         protected Parser parser;
         protected Tree(Parser p) { parser = p; }
-        protected void parse(Lexer lexer, List<ASTree> res)
+        protected void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException
         {
             res.add(parser.parse(lexer));
         }
-        protected boolean match(Lexer lexer) throws ParseException { 
+        protected boolean match(词法分析器类 lexer) throws ParseException { 
             return parser.match(lexer);
         }
     }
@@ -33,7 +33,7 @@ public class Parser {
     protected static class OrTree extends Element {
         protected Parser[] parsers;
         protected OrTree(Parser[] p) { parsers = p; }
-        protected void parse(Lexer lexer, List<ASTree> res)
+        protected void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException
         {
             Parser p = choose(lexer);
@@ -42,10 +42,10 @@ public class Parser {
             else
                 res.add(p.parse(lexer));
         }
-        protected boolean match(Lexer lexer) throws ParseException {
+        protected boolean match(词法分析器类 lexer) throws ParseException {
             return choose(lexer) != null;
         }
-        protected Parser choose(Lexer lexer) throws ParseException {
+        protected Parser choose(词法分析器类 lexer) throws ParseException {
             for (Parser p: parsers)
                 if (p.match(lexer))
                     return p;
@@ -64,7 +64,7 @@ public class Parser {
         protected Parser parser;
         protected boolean onlyOnce;
         protected Repeat(Parser p, boolean once) { parser = p; onlyOnce = once; }
-        protected void parse(Lexer lexer, List<ASTree> res)
+        protected void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException
         {
             while (parser.match(lexer)) {
@@ -75,7 +75,7 @@ public class Parser {
                     break;
             }
         }
-        protected boolean match(Lexer lexer) throws ParseException {
+        protected boolean match(词法分析器类 lexer) throws ParseException {
             return parser.match(lexer);
         }
     }
@@ -85,12 +85,12 @@ public class Parser {
         protected AToken(Class<? extends ASTLeaf> type) {
             if (type == null)
                 type = ASTLeaf.class;
-            factory = Factory.get(type, Token.class);
+            factory = Factory.get(type, 词类.class);
         }
-        protected void parse(Lexer lexer, List<ASTree> res)
+        protected void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException
         {
-            Token t = lexer.read();
+            词类 t = lexer.读();
             if (test(t)) {
                 ASTree leaf = factory.make(t);
                 res.add(leaf);
@@ -98,10 +98,10 @@ public class Parser {
             else
                 throw new ParseException(t);
         }
-        protected boolean match(Lexer lexer) throws ParseException {
+        protected boolean match(词法分析器类 lexer) throws ParseException {
             return test(lexer.peek(0));
         }
-        protected abstract boolean test(Token t); 
+        protected abstract boolean test(词类 t); 
     }
 
     protected static class IdToken extends AToken {
@@ -110,28 +110,28 @@ public class Parser {
             super(type);
             reserved = r != null ? r : new HashSet<String>();
         }
-        protected boolean test(Token t) {
+        protected boolean test(词类 t) {
             return t.isIdentifier() && !reserved.contains(t.getText());
         }
     }
 
     protected static class NumToken extends AToken {
         protected NumToken(Class<? extends ASTLeaf> type) { super(type); }
-        protected boolean test(Token t) { return t.isNumber(); }
+        protected boolean test(词类 t) { return t.isNumber(); }
     }
 
     protected static class StrToken extends AToken {
         protected StrToken(Class<? extends ASTLeaf> type) { super(type); }
-        protected boolean test(Token t) { return t.isString(); }
+        protected boolean test(词类 t) { return t.isString(); }
     }
 
     protected static class Leaf extends Element {
         protected String[] tokens;
         protected Leaf(String[] pat) { tokens = pat; }
-        protected void parse(Lexer lexer, List<ASTree> res)
+        protected void parse(词法分析器类 lexer, List<ASTree> res)
             throws ParseException
         {
-            Token t = lexer.read();
+            词类 t = lexer.读();
             if (t.isIdentifier())
                 for (String token: tokens)
                     if (token.equals(t.getText())) {
@@ -144,11 +144,11 @@ public class Parser {
             else
                 throw new ParseException(t);
         }
-        protected void find(List<ASTree> res, Token t) {
+        protected void find(List<ASTree> res, 词类 t) {
             res.add(new ASTLeaf(t));
         }
-        protected boolean match(Lexer lexer) throws ParseException {
-            Token t = lexer.peek(0);
+        protected boolean match(词法分析器类 lexer) throws ParseException {
+            词类 t = lexer.peek(0);
             if (t.isIdentifier())
                 for (String token: tokens)
                     if (token.equals(t.getText()))
@@ -160,7 +160,7 @@ public class Parser {
 
     protected static class Skip extends Leaf {
         protected Skip(String[] t) { super(t); }
-        protected void find(List<ASTree> res, Token t) {}
+        protected void find(List<ASTree> res, 词类 t) {}
     }
 
     public static class Precedence {
@@ -190,7 +190,7 @@ public class Parser {
             ops = map;
             factor = exp;
         }
-        public void parse(Lexer lexer, List<ASTree> res) throws ParseException {
+        public void parse(词法分析器类 lexer, List<ASTree> res) throws ParseException {
             ASTree right = factor.parse(lexer);
             Precedence prec;
             while ((prec = nextOperator(lexer)) != null)
@@ -198,12 +198,12 @@ public class Parser {
 
             res.add(right);
         }
-        private ASTree doShift(Lexer lexer, ASTree left, int prec)
+        private ASTree doShift(词法分析器类 lexer, ASTree left, int prec)
             throws ParseException
         {
             ArrayList<ASTree> list = new ArrayList<ASTree>();
             list.add(left);
-            list.add(new ASTLeaf(lexer.read()));
+            list.add(new ASTLeaf(lexer.读()));
             ASTree right = factor.parse(lexer);
             Precedence next;
             while ((next = nextOperator(lexer)) != null
@@ -213,8 +213,8 @@ public class Parser {
             list.add(right);
             return factory.make(list);
         }
-        private Precedence nextOperator(Lexer lexer) throws ParseException {
-            Token t = lexer.peek(0);
+        private Precedence nextOperator(词法分析器类 lexer) throws ParseException {
+            词类 t = lexer.peek(0);
             if (t.isIdentifier())
                 return ops.get(t.getText());
             else
@@ -226,7 +226,7 @@ public class Parser {
             else
                 return prec <= nextPrec.value;
         }
-        protected boolean match(Lexer lexer) throws ParseException {
+        protected boolean match(词法分析器类 lexer) throws ParseException {
             return factor.match(lexer);
         }
     }
@@ -295,14 +295,14 @@ public class Parser {
         elements = p.elements;
         factory = p.factory;
     }
-    public ASTree parse(Lexer lexer) throws ParseException {
+    public ASTree parse(词法分析器类 lexer) throws ParseException {
         ArrayList<ASTree> results = new ArrayList<ASTree>();
         for (Element e: elements)
             e.parse(lexer, results);
 
         return factory.make(results);
     }
-    protected boolean match(Lexer lexer) throws ParseException {
+    protected boolean match(词法分析器类 lexer) throws ParseException {
         if (elements.size() == 0)
             return true;
         else {

@@ -10,17 +10,17 @@ import chap14.TypeInfo;
 import chap6.BasicEvaluator;
 import chap6.Environment;
 import stone.BasicParser;
-import stone.Lexer;
+import stone.词法分析器类;
 import stone.ParseException;
-import stone.Token;
+import stone.词类;
 import stone.ast.ASTree;
 import stone.ast.NullStmnt;
 
 public class 解释器功用 {
   public static Object 求值(BasicParser 基本分析器, Environment 环境, String 源代码) throws ParseException {
-    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
+    词法分析器类 词法分析器 = new 词法分析器类(new StringReader(源代码));
     Object 终值 = null;
-    while (词法分析器.peek(0) != Token.EOF) {
+    while (词法分析器.peek(0) != 词类.EOF) {
       ASTree 树 = 基本分析器.parse(词法分析器);
       if (!(树 instanceof NullStmnt)) {
         终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
@@ -30,9 +30,9 @@ public class 解释器功用 {
   }
 
   public static Object 环境优化求值(BasicParser 基本分析器, Environment 环境, String 源代码) throws ParseException {
-    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
+    词法分析器类 词法分析器 = new 词法分析器类(new StringReader(源代码));
     Object 终值 = null;
-    while (词法分析器.peek(0) != Token.EOF) {
+    while (词法分析器.peek(0) != 词类.EOF) {
       ASTree 树 = 基本分析器.parse(词法分析器);
       if (!(树 instanceof NullStmnt)) {
         ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
@@ -44,10 +44,10 @@ public class 解释器功用 {
 
   public static 带类型返回值 带类型求值(BasicParser 基本分析器, Environment 环境, TypeEnv 类型环境, String 源代码)
       throws ParseException, TypeException {
-    Lexer 词法分析器 = new Lexer(new StringReader(源代码));
+    词法分析器类 词法分析器 = new 词法分析器类(new StringReader(源代码));
     Object 终值 = null;
     TypeInfo 类型 = null;
-    while (词法分析器.peek(0) != Token.EOF) {
+    while (词法分析器.peek(0) != 词类.EOF) {
       ASTree 树 = 基本分析器.parse(词法分析器);
       if (!(树 instanceof NullStmnt)) {
         ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());

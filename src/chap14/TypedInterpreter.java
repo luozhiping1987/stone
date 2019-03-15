@@ -1,8 +1,8 @@
 package chap14;
 import stone.BasicParser;
 import stone.CodeDialog;
-import stone.Lexer;
-import stone.Token;
+import stone.词法分析器类;
+import stone.词类;
 import stone.TypedParser;
 import stone.ParseException;
 import stone.ast.ASTree;
@@ -22,8 +22,8 @@ public class TypedInterpreter {
     public static void run(BasicParser bp, Environment env, TypeEnv typeEnv)
         throws ParseException, TypeException
     {
-        Lexer lexer = new Lexer(new CodeDialog());
-        while (lexer.peek(0) != Token.EOF) {
+        词法分析器类 lexer = new 词法分析器类(new CodeDialog());
+        while (lexer.peek(0) != 词类.EOF) {
             ASTree tree = bp.parse(lexer);
             if (!(tree instanceof NullStmnt)) {
                 ((EnvOptimizer.ASTreeOptEx)tree).lookup(

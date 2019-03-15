@@ -2,7 +2,7 @@ package chap14;
 import java.util.List;
 import chap7.FuncEvaluator;
 import chap11.EnvOptimizer;
-import stone.Token;
+import stone.词类;
 import static javassist.gluonj.GluonJ.revise;
 import stone.ast.*;
 import javassist.gluonj.*;
@@ -15,20 +15,20 @@ import javassist.gluonj.*;
         }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
-        public NumberEx(Token t) { super(t); }
+        public NumberEx(词类 t) { super(t); }
         public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
             return TypeInfo.INT;
         }
     }
     @Reviser public static class StringEx extends StringLiteral {
-        public StringEx(Token t) { super(t); }
+        public StringEx(词类 t) { super(t); }
         public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
             return TypeInfo.STRING;
         }
     }
     @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
         protected TypeInfo type;
-        public NameEx2(Token t) { super(t); }
+        public NameEx2(词类 t) { super(t); }
         public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
             type = tenv.get(nest, index);
             if (type == null)

@@ -20,7 +20,7 @@ public class BasicParser {
     Parser statement0 = rule();
     Parser block = rule(BlockStmnt.class)
         .sep("{").option(statement0)
-        .repeat(rule().sep(";", Token.EOL).option(statement0))
+        .repeat(rule().sep(";", 词类.EOL).option(statement0))
         .sep("}");
     Parser simple = rule(PrimaryExpr.class).ast(expr);
     Parser statement = statement0.or(
@@ -30,12 +30,12 @@ public class BasicParser {
             simple);
 
     Parser program = rule().or(statement, rule(NullStmnt.class))
-                           .sep(";", Token.EOL);
+                           .sep(";", 词类.EOL);
 
     public BasicParser() {
         reserved.add(";");
         reserved.add("}");
-        reserved.add(Token.EOL);
+        reserved.add(词类.EOL);
 
         operators.add("=", 1, Operators.RIGHT);
         operators.add("==", 2, Operators.LEFT);
@@ -47,7 +47,7 @@ public class BasicParser {
         operators.add("/", 4, Operators.LEFT);
         operators.add("%", 4, Operators.LEFT);
     }
-    public ASTree parse(Lexer lexer) throws ParseException {
+    public ASTree parse(词法分析器类 lexer) throws ParseException {
         return program.parse(lexer);
     }
 }

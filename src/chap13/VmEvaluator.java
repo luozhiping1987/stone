@@ -1,7 +1,7 @@
 package chap13;
 import java.util.List;
 import stone.StoneException;
-import stone.Token;
+import stone.词类;
 import chap11.EnvOptimizer;
 import chap6.Environment;
 import chap6.BasicEvaluator.ASTreeEx;
@@ -61,7 +61,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
-        public NumberEx(Token t) { super(t); }
+        public NumberEx(词类 t) { super(t); }
         public void compile(Code c) {
             int v = value();
             if (Byte.MIN_VALUE <= v && v <= Byte.MAX_VALUE) {
@@ -76,7 +76,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class StringEx extends StringLiteral {
-        public StringEx(Token t) { super(t); }
+        public StringEx(词类 t) { super(t); }
         public void compile(Code c) {
             int i = c.record(value());
             c.add(SCONST);
@@ -85,7 +85,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
-        public NameEx2(Token t) { super(t); }
+        public NameEx2(词类 t) { super(t); }
         public void compile(Code c) {
             if (nest > 0) {
                 c.add(GMOVE);

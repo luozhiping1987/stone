@@ -1,11 +1,11 @@
 package stone;
 
-public abstract class Token {
-    public static final Token EOF = new Token(-1){}; // end of file
+public abstract class 词类 {
+    public static final 词类 EOF = new 词类(-1){}; // end of file
     public static final String EOL = "\\n";          // end of line 
     private int lineNumber;
 
-    protected Token(int line) {
+    protected 词类(int line) {
         lineNumber = line;
     }
     public int getLineNumber() { return lineNumber; }

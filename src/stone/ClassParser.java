@@ -7,7 +7,7 @@ import stone.ast.Dot;
 public class ClassParser extends ClosureParser {
     Parser member = rule().or(def, simple);
     Parser class_body = rule(ClassBody.class).sep("{").option(member)
-                            .repeat(rule().sep(";", Token.EOL).option(member))
+                            .repeat(rule().sep(";", 词类.EOL).option(member))
                             .sep("}");
     Parser defclass = rule(ClassStmnt.class).sep("class").identifier(reserved)
                           .option(rule().sep("extends").identifier(reserved))

@@ -2,7 +2,7 @@ package chap11;
 import static javassist.gluonj.GluonJ.revise;
 import javassist.gluonj.*;
 import java.util.List;
-import stone.Token;
+import stone.词类;
 import stone.StoneException;
 import stone.ast.*;
 import chap11.Symbols.Location;
@@ -76,7 +76,7 @@ import chap7.ClosureEvaluator;
     @Reviser public static class NameEx extends Name {
         protected static final int UNKNOWN = -1;
         protected int nest, index;
-        public NameEx(Token t) { super(t); index = UNKNOWN; }
+        public NameEx(词类 t) { super(t); index = UNKNOWN; }
         public void lookup(Symbols syms) {
             Location loc = syms.get(name());
             if (loc == null)

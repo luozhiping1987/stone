@@ -108,7 +108,7 @@ import chap12.OptStoneObject.AccessException;
         }
     }
     @Reviser public static class NameEx2 extends EnvOptimizer.NameEx {
-        public NameEx2(Token t) { super(t); }
+        public NameEx2(词类 t) { super(t); }
         @Override public Object eval(Environment env) {
             if (index == UNKNOWN)
                 return env.get(name());

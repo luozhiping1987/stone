@@ -10,8 +10,8 @@ public class BasicInterpreter {
     public static void run(BasicParser bp, Environment env)
         throws ParseException
     {
-        Lexer lexer = new Lexer(new CodeDialog());
-        while (lexer.peek(0) != Token.EOF) {
+        词法分析器类 lexer = new 词法分析器类(new CodeDialog());
+        while (lexer.peek(0) != 词类.EOF) {
             ASTree t = bp.parse(lexer);
             if (!(t instanceof NullStmnt)) {
                 Object r = ((BasicEvaluator.ASTreeEx)t).eval(env);

@@ -1,7 +1,7 @@
 package stone.ast;
-import stone.Token;
+import stone.词类;
 
 public class StringLiteral extends ASTLeaf {
-    public StringLiteral(Token t) { super(t); }
+    public StringLiteral(词类 t) { super(t); }
     public String value() { return token().getText(); }
 }

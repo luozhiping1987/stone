@@ -1,6 +1,6 @@
 package chap6;
 import javassist.gluonj.*;
-import stone.Token;
+import stone.词类;
 import stone.StoneException;
 import stone.ast.*;
 import java.util.List;
@@ -18,21 +18,21 @@ import java.util.List;
         }
     }
     @Reviser public static class ASTLeafEx extends ASTLeaf {
-        public ASTLeafEx(Token t) { super(t); }
+        public ASTLeafEx(词类 t) { super(t); }
         public Object eval(Environment env) {
             throw new StoneException("cannot eval: " + toString(), this);
         }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
-        public NumberEx(Token t) { super(t); }
+        public NumberEx(词类 t) { super(t); }
         public Object eval(Environment e) { return value(); }
     }
     @Reviser public static class StringEx extends StringLiteral {
-        public StringEx(Token t) { super(t); }
+        public StringEx(词类 t) { super(t); }
         public Object eval(Environment e) { return value(); }
     }
     @Reviser public static class NameEx extends Name {
-        public NameEx(Token t) { super(t); }
+        public NameEx(词类 t) { super(t); }
         public Object eval(Environment env) {
             Object value = env.get(name());
             if (value == null)
