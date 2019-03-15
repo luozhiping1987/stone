@@ -20,19 +20,19 @@ import chap7.闭包求值器类;
         环境类 where(String name);
     }
     @Reviser public static abstract class 语法树优化执行类 extends 语法树类 {
-        public void lookup(Symbols syms) {}
+        public void 查找(Symbols syms) {}
     }
     @Reviser public static class ASTListEx extends ASTList {
         public ASTListEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             for (语法树类 t: this)
-                ((语法树优化执行类)t).lookup(syms);
+                ((语法树优化执行类)t).查找(syms);
         }
     }
     @Reviser public static class DefStmntEx extends DefStmnt {
         protected int index, size;
         public DefStmntEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             index = syms.putNew(name());
             size = FunEx.lookup(syms, parameters(), body());
         }
@@ -45,7 +45,7 @@ import chap7.闭包求值器类;
     @Reviser public static class FunEx extends Fun {
         protected int size = -1;
         public FunEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             size = lookup(syms, parameters(), body());
         }
         public Object 求值(环境类 env) {
@@ -55,15 +55,15 @@ import chap7.闭包求值器类;
                                  BlockStmnt body)
         {
             Symbols newSyms = new Symbols(syms);
-            ((ParamsEx)params).lookup(newSyms);
-            ((语法树优化执行类)revise(body)).lookup(newSyms);
+            ((ParamsEx)params).查找(newSyms);
+            ((语法树优化执行类)revise(body)).查找(newSyms);
             return newSyms.size();
         }
     }
     @Reviser public static class ParamsEx extends ParameterList {
         protected int[] offsets = null;
         public ParamsEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             int s = size();
             offsets = new int[s];
             for (int i = 0; i < s; i++)
@@ -77,7 +77,7 @@ import chap7.闭包求值器类;
         protected static final int UNKNOWN = -1;
         protected int nest, index;
         public NameEx(词类 t) { super(t); index = UNKNOWN; }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             Location loc = syms.get(name());
             if (loc == null)
                 throw new StoneException("undefined name: " + name(), this);
@@ -106,17 +106,17 @@ import chap7.闭包求值器类;
     }
     @Reviser public static class BinaryEx2 extends 基本求值器类.BinaryEx {
         public BinaryEx2(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             语法树类 left = left();
             if ("=".equals(operator())) {
                 if (left instanceof Name) {
                     ((NameEx)left).lookupForAssign(syms);
-                    ((语法树优化执行类)right()).lookup(syms);
+                    ((语法树优化执行类)right()).查找(syms);
                     return;
                 }
             }
-            ((语法树优化执行类)left).lookup(syms);
-            ((语法树优化执行类)right()).lookup(syms);
+            ((语法树优化执行类)left).查找(syms);
+            ((语法树优化执行类)right()).查找(syms);
         }
         @Override
         protected Object computeAssign(环境类 env, Object rvalue) {

@@ -31,9 +31,9 @@ import chap6.基本求值器类.语法树执行类;
     @Reviser public static class VarStmntEx extends VarStmnt {
         protected int index;
         public VarStmntEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {
+        public void 查找(Symbols syms) {
             index = syms.putNew(name());
-            ((语法树优化执行类)initializer()).lookup(syms);
+            ((语法树优化执行类)initializer()).查找(syms);
         }
         public Object 求值(环境类 env) {
             Object value = ((语法树执行类)initializer()).求值(env);

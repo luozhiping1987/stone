@@ -21,7 +21,7 @@ import chap12.OptStoneObject.AccessException;
 @Reviser public class 对象优化器类 {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
-        public void lookup(Symbols syms) {}
+        public void 查找(Symbols syms) {}
         public Object 求值(环境类 env) {
             Symbols methodNames = new MemberSymbols(((环境执行类2)env).symbols(),
                                                     MemberSymbols.METHOD);
@@ -34,7 +34,7 @@ import chap12.OptStoneObject.AccessException;
             if (ci.superClass() != null)
                 ci.superClass().copyTo(fieldNames, methodNames, methods);
             Symbols newSyms = new SymbolThis(fieldNames);
-            ((ClassBodyEx)body()).lookup(newSyms, methodNames, fieldNames,
+            ((ClassBodyEx)body()).查找(newSyms, methodNames, fieldNames,
                                          methods);
             ci.setMethods(methods);
             return name();
@@ -48,7 +48,7 @@ import chap12.OptStoneObject.AccessException;
                     ((语法树执行类)t).求值(env);
             return null;
         }
-        public void lookup(Symbols syms, Symbols methodNames,
+        public void 查找(Symbols syms, Symbols methodNames,
                            Symbols fieldNames, ArrayList<DefStmnt> methods)
         {
             for (语法树类 t: this) {
@@ -63,7 +63,7 @@ import chap12.OptStoneObject.AccessException;
                     ((DefStmntEx2)def).lookupAsMethod(fieldNames);
                 }
                 else
-                    ((语法树优化执行类)t).lookup(syms);
+                    ((语法树优化执行类)t).查找(syms);
             }
         }
     }
@@ -73,8 +73,8 @@ import chap12.OptStoneObject.AccessException;
         public void lookupAsMethod(Symbols syms) {
             Symbols newSyms = new Symbols(syms);
             newSyms.putNew(SymbolThis.NAME);
-            ((ParamsEx)parameters()).lookup(newSyms);
-            ((语法树优化执行类)revise(body())).lookup(newSyms);
+            ((ParamsEx)parameters()).查找(newSyms);
+            ((语法树优化执行类)revise(body())).查找(newSyms);
             size = newSyms.size();
         }
     }
