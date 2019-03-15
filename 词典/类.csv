@@ -6,3 +6,6 @@ BinaryExpr,二元表达式
 ASTLeaf,语法树叶类
 WhileStmnt,While声明
 ParseException,分析例外
+BasicInterpreter,基本解释器类
+BasicEnv,基本环境类
+BasicEvaluator,基本求值器类

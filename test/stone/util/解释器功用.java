@@ -7,7 +7,7 @@ import chap14.TypeChecker;
 import chap14.TypeEnv;
 import chap14.TypeException;
 import chap14.TypeInfo;
-import chap6.BasicEvaluator;
+import chap6.基本求值器类;
 import chap6.Environment;
 import stone.基本语法分析器类;
 import stone.词法分析器类;
@@ -23,7 +23,7 @@ public class 解释器功用 {
     while (词法分析器.瞄(0) != 词类.EOF) {
       语法树类 树 = 基本分析器.分析(词法分析器);
       if (!(树 instanceof NullStmnt)) {
-        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
+        终值 = ((基本求值器类.ASTreeEx) 树).eval(环境);
       }
     }
     return 终值;
@@ -36,7 +36,7 @@ public class 解释器功用 {
       语法树类 树 = 基本分析器.分析(词法分析器);
       if (!(树 instanceof NullStmnt)) {
         ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
-        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
+        终值 = ((基本求值器类.ASTreeEx) 树).eval(环境);
       }
     }
     return 终值;
@@ -53,7 +53,7 @@ public class 解释器功用 {
         ((EnvOptimizer.ASTreeOptEx) 树).lookup(((EnvOptimizer.EnvEx2) 环境).symbols());
 
         类型 = ((TypeChecker.ASTreeTypeEx) 树).typeCheck(类型环境);
-        终值 = ((BasicEvaluator.ASTreeEx) 树).eval(环境);
+        终值 = ((基本求值器类.ASTreeEx) 树).eval(环境);
       }
     }
     return new 带类型返回值(终值, 类型);

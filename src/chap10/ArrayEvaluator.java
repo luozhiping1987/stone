@@ -5,8 +5,8 @@ import stone.ArrayParser;
 import stone.StoneException;
 import stone.ast.*;
 import chap6.Environment;
-import chap6.BasicEvaluator;
-import chap6.BasicEvaluator.ASTreeEx;
+import chap6.基本求值器类;
+import chap6.基本求值器类.ASTreeEx;
 import chap7.FuncEvaluator;
 import chap7.FuncEvaluator.PrimaryEx;
 
@@ -35,7 +35,7 @@ import chap7.FuncEvaluator.PrimaryEx;
             throw new StoneException("bad array access", this);
         }
     }
-    @Reviser public static class AssignEx extends BasicEvaluator.BinaryEx {
+    @Reviser public static class AssignEx extends 基本求值器类.BinaryEx {
         public AssignEx(List<语法树类> c) { super(c); }
         @Override
         protected Object computeAssign(Environment env, Object rvalue) {

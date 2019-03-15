@@ -6,8 +6,8 @@ import javassist.gluonj.*;
 import stone.*;
 import stone.ast.*;
 import chap6.Environment;
-import chap6.BasicEvaluator;
-import chap6.BasicEvaluator.ASTreeEx;
+import chap6.基本求值器类;
+import chap6.基本求值器类.ASTreeEx;
 import chap7.FuncEvaluator.PrimaryEx;
 import chap11.ArrayEnv;
 import chap11.EnvOptimizer;
@@ -134,7 +134,7 @@ import chap12.OptStoneObject.AccessException;
             return (OptStoneObject)((EnvEx2)env).get(0, 0);
         }
     }
-    @Reviser public static class AssignEx extends BasicEvaluator.BinaryEx {
+    @Reviser public static class AssignEx extends 基本求值器类.BinaryEx {
         public AssignEx(List<语法树类> c) { super(c); }
         @Override
         protected Object computeAssign(Environment env, Object rvalue) {

@@ -4,7 +4,7 @@ import stone.StoneException;
 import stone.ast.语法树类;
 import javassist.gluonj.*;
 import chap6.Environment;
-import chap6.BasicEvaluator.ASTreeEx;
+import chap6.基本求值器类.ASTreeEx;
 import chap7.FuncEvaluator;
 
 @Require(FuncEvaluator.class)

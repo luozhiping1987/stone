@@ -1,9 +1,9 @@
 package chap7;
 import stone.ClosureParser;
 import stone.分析例外;
-import chap6.BasicInterpreter;
+import chap6.基本解释器类;
 
-public class ClosureInterpreter extends BasicInterpreter{
+public class ClosureInterpreter extends 基本解释器类{
     public static void main(String[] args) throws 分析例外 {
         run(new ClosureParser(), new NestedEnv());
     }

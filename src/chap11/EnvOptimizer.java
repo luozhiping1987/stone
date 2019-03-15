@@ -7,7 +7,7 @@ import stone.StoneException;
 import stone.ast.*;
 import chap11.Symbols.Location;
 import chap6.Environment;
-import chap6.BasicEvaluator;
+import chap6.基本求值器类;
 import chap7.ClosureEvaluator;
 
 @Require(ClosureEvaluator.class)
@@ -104,7 +104,7 @@ import chap7.ClosureEvaluator;
                 ((EnvEx2)env).put(nest, index, value);
         }
     }
-    @Reviser public static class BinaryEx2 extends BasicEvaluator.BinaryEx {
+    @Reviser public static class BinaryEx2 extends 基本求值器类.BinaryEx {
         public BinaryEx2(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {
             语法树类 left = left();

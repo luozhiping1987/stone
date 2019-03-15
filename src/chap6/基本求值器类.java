@@ -5,7 +5,7 @@ import stone.StoneException;
 import stone.ast.*;
 import java.util.List;
 
-@Reviser public class BasicEvaluator {
+@Reviser public class 基本求值器类 {
     public static final int TRUE = 1;
     public static final int FALSE = 0;
     @Reviser public static abstract class ASTreeEx extends 语法树类 {

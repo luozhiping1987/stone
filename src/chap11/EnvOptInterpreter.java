@@ -1,5 +1,5 @@
 package chap11;
-import chap6.BasicEvaluator;
+import chap6.基本求值器类;
 import chap6.Environment;
 import chap8.Natives;
 import stone.基本语法分析器类;
@@ -25,7 +25,7 @@ public class EnvOptInterpreter {
             if (!(t instanceof NullStmnt)) {
                 ((EnvOptimizer.ASTreeOptEx)t).lookup(
                         ((EnvOptimizer.EnvEx2)env).symbols());
-                Object r = ((BasicEvaluator.ASTreeEx)t).eval(env);
+                Object r = ((基本求值器类.ASTreeEx)t).eval(env);
                 System.out.println("=> " + r);
             }
         }

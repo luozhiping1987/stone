@@ -293,7 +293,7 @@ import static javassist.gluonj.GluonJ.revise;
             args[0] = env;
             int num = 1;
             for (语法树类 a: this)
-                args[num++] = ((chap6.BasicEvaluator.ASTreeEx)a).eval(env); 
+                args[num++] = ((chap6.基本求值器类.ASTreeEx)a).eval(env); 
             return func.invoke(args);
         }
     }

@@ -9,7 +9,7 @@ import stone.ast.语法树类;
 import stone.ast.NullStmnt;
 import chap11.EnvOptimizer;
 import chap11.ResizableArrayEnv;
-import chap6.BasicEvaluator;
+import chap6.基本求值器类;
 import chap6.Environment;
 
 public class TypedInterpreter {
@@ -30,7 +30,7 @@ public class TypedInterpreter {
                                         ((EnvOptimizer.EnvEx2)env).symbols());
                 TypeInfo type
                     = ((TypeChecker.ASTreeTypeEx)tree).typeCheck(typeEnv);
-                Object r = ((BasicEvaluator.ASTreeEx)tree).eval(env);
+                Object r = ((基本求值器类.ASTreeEx)tree).eval(env);
                 System.out.println("=> " + r + " : " + type);
             }
         }

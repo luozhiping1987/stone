@@ -3,12 +3,12 @@ import java.util.List;
 import javassist.gluonj.*;
 import stone.StoneException;
 import stone.ast.*;
-import chap6.BasicEvaluator;
+import chap6.基本求值器类;
 import chap6.Environment;
-import chap6.BasicEvaluator.ASTreeEx;
-import chap6.BasicEvaluator.BlockEx;
+import chap6.基本求值器类.ASTreeEx;
+import chap6.基本求值器类.BlockEx;
 
-@Require(BasicEvaluator.class)
+@Require(基本求值器类.class)
 @Reviser public class FuncEvaluator {
     @Reviser public static interface EnvEx extends Environment {
         void putNew(String name, Object value);

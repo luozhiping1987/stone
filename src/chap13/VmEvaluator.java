@@ -4,7 +4,7 @@ import stone.StoneException;
 import stone.词类;
 import chap11.EnvOptimizer;
 import chap6.Environment;
-import chap6.BasicEvaluator.ASTreeEx;
+import chap6.基本求值器类.ASTreeEx;
 import chap7.FuncEvaluator;
 import javassist.gluonj.*;
 import static chap13.Opcode.*;

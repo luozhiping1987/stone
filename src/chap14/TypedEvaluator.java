@@ -6,7 +6,7 @@ import chap11.EnvOptimizer;
 import chap11.Symbols;
 import chap11.EnvOptimizer.ASTreeOptEx;
 import chap6.Environment;
-import chap6.BasicEvaluator.ASTreeEx;
+import chap6.基本求值器类.ASTreeEx;
 
 @Require(EnvOptimizer.class)
 @Reviser public class TypedEvaluator {
