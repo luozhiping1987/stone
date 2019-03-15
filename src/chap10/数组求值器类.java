@@ -6,7 +6,7 @@ import stone.StoneException;
 import stone.ast.*;
 import chap6.环境类;
 import chap6.基本求值器类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 import chap7.函数求值器类;
 import chap7.函数求值器类.PrimaryEx;
 
@@ -19,7 +19,7 @@ import chap7.函数求值器类.PrimaryEx;
             Object[] res = new Object[s];
             int i = 0;
             for (语法树类 t: this)
-                res[i++] = ((语法树执行类)t).求值(env);
+                res[i++] = ((语法树扩展类)t).求值(env);
             return res;
         }
     }
@@ -27,7 +27,7 @@ import chap7.函数求值器类.PrimaryEx;
         public ArrayRefEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env, Object value) {
             if (value instanceof Object[]) {
-                Object index = ((语法树执行类)index()).求值(env);
+                Object index = ((语法树扩展类)index()).求值(env);
                 if (index instanceof Integer)
                     return ((Object[])value)[(Integer)index];
             }
@@ -46,7 +46,7 @@ import chap7.函数求值器类.PrimaryEx;
                     Object a = ((PrimaryEx)le).evalSubExpr(env, 1);
                     if (a instanceof Object[]) {
                         ArrayRef aref = (ArrayRef)p.postfix(0);
-                        Object index = ((语法树执行类)aref.index()).求值(env);
+                        Object index = ((语法树扩展类)aref.index()).求值(env);
                         if (index instanceof Integer) {
                             ((Object[])a)[(Integer)index] = rvalue;
                             return rvalue;

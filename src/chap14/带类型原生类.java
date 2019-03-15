@@ -1,7 +1,7 @@
 package chap14;
 import chap6.环境类;
 import chap8.原生类;
-import chap11.环境优化器类.环境执行类2;
+import chap11.环境优化器类.环境扩展类2;
 
 public class 带类型原生类 extends 原生类 {
     protected 类型环境类 typeEnv;
@@ -10,7 +10,7 @@ public class 带类型原生类 extends 原生类 {
                           String methodName, 类型信息类 type, Class<?> ... params)
     {
         append(env, name, clazz, methodName, params);
-        int index = ((环境执行类2)env).所有符号().find(name);
+        int index = ((环境扩展类2)env).所有符号().find(name);
         typeEnv.put(0, index, type);
     }
     protected void appendNatives(环境类 env) {

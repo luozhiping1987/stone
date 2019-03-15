@@ -1,6 +1,6 @@
 package chap11;
 import stone.StoneException;
-import chap11.环境优化器类.环境执行类2;
+import chap11.环境优化器类.环境扩展类2;
 import chap6.环境类;
 
 public class ArrayEnv implements 环境类 {
@@ -17,7 +17,7 @@ public class ArrayEnv implements 环境类 {
         else if (outer == null)
             return null;
         else
-            return ((环境执行类2)outer).get(nest - 1, index);
+            return ((环境扩展类2)outer).get(nest - 1, index);
     }
     public void put(int nest, int index, Object value) {
         if (nest == 0)
@@ -25,7 +25,7 @@ public class ArrayEnv implements 环境类 {
         else if (outer == null)
             throw new StoneException("no outer environment");
         else
-            ((环境执行类2)outer).put(nest - 1, index, value);
+            ((环境扩展类2)outer).put(nest - 1, index, value);
     }
     public Object get(String name) { error(name); return null; }
     public void put(String name, Object value) { error(name); }

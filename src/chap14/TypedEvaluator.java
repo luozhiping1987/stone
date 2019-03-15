@@ -6,7 +6,7 @@ import chap11.环境优化器类;
 import chap11.Symbols;
 import chap11.环境优化器类.语法树优化执行类;
 import chap6.环境类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 
 @Require(环境优化器类.class)
 @Reviser public class TypedEvaluator {
@@ -36,8 +36,8 @@ import chap6.基本求值器类.语法树执行类;
             ((语法树优化执行类)initializer()).查找(syms);
         }
         public Object 求值(环境类 env) {
-            Object value = ((语法树执行类)initializer()).求值(env);
-            ((环境优化器类.环境执行类2)env).put(0, index, value);
+            Object value = ((语法树扩展类)initializer()).求值(env);
+            ((环境优化器类.环境扩展类2)env).put(0, index, value);
             return value;
         }
     }

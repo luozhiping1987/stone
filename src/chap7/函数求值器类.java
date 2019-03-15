@@ -5,7 +5,7 @@ import stone.StoneException;
 import stone.ast.*;
 import chap6.基本求值器类;
 import chap6.环境类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 import chap6.基本求值器类.BlockEx;
 
 @Require(基本求值器类.class)
@@ -38,7 +38,7 @@ import chap6.基本求值器类.BlockEx;
                 return ((PostfixEx)postfix(nest)).求值(env, target);
             }
             else
-                return ((语法树执行类)operand()).求值(env);
+                return ((语法树扩展类)operand()).求值(env);
         }
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
@@ -58,7 +58,7 @@ import chap6.基本求值器类.BlockEx;
             int num = 0;
             for (语法树类 a: this)
                 ((ParamsEx)params).求值(newEnv, num++,
-                                        ((语法树执行类)a).求值(callerEnv));
+                                        ((语法树扩展类)a).求值(callerEnv));
             return ((BlockEx)func.body()).求值(newEnv);
         }
     }

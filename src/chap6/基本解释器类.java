@@ -14,7 +14,7 @@ public class 基本解释器类 {
         while (lexer.瞄(0) != 词类.EOF) {
             语法树类 t = bp.分析(lexer);
             if (!(t instanceof 空声明类)) {
-                Object r = ((基本求值器类.语法树执行类)t).求值(env);
+                Object r = ((基本求值器类.语法树扩展类)t).求值(env);
                 System.out.println("=> " + r);
             }
         }

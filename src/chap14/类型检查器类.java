@@ -23,7 +23,7 @@ import stone.ast.语法树类;
 
 @Require(TypedEvaluator.class)
 @Reviser public class 类型检查器类 {
-    @Reviser public static abstract class 语法树类型执行类 extends 语法树类 {
+    @Reviser public static abstract class 语法树类型扩展类 extends 语法树类 {
         public 类型信息类 类型检查(类型环境类 tenv) throws 类型例外 {
             return null;
         }
@@ -68,7 +68,7 @@ import stone.ast.语法树类;
     @Reviser public static class NegativeEx extends NegativeExpr {
         public NegativeEx(List<语法树类> c) { super(c); }
         public 类型信息类 类型检查(类型环境类 tenv) throws 类型例外 {
-            类型信息类 t = ((语法树类型执行类)operand()).类型检查(tenv);
+            类型信息类 t = ((语法树类型扩展类)operand()).类型检查(tenv);
             t.assertSubtypeOf(类型信息类.INT, tenv, this);
             return 类型信息类.INT;
         }
@@ -81,8 +81,8 @@ import stone.ast.语法树类;
             if ("=".equals(op))
                 return typeCheckForAssign(tenv);
             else {
-                leftType = ((语法树类型执行类)left()).类型检查(tenv);
-                rightType = ((语法树类型执行类)right()).类型检查(tenv);
+                leftType = ((语法树类型扩展类)left()).类型检查(tenv);
+                rightType = ((语法树类型扩展类)right()).类型检查(tenv);
                 if ("+".equals(op))
                     return leftType.plus(rightType, tenv);
                 else if ("==".equals(op))
@@ -97,7 +97,7 @@ import stone.ast.语法树类;
         protected 类型信息类 typeCheckForAssign(类型环境类 tenv)
             throws 类型例外
         {
-            rightType = ((语法树类型执行类)right()).类型检查(tenv);
+            rightType = ((语法树类型扩展类)right()).类型检查(tenv);
             语法树类 le = left();
             if (le instanceof Name)
                 return ((NameEx2)le).typeCheckForAssign(tenv, rightType);
@@ -112,31 +112,31 @@ import stone.ast.语法树类;
             type = 类型信息类.INT;
             for (语法树类 t: this)
                 if (!(t instanceof 空声明类))
-                    type = ((语法树类型执行类)t).类型检查(tenv);
+                    type = ((语法树类型扩展类)t).类型检查(tenv);
             return type;
         }
     }
     @Reviser public static class IfEx extends IfStmnt {
         public IfEx(List<语法树类> c) { super(c); }
         public 类型信息类 类型检查(类型环境类 tenv) throws 类型例外 {
-            类型信息类 condType = ((语法树类型执行类)condition()).类型检查(tenv);
+            类型信息类 condType = ((语法树类型扩展类)condition()).类型检查(tenv);
             condType.assertSubtypeOf(类型信息类.INT, tenv, this);
-            类型信息类 thenType = ((语法树类型执行类)thenBlock()).类型检查(tenv);
+            类型信息类 thenType = ((语法树类型扩展类)thenBlock()).类型检查(tenv);
             类型信息类 elseType;
             语法树类 elseBk = elseBlock();
             if (elseBk == null)
                 elseType = 类型信息类.INT;
             else
-                elseType = ((语法树类型执行类)elseBk).类型检查(tenv);
+                elseType = ((语法树类型扩展类)elseBk).类型检查(tenv);
             return thenType.union(elseType, tenv);
         }
     }
     @Reviser public static class WhileEx extends While声明类 {
         public WhileEx(List<语法树类> c) { super(c); }
         public 类型信息类 类型检查(类型环境类 tenv) throws 类型例外 {
-            类型信息类 condType = ((语法树类型执行类)condition()).类型检查(tenv);
+            类型信息类 condType = ((语法树类型扩展类)condition()).类型检查(tenv);
             condType.assertSubtypeOf(类型信息类.INT, tenv, this);
-            类型信息类 bodyType = ((语法树类型执行类)body()).类型检查(tenv);
+            类型信息类 bodyType = ((语法树类型扩展类)body()).类型检查(tenv);
             return bodyType.union(类型信息类.INT, tenv);
         }
     }
@@ -156,7 +156,7 @@ import stone.ast.语法树类;
             for (int i = 0; i < params.length; i++)
                 bodyEnv.put(0, i, params[i]);
             类型信息类 bodyType
-                = ((语法树类型执行类)revise(body())).类型检查(bodyEnv);
+                = ((语法树类型扩展类)revise(body())).类型检查(bodyEnv);
             bodyType.assertSubtypeOf(retType, tenv, this);
             return funcType;
         }
@@ -183,7 +183,7 @@ import stone.ast.语法树类;
                 return ((PostfixEx)postfix(nest)).类型检查(tenv, target);
             }
             else
-                return ((语法树类型执行类)operand()).类型检查(tenv);
+                return ((语法树类型扩展类)operand()).类型检查(tenv);
         }
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
@@ -207,7 +207,7 @@ import stone.ast.语法树类;
             argTypes = new 类型信息类[params.length];
             int num = 0;
             for (语法树类 a: this) {
-                类型信息类 t = argTypes[num] = ((语法树类型执行类)a).类型检查(tenv);
+                类型信息类 t = argTypes[num] = ((语法树类型扩展类)a).类型检查(tenv);
                 t.assertSubtypeOf(params[num++], tenv, this);
             }
             return funcType.returnType;
@@ -221,7 +221,7 @@ import stone.ast.语法树类;
                 throw new 类型例外("duplicate variable: " + name(), this);
             varType = 类型信息类.get(type());
             tenv.put(0, index, varType);
-            valueType = ((语法树类型执行类)initializer()).类型检查(tenv);
+            valueType = ((语法树类型扩展类)initializer()).类型检查(tenv);
             valueType.assertSubtypeOf(varType, tenv, this);
             return varType;
         }

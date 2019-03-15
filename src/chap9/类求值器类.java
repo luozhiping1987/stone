@@ -4,7 +4,7 @@ import stone.StoneException;
 import javassist.gluonj.*;
 import stone.ast.*;
 import chap6.环境类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 import chap6.基本求值器类;
 import chap7.函数求值器类;
 import chap7.嵌套环境类;
@@ -26,7 +26,7 @@ import chap9.StoneObject.AccessException;
         public ClassBodyEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env) {
             for (语法树类 t: this)
-                ((语法树执行类)t).求值(env);
+                ((语法树扩展类)t).求值(env);
             return null;
         }
     }

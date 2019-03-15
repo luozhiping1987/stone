@@ -12,7 +12,7 @@ import chap7.闭包求值器类;
 
 @Require(闭包求值器类.class)
 @Reviser public class 环境优化器类 {
-    @Reviser public static interface 环境执行类2 extends 环境类 {
+    @Reviser public static interface 环境扩展类2 extends 环境类 {
         Symbols 所有符号();
         void put(int nest, int index, Object value);
         Object get(int nest, int index);
@@ -37,7 +37,7 @@ import chap7.闭包求值器类;
             size = FunEx.lookup(syms, parameters(), body());
         }
         public Object 求值(环境类 env) {
-            ((环境执行类2)env).put(0, index, new OptFunction(parameters(), body(),
+            ((环境扩展类2)env).put(0, index, new OptFunction(parameters(), body(),
                                                         env, size));
             return name();
         }
@@ -70,7 +70,7 @@ import chap7.闭包求值器类;
                 offsets[i] = syms.putNew(name(i));
         }
         public void 求值(环境类 env, int index, Object value) {
-            ((环境执行类2)env).put(0, offsets[index], value);
+            ((环境扩展类2)env).put(0, offsets[index], value);
         }
     }
     @Reviser public static class NameEx extends Name {
@@ -95,13 +95,13 @@ import chap7.闭包求值器类;
             if (index == UNKNOWN)
                 return env.get(name());
             else
-                return ((环境执行类2)env).get(nest, index);
+                return ((环境扩展类2)env).get(nest, index);
         }
         public void evalForAssign(环境类 env, Object value) {
             if (index == UNKNOWN)
                 env.put(name(), value);
             else
-                ((环境执行类2)env).put(nest, index, value);
+                ((环境扩展类2)env).put(nest, index, value);
         }
     }
     @Reviser public static class BinaryEx2 extends 基本求值器类.BinaryEx {

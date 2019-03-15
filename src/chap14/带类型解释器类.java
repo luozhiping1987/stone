@@ -27,10 +27,10 @@ public class 带类型解释器类 {
             语法树类 tree = bp.分析(lexer);
             if (!(tree instanceof 空声明类)) {
                 ((环境优化器类.语法树优化执行类)tree).查找(
-                                        ((环境优化器类.环境执行类2)env).所有符号());
+                                        ((环境优化器类.环境扩展类2)env).所有符号());
                 类型信息类 type
-                    = ((类型检查器类.语法树类型执行类)tree).类型检查(typeEnv);
-                Object r = ((基本求值器类.语法树执行类)tree).求值(env);
+                    = ((类型检查器类.语法树类型扩展类)tree).类型检查(typeEnv);
+                Object r = ((基本求值器类.语法树扩展类)tree).求值(env);
                 System.out.println("=> " + r + " : " + type);
             }
         }

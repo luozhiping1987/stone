@@ -48,7 +48,7 @@ import static javassist.gluonj.GluonJ.revise;
             return RESULT + "=0;";
     }
 
-    @Reviser public static interface EnvEx3 extends 环境优化器类.环境执行类2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.环境扩展类2 {
         JavaLoader javaLoader();
     }
     @Reviser public static class ArrayEnvEx extends ArrayEnv {
@@ -293,7 +293,7 @@ import static javassist.gluonj.GluonJ.revise;
             args[0] = env;
             int num = 1;
             for (语法树类 a: this)
-                args[num++] = ((chap6.基本求值器类.语法树执行类)a).求值(env); 
+                args[num++] = ((chap6.基本求值器类.语法树扩展类)a).求值(env); 
             return func.invoke(args);
         }
     }

@@ -4,7 +4,7 @@ import stone.StoneException;
 import stone.词类;
 import chap11.环境优化器类;
 import chap6.环境类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 import chap7.函数求值器类;
 import javassist.gluonj.*;
 import static chap13.Opcode.*;
@@ -13,7 +13,7 @@ import stone.ast.*;
 
 @Require(环境优化器类.class)
 @Reviser public class 虚拟机求值器类 {
-    @Reviser public static interface EnvEx3 extends 环境优化器类.环境执行类2 {
+    @Reviser public static interface EnvEx3 extends 环境优化器类.环境扩展类2 {
         StoneVM stoneVM();
         Code code();
     }
@@ -204,7 +204,7 @@ import stone.ast.*;
                 throw new StoneException("bad number of arguments", this);
             int num = 0;
             for (语法树类 a: this)
-                ((ParamsEx2)params).求值(env, num++, ((语法树执行类)a).求值(env)); 
+                ((ParamsEx2)params).求值(env, num++, ((语法树扩展类)a).求值(env)); 
             StoneVM svm = ((EnvEx3)env).stoneVM();
             svm.run(func.entry());
             return svm.stack()[0];

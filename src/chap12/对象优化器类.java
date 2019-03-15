@@ -7,13 +7,13 @@ import stone.*;
 import stone.ast.*;
 import chap6.环境类;
 import chap6.基本求值器类;
-import chap6.基本求值器类.语法树执行类;
+import chap6.基本求值器类.语法树扩展类;
 import chap7.函数求值器类.PrimaryEx;
 import chap11.ArrayEnv;
 import chap11.环境优化器类;
 import chap11.Symbols;
 import chap11.环境优化器类.语法树优化执行类;
-import chap11.环境优化器类.环境执行类2;
+import chap11.环境优化器类.环境扩展类2;
 import chap11.环境优化器类.ParamsEx;
 import chap12.OptStoneObject.AccessException;
 
@@ -23,13 +23,13 @@ import chap12.OptStoneObject.AccessException;
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public void 查找(Symbols syms) {}
         public Object 求值(环境类 env) {
-            Symbols methodNames = new MemberSymbols(((环境执行类2)env).所有符号(),
+            Symbols methodNames = new MemberSymbols(((环境扩展类2)env).所有符号(),
                                                     MemberSymbols.METHOD);
             Symbols fieldNames = new MemberSymbols(methodNames,
                                                    MemberSymbols.FIELD);
             OptClassInfo ci = new OptClassInfo(this, env, methodNames,
                                                fieldNames);
-            ((环境执行类2)env).put(name(), ci);
+            ((环境扩展类2)env).put(name(), ci);
             ArrayList<DefStmnt> methods = new ArrayList<DefStmnt>();
             if (ci.superClass() != null)
                 ci.superClass().copyTo(fieldNames, methodNames, methods);
@@ -45,7 +45,7 @@ import chap12.OptStoneObject.AccessException;
         public Object 求值(环境类 env) {
             for (语法树类 t: this)
                 if (!(t instanceof DefStmnt))
-                    ((语法树执行类)t).求值(env);
+                    ((语法树扩展类)t).求值(env);
             return null;
         }
         public void 查找(Symbols syms, Symbols methodNames,
@@ -117,7 +117,7 @@ import chap12.OptStoneObject.AccessException;
             else if (nest == MemberSymbols.METHOD)
                 return getThis(env).method(index);
             else
-                return ((环境执行类2)env).get(nest, index);
+                return ((环境扩展类2)env).get(nest, index);
         }
         @Override public void evalForAssign(环境类 env, Object value) {
             if (index == UNKNOWN)
@@ -128,10 +128,10 @@ import chap12.OptStoneObject.AccessException;
                 throw new StoneException("cannot update a method: " + name(),
                                          this);
             else
-                ((环境执行类2)env).put(nest, index, value);
+                ((环境扩展类2)env).put(nest, index, value);
         }
         protected OptStoneObject getThis(环境类 env) {
-            return (OptStoneObject)((环境执行类2)env).get(0, 0);
+            return (OptStoneObject)((环境扩展类2)env).get(0, 0);
         }
     }
     @Reviser public static class AssignEx extends 基本求值器类.BinaryEx {

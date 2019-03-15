@@ -8,7 +8,7 @@ import java.util.List;
 @Reviser public class 基本求值器类 {
     public static final int TRUE = 1;
     public static final int FALSE = 0;
-    @Reviser public static abstract class 语法树执行类 extends 语法树类 {
+    @Reviser public static abstract class 语法树扩展类 extends 语法树类 {
         public abstract Object 求值(环境类 env);
     }
     @Reviser public static class ASTListEx extends ASTList {
@@ -44,7 +44,7 @@ import java.util.List;
     @Reviser public static class NegativeEx extends NegativeExpr {
         public NegativeEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env) {
-            Object v = ((语法树执行类)operand()).求值(env);
+            Object v = ((语法树扩展类)operand()).求值(env);
             if (v instanceof Integer)
                 return new Integer(-((Integer)v).intValue());
             else
@@ -56,12 +56,12 @@ import java.util.List;
         public Object 求值(环境类 env) {
             String op = operator();
             if ("=".equals(op)) {
-                Object right = ((语法树执行类)right()).求值(env);
+                Object right = ((语法树扩展类)right()).求值(env);
                 return computeAssign(env, right);
             }
             else {
-                Object left = ((语法树执行类)left()).求值(env);
-                Object right = ((语法树执行类)right()).求值(env);
+                Object left = ((语法树扩展类)left()).求值(env);
+                Object right = ((语法树扩展类)right()).求值(env);
                 return computeOp(left, op, right);
             }
         }
@@ -119,7 +119,7 @@ import java.util.List;
             Object result = 0;
             for (语法树类 t: this) {
                 if (!(t instanceof 空声明类))
-                    result = ((语法树执行类)t).求值(env);
+                    result = ((语法树扩展类)t).求值(env);
             }
             return result;
         }
@@ -127,15 +127,15 @@ import java.util.List;
     @Reviser public static class IfEx extends IfStmnt {
         public IfEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env) {
-            Object c = ((语法树执行类)condition()).求值(env);
+            Object c = ((语法树扩展类)condition()).求值(env);
             if (c instanceof Integer && ((Integer)c).intValue() != FALSE)
-                return ((语法树执行类)thenBlock()).求值(env);
+                return ((语法树扩展类)thenBlock()).求值(env);
             else {
                 语法树类 b = elseBlock();
                 if (b == null)
                     return 0;
                 else
-                    return ((语法树执行类)b).求值(env);
+                    return ((语法树扩展类)b).求值(env);
             }
         }
     }
@@ -144,11 +144,11 @@ import java.util.List;
         public Object 求值(环境类 env) {
             Object result = 0;
             for (;;) {
-                Object c = ((语法树执行类)condition()).求值(env);
+                Object c = ((语法树扩展类)condition()).求值(env);
                 if (c instanceof Integer && ((Integer)c).intValue() == FALSE)
                     return result;
                 else
-                    result = ((语法树执行类)body()).求值(env);
+                    result = ((语法树扩展类)body()).求值(env);
             }
         }
     }
