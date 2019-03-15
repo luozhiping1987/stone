@@ -26,3 +26,6 @@ ArrayEvaluator,数组求值器类
 EnvOptimizer,环境优化器类
 InlineCache,内联缓存类
 ObjOptimizer,对象优化器类
+VmInterpreter,虚拟机解释器类
+StoneVMEnv,虚拟机环境类
+VmEvaluator,虚拟机求值器类

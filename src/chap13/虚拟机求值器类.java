@@ -12,7 +12,7 @@ import static javassist.gluonj.GluonJ.revise;
 import stone.ast.*;
 
 @Require(环境优化器类.class)
-@Reviser public class VmEvaluator {
+@Reviser public class 虚拟机求值器类 {
     @Reviser public static interface EnvEx3 extends 环境优化器类.EnvEx2 {
         StoneVM stoneVM();
         Code code();
