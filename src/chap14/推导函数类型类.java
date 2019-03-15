@@ -8,10 +8,10 @@ import javassist.gluonj.Require;
 import javassist.gluonj.Reviser;
 
 @Require({TypeChecker.class, InferTypes.class})
-@Reviser public class InferFuncTypes {
+@Reviser public class 推导函数类型类 {
     @Reviser public static class DefStmntEx3 extends TypeChecker.DefStmntEx2 {
         public DefStmntEx3(List<语法树类> c) { super(c); }
-        @Override public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        @Override public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             FunctionType func = super.typeCheck(tenv).toFunctionType();
             for (TypeInfo t: func.parameterTypes)
                 fixUnknown(t);

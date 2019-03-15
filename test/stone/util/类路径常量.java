@@ -11,4 +11,6 @@ public class 类路径常量 {
   public static final String 内联缓存 = "chap12.内联缓存类";
   public static final String 对象优化器 = "chap12.对象优化器类";
   public static final String 虚拟机求值器 = "chap13.虚拟机求值器类";
+  public static final String 变Java = "chap14.变Java类";
+  public static final String 推导函数类型 = "chap14.推导函数类型类";
 }

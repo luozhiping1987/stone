@@ -22,20 +22,20 @@ public class TypeInfo {
         superType = superType.type();
         return type() == superType || superType == ANY;
     }
-    public void assertSubtypeOf(TypeInfo type, TypeEnv env, 语法树类 where)
+    public void assertSubtypeOf(TypeInfo type, 类型环境类 env, 语法树类 where)
         throws TypeException
     {
         if (!subtypeOf(type))
             throw new TypeException("type mismatch: cannot convert from "
                                     + this + " to " + type, where);
     }
-    public TypeInfo union(TypeInfo right, TypeEnv tenv) {
+    public TypeInfo union(TypeInfo right, 类型环境类 tenv) {
         if (match(right))
             return type();
         else
             return ANY;
     }
-    public TypeInfo plus(TypeInfo right, TypeEnv tenv) {
+    public TypeInfo plus(TypeInfo right, 类型环境类 tenv) {
         if (INT.match(this) && INT.match(right))
             return INT;
         else if (STRING.match(this) || STRING.match(right))

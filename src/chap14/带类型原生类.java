@@ -3,9 +3,9 @@ import chap6.Environment;
 import chap8.原生类;
 import chap11.环境优化器类.EnvEx2;
 
-public class TypedNatives extends 原生类 {
-    protected TypeEnv typeEnv;
-    public TypedNatives(TypeEnv te) { typeEnv = te; }
+public class 带类型原生类 extends 原生类 {
+    protected 类型环境类 typeEnv;
+    public 带类型原生类(类型环境类 te) { typeEnv = te; }
     protected void append(Environment env, String name, Class<?> clazz,
                           String methodName, TypeInfo type, Class<?> ... params)
     {

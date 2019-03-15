@@ -13,7 +13,7 @@ import javassist.gluonj.Reviser;
 import static javassist.gluonj.GluonJ.revise;
 
 @Require(TypeChecker.class)
-@Reviser public class ToJava {
+@Reviser public class 变Java类 {
     public static final String METHOD = "m";
     public static final String LOCAL = "v";
     public static final String ENV = "env";

@@ -9,7 +9,7 @@ import chap14.TypeInfo.UnknownType;
 @Reviser public class InferTypes {
     @Reviser public static class TypeInfoEx extends TypeInfo {
         @Override
-        public void assertSubtypeOf(TypeInfo type, TypeEnv tenv, 语法树类 where)
+        public void assertSubtypeOf(TypeInfo type, 类型环境类 tenv, 语法树类 where)
             throws TypeException
         {
             if (type.isUnknownType())
@@ -18,13 +18,13 @@ import chap14.TypeInfo.UnknownType;
             else
                 super.assertSubtypeOf(type, tenv, where);
         }
-        @Override public TypeInfo union(TypeInfo right, TypeEnv tenv) {
+        @Override public TypeInfo union(TypeInfo right, 类型环境类 tenv) {
             if (right.isUnknownType())
                 return right.union(this, tenv);
             else
                 return super.union(right, tenv);
         }
-        @Override public TypeInfo plus(TypeInfo right, TypeEnv tenv) {
+        @Override public TypeInfo plus(TypeInfo right, 类型环境类 tenv) {
             if (right.isUnknownType())
                 return right.plus(this, tenv);
             else
@@ -36,7 +36,7 @@ import chap14.TypeInfo.UnknownType;
         public boolean resolved() { return type != null; }
         public void setType(TypeInfo t) { type = t; }
         @Override public TypeInfo type() { return type == null ? ANY : type; }
-        @Override public void assertSubtypeOf(TypeInfo t, TypeEnv tenv,
+        @Override public void assertSubtypeOf(TypeInfo t, 类型环境类 tenv,
                                             语法树类 where) throws TypeException
         {
             if (resolved())
@@ -44,7 +44,7 @@ import chap14.TypeInfo.UnknownType;
             else
                 ((TypeEnvEx)tenv).addEquation(this, t);
         }
-        public void assertSupertypeOf(TypeInfo t, TypeEnv tenv, 语法树类 where)
+        public void assertSupertypeOf(TypeInfo t, 类型环境类 tenv, 语法树类 where)
             throws TypeException
         {
             if (resolved())
@@ -52,7 +52,7 @@ import chap14.TypeInfo.UnknownType;
             else
                 ((TypeEnvEx)tenv).addEquation(this, t);
         } 
-        @Override public TypeInfo union(TypeInfo right, TypeEnv tenv) {
+        @Override public TypeInfo union(TypeInfo right, 类型环境类 tenv) {
             if (resolved())
                 return type.union(right, tenv);
             else {
@@ -60,7 +60,7 @@ import chap14.TypeInfo.UnknownType;
                 return right;
             }
         }
-        @Override public TypeInfo plus(TypeInfo right, TypeEnv tenv) {
+        @Override public TypeInfo plus(TypeInfo right, 类型环境类 tenv) {
             if (resolved())
                 return type.plus(right, tenv);
             else {
@@ -69,7 +69,7 @@ import chap14.TypeInfo.UnknownType;
             }
         }
     }
-    @Reviser public static class TypeEnvEx extends TypeEnv {
+    @Reviser public static class TypeEnvEx extends 类型环境类 {
         public static class Equation extends ArrayList<UnknownType> {}
         protected List<Equation> equations = new LinkedList<Equation>();
         public void addEquation(UnknownType t1, TypeInfo t2) {

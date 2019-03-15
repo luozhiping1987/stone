@@ -4,7 +4,7 @@ import java.io.StringReader;
 
 import chap11.环境优化器类;
 import chap14.TypeChecker;
-import chap14.TypeEnv;
+import chap14.类型环境类;
 import chap14.TypeException;
 import chap14.TypeInfo;
 import chap6.基本求值器类;
@@ -42,7 +42,7 @@ public class 解释器功用 {
     return 终值;
   }
 
-  public static 带类型返回值 带类型求值(基本语法分析器类 基本分析器, Environment 环境, TypeEnv 类型环境, String 源代码)
+  public static 带类型返回值 带类型求值(基本语法分析器类 基本分析器, Environment 环境, 类型环境类 类型环境, String 源代码)
       throws 分析例外, TypeException {
     词法分析器类 词法分析器 = new 词法分析器类(new StringReader(源代码));
     Object 终值 = null;

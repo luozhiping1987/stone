@@ -10,33 +10,33 @@ import javassist.gluonj.*;
 @Require(TypedEvaluator.class)
 @Reviser public class TypeChecker {
     @Reviser public static abstract class ASTreeTypeEx extends 语法树类 {
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             return null;
         }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
         public NumberEx(词类 t) { super(t); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             return TypeInfo.INT;
         }
     }
     @Reviser public static class StringEx extends StringLiteral {
         public StringEx(词类 t) { super(t); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             return TypeInfo.STRING;
         }
     }
     @Reviser public static class NameEx2 extends 环境优化器类.NameEx {
         protected TypeInfo type;
         public NameEx2(词类 t) { super(t); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             type = tenv.get(nest, index);
             if (type == null)
                 throw new TypeException("undefined name: " + name(), this);
             else
                 return type;
         }
-        public TypeInfo typeCheckForAssign(TypeEnv tenv, TypeInfo valueType)
+        public TypeInfo typeCheckForAssign(类型环境类 tenv, TypeInfo valueType)
             throws TypeException
         {
             type = tenv.get(nest, index);
@@ -53,7 +53,7 @@ import javassist.gluonj.*;
     }
     @Reviser public static class NegativeEx extends NegativeExpr {
         public NegativeEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             TypeInfo t = ((ASTreeTypeEx)operand()).typeCheck(tenv);
             t.assertSubtypeOf(TypeInfo.INT, tenv, this);
             return TypeInfo.INT;
@@ -62,7 +62,7 @@ import javassist.gluonj.*;
     @Reviser public static class BinaryEx extends 二元表达式 {
         protected TypeInfo leftType, rightType;
         public BinaryEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             String op = operator();
             if ("=".equals(op))
                 return typeCheckForAssign(tenv);
@@ -80,7 +80,7 @@ import javassist.gluonj.*;
                 }
             }
         }
-        protected TypeInfo typeCheckForAssign(TypeEnv tenv)
+        protected TypeInfo typeCheckForAssign(类型环境类 tenv)
             throws TypeException
         {
             rightType = ((ASTreeTypeEx)right()).typeCheck(tenv);
@@ -94,7 +94,7 @@ import javassist.gluonj.*;
     @Reviser public static class BlockEx extends BlockStmnt {
         TypeInfo type;
         public BlockEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             type = TypeInfo.INT;
             for (语法树类 t: this)
                 if (!(t instanceof NullStmnt))
@@ -104,7 +104,7 @@ import javassist.gluonj.*;
     }
     @Reviser public static class IfEx extends IfStmnt {
         public IfEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             TypeInfo condType = ((ASTreeTypeEx)condition()).typeCheck(tenv);
             condType.assertSubtypeOf(TypeInfo.INT, tenv, this);
             TypeInfo thenType = ((ASTreeTypeEx)thenBlock()).typeCheck(tenv);
@@ -119,7 +119,7 @@ import javassist.gluonj.*;
     }
     @Reviser public static class WhileEx extends While声明 {
         public WhileEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             TypeInfo condType = ((ASTreeTypeEx)condition()).typeCheck(tenv);
             condType.assertSubtypeOf(TypeInfo.INT, tenv, this);
             TypeInfo bodyType = ((ASTreeTypeEx)body()).typeCheck(tenv);
@@ -128,9 +128,9 @@ import javassist.gluonj.*;
     }
     @Reviser public static class DefStmntEx2 extends TypedEvaluator.DefStmntEx {
         protected TypeInfo.FunctionType funcType;
-        protected TypeEnv bodyEnv;
+        protected 类型环境类 bodyEnv;
         public DefStmntEx2(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             TypeInfo[] params = ((ParamListEx2)parameters()).types();
             TypeInfo retType = TypeInfo.get(type());
             funcType = TypeInfo.function(retType, params);
@@ -138,7 +138,7 @@ import javassist.gluonj.*;
             if (oldType != null)
                 throw new TypeException("function redefinition: " + name(),
                                         this);
-            bodyEnv = new TypeEnv(size, tenv);
+            bodyEnv = new 类型环境类(size, tenv);
             for (int i = 0; i < params.length; i++)
                 bodyEnv.put(0, i, params[i]);
             TypeInfo bodyType
@@ -160,10 +160,10 @@ import javassist.gluonj.*;
     }
     @Reviser public static class PrimaryEx2 extends 函数求值器类.PrimaryEx {
         public PrimaryEx2(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             return typeCheck(tenv, 0);
         }
-        public TypeInfo typeCheck(TypeEnv tenv, int nest) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv, int nest) throws TypeException {
             if (hasPostfix(nest)) {
                 TypeInfo target = typeCheck(tenv, nest + 1);
                 return ((PostfixEx)postfix(nest)).typeCheck(tenv, target); 
@@ -174,14 +174,14 @@ import javassist.gluonj.*;
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
         public PostfixEx(List<语法树类> c) { super(c); }
-        public abstract TypeInfo typeCheck(TypeEnv tenv, TypeInfo target)
+        public abstract TypeInfo typeCheck(类型环境类 tenv, TypeInfo target)
             throws TypeException;
     }
     @Reviser public static class ArgumentsEx extends Arguments {
         protected TypeInfo[] argTypes;
         protected TypeInfo.FunctionType funcType;
         public ArgumentsEx(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv, TypeInfo target)
+        public TypeInfo typeCheck(类型环境类 tenv, TypeInfo target)
             throws TypeException
         {
             if (!(target instanceof TypeInfo.FunctionType))
@@ -202,7 +202,7 @@ import javassist.gluonj.*;
     @Reviser public static class VarStmntEx2 extends TypedEvaluator.VarStmntEx {
         protected TypeInfo varType, valueType;
         public VarStmntEx2(List<语法树类> c) { super(c); }
-        public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
+        public TypeInfo typeCheck(类型环境类 tenv) throws TypeException {
             if (tenv.get(0, index) != null)
                 throw new TypeException("duplicate variable: " + name(), this);
             varType = TypeInfo.get(type());

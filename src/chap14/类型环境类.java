@@ -2,11 +2,11 @@ package chap14;
 import java.util.Arrays;
 import stone.StoneException;
 
-public class TypeEnv {
-    protected TypeEnv outer;
+public class 类型环境类 {
+    protected 类型环境类 outer;
     protected TypeInfo[] types;
-    public TypeEnv() { this(8, null); }
-    public TypeEnv(int size, TypeEnv out) {
+    public 类型环境类() { this(8, null); }
+    public 类型环境类(int size, 类型环境类 out) {
         outer = out;
         types = new TypeInfo[size];
     }

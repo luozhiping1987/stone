@@ -29,3 +29,9 @@ ObjOptimizer,对象优化器类
 VmInterpreter,虚拟机解释器类
 StoneVMEnv,虚拟机环境类
 VmEvaluator,虚拟机求值器类
+TypedInterpreter,带类型解释器类
+TypeEnv,类型环境类
+TypedParser,带类型语法分析器类
+TypedNatives,带类型原生类
+ToJava,变Java
+InferFuncTypes,推导函数类型类
