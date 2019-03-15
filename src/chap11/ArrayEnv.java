@@ -10,7 +10,7 @@ public class ArrayEnv implements 环境类 {
         values = new Object[size];
         outer = out;
     }
-    public Symbols symbols() { throw new StoneException("no symbols"); }
+    public Symbols 所有符号() { throw new StoneException("no symbols"); }
     public Object get(int nest, int index) {
         if (nest == 0)
             return values[index];

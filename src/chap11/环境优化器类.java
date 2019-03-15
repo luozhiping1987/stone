@@ -13,7 +13,7 @@ import chap7.闭包求值器类;
 @Require(闭包求值器类.class)
 @Reviser public class 环境优化器类 {
     @Reviser public static interface 环境执行类2 extends 环境类 {
-        Symbols symbols();
+        Symbols 所有符号();
         void put(int nest, int index, Object value);
         Object get(int nest, int index);
         void putNew(String name, Object value);

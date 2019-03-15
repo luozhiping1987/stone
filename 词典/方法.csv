@@ -7,7 +7,7 @@ ASTree.parse,分析
 Natives.environment,环境
 *.eval,求值
 *.lookup,查找
-EnvEx2.symbols,所有符号
+*.symbols,所有符号
 ASTreeTypeEx.typeCheck,类型检查
 Token.getText,取文本
 Token.isNumber,为数

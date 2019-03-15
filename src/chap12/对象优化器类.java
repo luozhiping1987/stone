@@ -23,7 +23,7 @@ import chap12.OptStoneObject.AccessException;
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public void 查找(Symbols syms) {}
         public Object 求值(环境类 env) {
-            Symbols methodNames = new MemberSymbols(((环境执行类2)env).symbols(),
+            Symbols methodNames = new MemberSymbols(((环境执行类2)env).所有符号(),
                                                     MemberSymbols.METHOD);
             Symbols fieldNames = new MemberSymbols(methodNames,
                                                    MemberSymbols.FIELD);

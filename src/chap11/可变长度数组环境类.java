@@ -9,7 +9,7 @@ public class 可变长度数组环境类 extends ArrayEnv {
         super(10, null);
         names = new Symbols();
     }
-    @Override public Symbols symbols() { return names; }
+    @Override public Symbols 所有符号() { return names; }
     @Override public Object get(String name) {
         Integer i = names.find(name);
         if (i == null)
