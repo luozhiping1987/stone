@@ -11,7 +11,7 @@ import chap7.函数求值器类;
 import chap7.函数求值器类.PrimaryEx;
 
 @Require({函数求值器类.class, ArrayParser.class})
-@Reviser public class ArrayEvaluator {
+@Reviser public class 数组求值器类 {
     @Reviser public static class ArrayLitEx extends ArrayLiteral {
         public ArrayLitEx(List<语法树类> list) { super(list); }
         public Object eval(Environment env) {

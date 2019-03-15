@@ -8,8 +8,8 @@ import chap7.嵌套环境类;
 import chap8.原生类;
 import chap9.类解释器类;
 import javassist.gluonj.util.UTester;
-import stone.类语法分析器类;
 import stone.分析例外;
+import stone.类语法分析器类;
 import stone.util.类路径常量;
 import stone.util.解释器功用;
 
@@ -29,8 +29,7 @@ public class 数组解释器Test extends 类解释器类 {
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith(类路径常量.类求值器, "chap10.ArrayEvaluator",
-        类路径常量.原生求值器, 类路径常量.闭包求值器))
+    if (UTester.runTestWith(类路径常量.类求值器, 类路径常量.数组求值器, 类路径常量.原生求值器, 类路径常量.闭包求值器))
       return;
     // assertEquals("a", 求值(数字数组));
     assertEquals(3, 求值(数字数组 + 换行 + 数字数组取值));
