@@ -14,7 +14,7 @@ public class ExprParser {
         while (isToken("+") || isToken("-")) {
             语法树叶类 op = new 语法树叶类(lexer.读());
             语法树类 right = term();
-            left = new 二元表达式(Arrays.asList(left, op, right));
+            left = new 二元表达式类(Arrays.asList(left, op, right));
         }
         return left;
     }
@@ -23,7 +23,7 @@ public class ExprParser {
         while (isToken("*") || isToken("/")) {
             语法树叶类 op = new 语法树叶类(lexer.读());
             语法树类 right = factor();
-            left = new 二元表达式(Arrays.asList(left, op, right));
+            left = new 二元表达式类(Arrays.asList(left, op, right));
         }
         return left;
     }

@@ -119,7 +119,7 @@ import stone.ast.*;
             c.add(encodeRegister(c.nextReg - 1));   
         }
     }
-    @Reviser public static class BinaryEx extends 二元表达式 {
+    @Reviser public static class BinaryEx extends 二元表达式类 {
         public BinaryEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             String op = operator();

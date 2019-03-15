@@ -51,7 +51,7 @@ import java.util.List;
                 throw new StoneException("bad type for -", this);
         }
     }
-    @Reviser public static class BinaryEx extends 二元表达式 {
+    @Reviser public static class BinaryEx extends 二元表达式类 {
         public BinaryEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env) {
             String op = operator();

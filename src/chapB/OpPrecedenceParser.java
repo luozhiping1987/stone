@@ -41,7 +41,7 @@ public class OpPrecedenceParser {
         while ((next = nextOperator()) != null && rightIsExpr(prec, next))
             right = doShift(right, next.value);
 
-        return new 二元表达式(Arrays.asList(left, op, right));
+        return new 二元表达式类(Arrays.asList(left, op, right));
     }
     private Precedence nextOperator() throws 分析例外 {
         词类 t = lexer.瞄(0);

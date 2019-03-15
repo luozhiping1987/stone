@@ -15,7 +15,7 @@ public class 基本语法分析器类 {
             rule().string(StringLiteral.class));
     Parser factor = rule().or(rule(NegativeExpr.class).sep("-").ast(primary),
                               primary);                               
-    Parser expr = expr0.expression(二元表达式.class, factor, operators);
+    Parser expr = expr0.expression(二元表达式类.class, factor, operators);
 
     Parser statement0 = rule();
     Parser block = rule(BlockStmnt.class)

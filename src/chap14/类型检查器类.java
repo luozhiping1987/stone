@@ -17,7 +17,7 @@ import stone.ast.NumberLiteral;
 import stone.ast.Postfix;
 import stone.ast.StringLiteral;
 import stone.ast.While声明类;
-import stone.ast.二元表达式;
+import stone.ast.二元表达式类;
 import stone.ast.空声明类;
 import stone.ast.语法树类;
 
@@ -73,7 +73,7 @@ import stone.ast.语法树类;
             return 类型信息类.INT;
         }
     }
-    @Reviser public static class BinaryEx extends 二元表达式 {
+    @Reviser public static class BinaryEx extends 二元表达式类 {
         protected 类型信息类 leftType, rightType;
         public BinaryEx(List<语法树类> c) { super(c); }
         public 类型信息类 类型检查(类型环境类 tenv) throws 类型例外 {

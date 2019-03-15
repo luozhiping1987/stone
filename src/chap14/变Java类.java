@@ -178,8 +178,8 @@ import static javassist.gluonj.GluonJ.revise;
                     throw new StoneException("bad expression statement", this); 
         }
         protected static boolean isExprStmnt(语法树类 tree) {
-            if (tree instanceof 二元表达式)
-                return "=".equals(((二元表达式)tree).operator());
+            if (tree instanceof 二元表达式类)
+                return "=".equals(((二元表达式类)tree).operator());
             return tree instanceof PrimaryExpr || tree instanceof VarStmnt;
         }
         protected static boolean isControlStmnt(语法树类 tree) {
