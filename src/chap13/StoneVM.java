@@ -2,7 +2,7 @@ package chap13;
 import static chap13.Opcode.*;
 import chap8.NativeFunction;
 import stone.StoneException;
-import stone.ast.ASTree;
+import stone.ast.语法树类;
 import stone.ast.ASTList;
 import java.util.ArrayList;
 
@@ -144,7 +144,7 @@ public class StoneVM {
             for (int i = 0; i < numOfArgs; i++)
                 args[i] = stack[sp + i];
             stack[sp] = ((NativeFunction)value).invoke(args,
-                                        new ASTList(new ArrayList<ASTree>()));
+                                        new ASTList(new ArrayList<语法树类>()));
             pc += 3;
         }
         else

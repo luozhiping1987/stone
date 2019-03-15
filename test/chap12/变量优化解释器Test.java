@@ -12,7 +12,7 @@ import chap11.ResizableArrayEnv;
 import chap8.Natives;
 import javassist.gluonj.util.UTester;
 import stone.ClassParser;
-import stone.ParseException;
+import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
@@ -32,7 +32,7 @@ public class 变量优化解释器Test extends ObjOptInterpreter {
   }
 
 
-  public static Object 求值(String 源代码) throws ParseException {
+  public static Object 求值(String 源代码) throws 分析例外 {
     return 解释器功用.求值(new ClassParser(), new Natives().environment(new ResizableArrayEnv()), 源代码);
   }
 

@@ -1,1 +1,6 @@
 Lexer.read,读
+ASTree.numChildren,子个数
+ASTree.child,子
+ASTLeaf.token,词
+Lexer.peek,瞄
+ASTree.parse,分析

@@ -20,7 +20,7 @@ import chap12.OptStoneObject.AccessException;
 @Require(EnvOptimizer.class)
 @Reviser public class ObjOptimizer {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
-        public ClassStmntEx(List<ASTree> c) { super(c); }
+        public ClassStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {}
         public Object eval(Environment env) {
             Symbols methodNames = new MemberSymbols(((EnvEx2)env).symbols(),
@@ -41,9 +41,9 @@ import chap12.OptStoneObject.AccessException;
         }
     }
     @Reviser public static class ClassBodyEx extends ClassBody {
-        public ClassBodyEx(List<ASTree> c) { super(c); }
+        public ClassBodyEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env) {
-            for (ASTree t: this)
+            for (语法树类 t: this)
                 if (!(t instanceof DefStmnt))
                     ((ASTreeEx)t).eval(env);
             return null;
@@ -51,7 +51,7 @@ import chap12.OptStoneObject.AccessException;
         public void lookup(Symbols syms, Symbols methodNames,
                            Symbols fieldNames, ArrayList<DefStmnt> methods)
         {
-            for (ASTree t: this) {
+            for (语法树类 t: this) {
                 if (t instanceof DefStmnt) {
                     DefStmnt def = (DefStmnt)t;
                     int oldSize = methodNames.size();
@@ -68,7 +68,7 @@ import chap12.OptStoneObject.AccessException;
         }
     }
     @Reviser public static class DefStmntEx2 extends EnvOptimizer.DefStmntEx {
-        public DefStmntEx2(List<ASTree> c) { super(c); }
+        public DefStmntEx2(List<语法树类> c) { super(c); }
         public int locals() { return size; }
         public void lookupAsMethod(Symbols syms) {
             Symbols newSyms = new Symbols(syms);
@@ -79,7 +79,7 @@ import chap12.OptStoneObject.AccessException;
         }
     }
     @Reviser public static class DotEx extends Dot {
-        public DotEx(List<ASTree> c) { super(c); }
+        public DotEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env, Object value) {
             String member = name();
             if (value instanceof OptClassInfo) {
@@ -135,10 +135,10 @@ import chap12.OptStoneObject.AccessException;
         }
     }
     @Reviser public static class AssignEx extends BasicEvaluator.BinaryEx {
-        public AssignEx(List<ASTree> c) { super(c); }
+        public AssignEx(List<语法树类> c) { super(c); }
         @Override
         protected Object computeAssign(Environment env, Object rvalue) {
-            ASTree le = left();
+            语法树类 le = left();
             if (le instanceof PrimaryExpr) {
                 PrimaryEx p = (PrimaryEx)le;
                 if (p.hasPostfix(0) && p.postfix(0) instanceof Dot) {

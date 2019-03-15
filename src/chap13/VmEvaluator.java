@@ -17,18 +17,18 @@ import stone.ast.*;
         StoneVM stoneVM();
         Code code();
     }
-    @Reviser public static abstract class ASTreeVmEx extends ASTree {
+    @Reviser public static abstract class ASTreeVmEx extends 语法树类 {
         public void compile(Code c) {}
     }
     @Reviser public static class ASTListEx extends ASTList {
-        public ASTListEx(List<ASTree> c) { super(c); }
+        public ASTListEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
-            for (ASTree t: this)
+            for (语法树类 t: this)
                 ((ASTreeVmEx)t).compile(c);
         }
     }
     @Reviser public static class DefStmntVmEx extends EnvOptimizer.DefStmntEx {
-        public DefStmntVmEx(List<ASTree> c) { super(c); }
+        public DefStmntVmEx(List<语法树类> c) { super(c); }
         @Override public Object eval(Environment env) {
             String funcName = name();
             EnvEx3 vmenv = (EnvEx3)env;
@@ -54,7 +54,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class ParamsEx2 extends EnvOptimizer.ParamsEx {
-        public ParamsEx2(List<ASTree> c) { super(c); }
+        public ParamsEx2(List<语法树类> c) { super(c); }
         @Override public void eval(Environment env, int index, Object value) {
             StoneVM vm = ((EnvEx3)env).stoneVM();
             vm.stack()[offsets[index]] = value;
@@ -112,19 +112,19 @@ import stone.ast.*;
         }
     }
     @Reviser public static class NegativeEx extends NegativeExpr {
-        public NegativeEx(List<ASTree> c) { super(c); }
+        public NegativeEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             ((ASTreeVmEx)operand()).compile(c);
             c.add(NEG);
             c.add(encodeRegister(c.nextReg - 1));   
         }
     }
-    @Reviser public static class BinaryEx extends BinaryExpr {
-        public BinaryEx(List<ASTree> c) { super(c); }
+    @Reviser public static class BinaryEx extends 二元表达式 {
+        public BinaryEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             String op = operator();
             if (op.equals("=")) {
-                ASTree l = left();
+                语法树类 l = left();
                 if (l instanceof Name) {
                     ((ASTreeVmEx)right()).compile(c);
                     ((NameEx2)l).compileAssign(c);
@@ -163,7 +163,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class PrimaryVmEx extends FuncEvaluator.PrimaryEx {
-        public PrimaryVmEx(List<ASTree> c) { super(c); }
+        public PrimaryVmEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             compileSubExpr(c, 0);
         }
@@ -177,11 +177,11 @@ import stone.ast.*;
         }
     }
     @Reviser public static class ArgumentsEx extends Arguments {
-        public ArgumentsEx(List<ASTree> c) { super(c); }
+        public ArgumentsEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             int newOffset = c.frameSize;
             int numOfArgs = 0;
-            for (ASTree a: this) {
+            for (语法树类 a: this) {
                 ((ASTreeVmEx)a).compile(c);
                 c.add(MOVE);
                 c.add(encodeRegister(--c.nextReg));
@@ -203,7 +203,7 @@ import stone.ast.*;
             if (size() != params.size())
                 throw new StoneException("bad number of arguments", this);
             int num = 0;
-            for (ASTree a: this)
+            for (语法树类 a: this)
                 ((ParamsEx2)params).eval(env, num++, ((ASTreeEx)a).eval(env)); 
             StoneVM svm = ((EnvEx3)env).stoneVM();
             svm.run(func.entry());
@@ -211,11 +211,11 @@ import stone.ast.*;
         }
     }
     @Reviser public static class BlockEx extends BlockStmnt {
-        public BlockEx(List<ASTree> c) { super(c); }
+        public BlockEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
-            if (this.numChildren() > 0) {
+            if (this.子个数() > 0) {
                 int initReg = c.nextReg;
-                for (ASTree a: this) {
+                for (语法树类 a: this) {
                     c.nextReg = initReg;
                     ((ASTreeVmEx)a).compile(c);
                 }
@@ -228,7 +228,7 @@ import stone.ast.*;
         }
     }
     @Reviser public static class IfEx extends IfStmnt {
-        public IfEx(List<ASTree> c) { super(c); }
+        public IfEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             ((ASTreeVmEx)condition()).compile(c);
             int pos = c.position();
@@ -241,7 +241,7 @@ import stone.ast.*;
             c.add(GOTO);
             c.add(encodeShortOffset(0));
             c.set(encodeShortOffset(c.position() - pos), pos + 2);
-            ASTree b = elseBlock();
+            语法树类 b = elseBlock();
             c.nextReg = oldReg;
             if (b != null)
                 ((ASTreeVmEx)b).compile(c);
@@ -253,8 +253,8 @@ import stone.ast.*;
             c.set(encodeShortOffset(c.position() - pos2), pos2 + 1);
         }
     }
-    @Reviser public static class WhileEx extends WhileStmnt {
-        public WhileEx(List<ASTree> c) { super(c); }
+    @Reviser public static class WhileEx extends While声明 {
+        public WhileEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             int oldReg = c.nextReg;
             c.add(BCONST);

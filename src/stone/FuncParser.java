@@ -4,7 +4,7 @@ import stone.ast.ParameterList;
 import stone.ast.Arguments;
 import stone.ast.DefStmnt;
 
-public class FuncParser extends BasicParser {
+public class FuncParser extends 基本语法分析器类 {
     Parser param = rule().identifier(reserved);
     Parser params = rule(ParameterList.class)
                         .ast(param).repeat(rule().sep(",").ast(param));

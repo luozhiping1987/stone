@@ -1,6 +1,6 @@
 package chap14;
 
-import stone.ast.ASTree;
+import stone.ast.语法树类;
 import stone.ast.TypeTag;
 
 public class TypeInfo {
@@ -22,7 +22,7 @@ public class TypeInfo {
         superType = superType.type();
         return type() == superType || superType == ANY;
     }
-    public void assertSubtypeOf(TypeInfo type, TypeEnv env, ASTree where)
+    public void assertSubtypeOf(TypeInfo type, TypeEnv env, 语法树类 where)
         throws TypeException
     {
         if (!subtypeOf(type))

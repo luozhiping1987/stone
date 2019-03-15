@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import javassist.gluonj.util.UTester;
 import stone.ClosureParser;
-import stone.ParseException;
+import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
@@ -29,7 +29,7 @@ public class 闭包解释器Test extends ClosureInterpreter {
     }
   }
 
-  public static Object 求值(String 源代码) throws ParseException {
+  public static Object 求值(String 源代码) throws 分析例外 {
     return 解释器功用.求值(new ClosureParser(), new NestedEnv(), 源代码);
   }
 

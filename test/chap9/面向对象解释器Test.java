@@ -11,7 +11,7 @@ import chap7.NestedEnv;
 import chap8.Natives;
 import javassist.gluonj.util.UTester;
 import stone.ClassParser;
-import stone.ParseException;
+import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
@@ -25,7 +25,7 @@ public class 面向对象解释器Test extends ClassInterpreter {
     }
   }
 
-  public static Object 求值(String 源代码) throws ParseException {
+  public static Object 求值(String 源代码) throws 分析例外 {
     return 解释器功用.求值(new ClassParser(), new Natives().environment(new NestedEnv()), 源代码);
   }
 

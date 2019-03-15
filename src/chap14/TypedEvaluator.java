@@ -11,26 +11,26 @@ import chap6.BasicEvaluator.ASTreeEx;
 @Require(EnvOptimizer.class)
 @Reviser public class TypedEvaluator {
     @Reviser public static class DefStmntEx extends EnvOptimizer.DefStmntEx {
-        public DefStmntEx(List<ASTree> c) { super(c); }
-        public TypeTag type() { return (TypeTag)child(2); }
-        @Override public BlockStmnt body() { return (BlockStmnt)child(3); }
+        public DefStmntEx(List<语法树类> c) { super(c); }
+        public TypeTag type() { return (TypeTag)子(2); }
+        @Override public BlockStmnt body() { return (BlockStmnt)子(3); }
         @Override public String toString() {
             return "(def " + name() + " " + parameters() + " " + type() + " "
                    + body() + ")";
         }
     }
     @Reviser public static class ParamListEx extends EnvOptimizer.ParamsEx {
-        public ParamListEx(List<ASTree> c) { super(c); }
+        public ParamListEx(List<语法树类> c) { super(c); }
         @Override public String name(int i) {
-            return ((ASTLeaf)child(i).child(0)).token().getText();
+            return ((语法树叶类)子(i).子(0)).词().getText();
         }
         public TypeTag typeTag(int i) {
-            return (TypeTag)child(i).child(1);
+            return (TypeTag)子(i).子(1);
         }
     }
     @Reviser public static class VarStmntEx extends VarStmnt {
         protected int index;
-        public VarStmntEx(List<ASTree> c) { super(c); }
+        public VarStmntEx(List<语法树类> c) { super(c); }
         public void lookup(Symbols syms) {
             index = syms.putNew(name());
             ((ASTreeOptEx)initializer()).lookup(syms);

@@ -20,7 +20,7 @@ import static javassist.gluonj.GluonJ.revise;
     public static final String RESULT = "res";
     public static final String ENV_TYPE = "chap11.ArrayEnv";
 
-    public static String translateExpr(ASTree ast, TypeInfo from, TypeInfo to) {
+    public static String translateExpr(语法树类 ast, TypeInfo from, TypeInfo to) {
         return translateExpr(((ASTreeEx)ast).translate(null), from, to);
     }
     public static String translateExpr(String expr, TypeInfo from,
@@ -56,7 +56,7 @@ import static javassist.gluonj.GluonJ.revise;
         protected JavaLoader jloader = new JavaLoader();
         public JavaLoader javaLoader() { return jloader; }
     }
-    @Reviser public static abstract class ASTreeEx extends ASTree {
+    @Reviser public static abstract class ASTreeEx extends 语法树类 {
         public String translate(TypeInfo result) { return ""; }
     }
     @Reviser public static class NumberEx extends NumberLiteral {
@@ -98,7 +98,7 @@ import static javassist.gluonj.GluonJ.revise;
                 return translateExpr(expr, TypeInfo.ANY, type);
             }
         }
-        public String translateAssign(TypeInfo valueType, ASTree right) {
+        public String translateAssign(TypeInfo valueType, 语法树类 right) {
             if (nest == 0)
                 return "(" + LOCAL + index + "="
                        + translateExpr(right, valueType, type) + ")";
@@ -110,13 +110,13 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static class NegativeEx extends NegativeExpr {
-        public NegativeEx(List<ASTree> c) { super(c); }
+        public NegativeEx(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
             return "-" + ((ASTreeEx)operand()).translate(null);
         }
     }
     @Reviser public static class BinaryEx2 extends TypeChecker.BinaryEx {
-        public BinaryEx2(List<ASTree> c) { super(c); }
+        public BinaryEx2(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
             String op = operator();
             if ("=".equals(op))
@@ -148,10 +148,10 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static class BlockEx2 extends TypeChecker.BlockEx {
-        public BlockEx2(List<ASTree> c) { super(c); }
+        public BlockEx2(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
-            ArrayList<ASTree> body = new ArrayList<ASTree>();
-            for (ASTree t: this)
+            ArrayList<语法树类> body = new ArrayList<语法树类>();
+            for (语法树类 t: this)
                 if (!(t instanceof NullStmnt))
                     body.add(t);
             StringBuilder code = new StringBuilder();
@@ -163,7 +163,7 @@ import static javassist.gluonj.GluonJ.revise;
                                    i == body.size() - 1);
             return code.toString();
         }
-        protected void translateStmnt(StringBuilder code, ASTree tree,
+        protected void translateStmnt(StringBuilder code, 语法树类 tree,
                                       TypeInfo result, boolean last)
         {
             if (isControlStmnt(tree))
@@ -177,18 +177,18 @@ import static javassist.gluonj.GluonJ.revise;
                 else
                     throw new StoneException("bad expression statement", this); 
         }
-        protected static boolean isExprStmnt(ASTree tree) {
-            if (tree instanceof BinaryExpr)
-                return "=".equals(((BinaryExpr)tree).operator());
+        protected static boolean isExprStmnt(语法树类 tree) {
+            if (tree instanceof 二元表达式)
+                return "=".equals(((二元表达式)tree).operator());
             return tree instanceof PrimaryExpr || tree instanceof VarStmnt;
         }
-        protected static boolean isControlStmnt(ASTree tree) {
+        protected static boolean isControlStmnt(语法树类 tree) {
             return tree instanceof BlockStmnt || tree instanceof IfStmnt
-                   || tree instanceof WhileStmnt;
+                   || tree instanceof While声明;
         }
     }
     @Reviser public static class IfEx extends IfStmnt {
-        public IfEx(List<ASTree> c) { super(c); }
+        public IfEx(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
             StringBuilder code = new StringBuilder();       
             code.append("if(");
@@ -196,7 +196,7 @@ import static javassist.gluonj.GluonJ.revise;
             code.append("!=0){\n");
             code.append(((ASTreeEx)thenBlock()).translate(result));
             code.append("} else {\n");
-            ASTree elseBk = elseBlock();
+            语法树类 elseBk = elseBlock();
             if (elseBk != null)
                 code.append(((ASTreeEx)elseBk).translate(result));
             else if (result != null)
@@ -204,8 +204,8 @@ import static javassist.gluonj.GluonJ.revise;
             return code.append("}\n").toString();
         }
     }
-    @Reviser public static class WhileEx extends WhileStmnt {
-        public WhileEx(List<ASTree> c) { super(c); }
+    @Reviser public static class WhileEx extends While声明 {
+        public WhileEx(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
             String code = "while(" + ((ASTreeEx)condition()).translate(null)
                           + "!=0){\n" + ((ASTreeEx)body()).translate(result)
@@ -217,7 +217,7 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static class DefStmntEx3 extends TypeChecker.DefStmntEx2 {
-        public DefStmntEx3(List<ASTree> c) { super(c); }
+        public DefStmntEx3(List<语法树类> c) { super(c); }
         @Override public Object eval(Environment env) {
             String funcName = name();
             JavaFunction func = new JavaFunction(funcName, translate(null),
@@ -259,7 +259,7 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static class PrimaryEx2 extends FuncEvaluator.PrimaryEx {
-        public PrimaryEx2(List<ASTree> c) { super(c); }
+        public PrimaryEx2(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) { return translate(0); }
         public String translate(int nest) {
             if (hasPostfix(nest)) {
@@ -271,17 +271,17 @@ import static javassist.gluonj.GluonJ.revise;
         }
     }
     @Reviser public static abstract class PostfixEx extends Postfix {
-        public PostfixEx(List<ASTree> c) { super(c); }
+        public PostfixEx(List<语法树类> c) { super(c); }
         public abstract String translate(String expr);
     }
     @Reviser public static class ArgumentsEx extends TypeChecker.ArgumentsEx {
-        public ArgumentsEx(List<ASTree> c) { super(c); }
+        public ArgumentsEx(List<语法树类> c) { super(c); }
         public String translate(String expr) {
             StringBuilder code = new StringBuilder(expr);
             code.append('(').append(ENV);
             for (int i = 0; i < size(); i++)
                 code.append(',')
-                    .append(translateExpr(child(i), argTypes[i],
+                    .append(translateExpr(子(i), argTypes[i],
                                           funcType.parameterTypes[i]));
             return code.append(')').toString();
         }
@@ -289,16 +289,16 @@ import static javassist.gluonj.GluonJ.revise;
             if (!(value instanceof JavaFunction))
                 throw new StoneException("bad function", this);
             JavaFunction func = (JavaFunction)value;
-            Object[] args = new Object[numChildren() + 1];
+            Object[] args = new Object[子个数() + 1];
             args[0] = env;
             int num = 1;
-            for (ASTree a: this)
+            for (语法树类 a: this)
                 args[num++] = ((chap6.BasicEvaluator.ASTreeEx)a).eval(env); 
             return func.invoke(args);
         }
     }
     @Reviser public static class VarStmntEx3 extends TypeChecker.VarStmntEx2 {
-        public VarStmntEx3(List<ASTree> c) { super(c); }
+        public VarStmntEx3(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) {
             return LOCAL + index + "="
                    + translateExpr(initializer(), valueType, varType);

@@ -2,15 +2,15 @@ package stone.ast;
 import java.util.List;
 
 public class ClassStmnt extends ASTList {
-    public ClassStmnt(List<ASTree> c) { super(c); }
-    public String name() { return ((ASTLeaf)child(0)).token().getText(); }
+    public ClassStmnt(List<语法树类> c) { super(c); }
+    public String name() { return ((语法树叶类)子(0)).词().getText(); }
     public String superClass() {
-        if (numChildren() < 3)
+        if (子个数() < 3)
             return null;
         else
-            return ((ASTLeaf)child(1)).token().getText();
+            return ((语法树叶类)子(1)).词().getText();
     }
-    public ClassBody body() { return (ClassBody)child(numChildren() - 1); }
+    public ClassBody body() { return (ClassBody)子(子个数() - 1); }
     public String toString() {
         String parent = superClass();
         if (parent == null)

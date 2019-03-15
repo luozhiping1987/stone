@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import javassist.gluonj.util.UTester;
-import stone.BasicParser;
-import stone.ParseException;
+import stone.基本语法分析器类;
+import stone.分析例外;
 import stone.util.解释器功用;
 
 // 测试方式参考: https://github.com/chibash/gluonj/blob/fc453d9a187e60dfdaa1084a8974b8a4ba072aae/src/javassist/gluonj/util/UTester.java#L36
@@ -22,8 +22,8 @@ public class 基本解释器Test extends BasicInterpreter {
     "}";
   private static final String 求值 = "sum";
 
-  public static Object 求值(String 源代码) throws ParseException {
-    return 解释器功用.求值(new BasicParser(), new BasicEnv(), 源代码);
+  public static Object 求值(String 源代码) throws 分析例外 {
+    return 解释器功用.求值(new 基本语法分析器类(), new BasicEnv(), 源代码);
   }
 
   @Test

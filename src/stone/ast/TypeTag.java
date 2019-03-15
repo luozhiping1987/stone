@@ -3,10 +3,10 @@ import java.util.List;
 
 public class TypeTag extends ASTList {
     public static final String UNDEF = "<Undef>";
-    public TypeTag(List<ASTree> c) { super(c); }
+    public TypeTag(List<语法树类> c) { super(c); }
     public String type() {
-        if (numChildren() > 0)
-            return ((ASTLeaf)child(0)).token().getText();
+        if (子个数() > 0)
+            return ((语法树叶类)子(0)).词().getText();
         else
             return UNDEF;
     }

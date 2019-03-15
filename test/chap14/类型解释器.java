@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import chap11.ResizableArrayEnv;
 import javassist.gluonj.util.UTester;
-import stone.ParseException;
+import stone.分析例外;
 import stone.TypedParser;
 import stone.util.带类型返回值;
 import stone.util.文件功用;
@@ -30,7 +30,7 @@ public class 类型解释器 extends TypedInterpreter {
     }
   }
 
-  public static 带类型返回值 求值(String 源代码) throws ParseException, TypeException {
+  public static 带类型返回值 求值(String 源代码) throws 分析例外, TypeException {
     TypeEnv te = new TypeEnv();
     return 解释器功用.带类型求值(new TypedParser(),
         new TypedNatives(te).environment(new ResizableArrayEnv()), te, 源代码);

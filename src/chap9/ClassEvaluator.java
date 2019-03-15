@@ -15,7 +15,7 @@ import chap9.StoneObject.AccessException;
 @Require(FuncEvaluator.class)
 @Reviser public class ClassEvaluator {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
-        public ClassStmntEx(List<ASTree> c) { super(c); }
+        public ClassStmntEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env) {
             ClassInfo ci = new ClassInfo(this, env);
             ((EnvEx)env).put(name(), ci);
@@ -23,15 +23,15 @@ import chap9.StoneObject.AccessException;
         }
     }
     @Reviser public static class ClassBodyEx extends ClassBody {
-        public ClassBodyEx(List<ASTree> c) { super(c); }
+        public ClassBodyEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env) {
-            for (ASTree t: this)
+            for (语法树类 t: this)
                 ((ASTreeEx)t).eval(env);
             return null;
         }
     }
     @Reviser public static class DotEx extends Dot {
-        public DotEx(List<ASTree> c) { super(c); }
+        public DotEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env, Object value) {
             String member = name();
             if (value instanceof ClassInfo) {
@@ -58,10 +58,10 @@ import chap9.StoneObject.AccessException;
         }
     }
     @Reviser public static class AssignEx extends BasicEvaluator.BinaryEx {
-        public AssignEx(List<ASTree> c) { super(c); }
+        public AssignEx(List<语法树类> c) { super(c); }
         @Override
         protected Object computeAssign(Environment env, Object rvalue) {
-            ASTree le = left();
+            语法树类 le = left();
             if (le instanceof PrimaryExpr) {
                 PrimaryEx p = (PrimaryEx)le;
                 if (p.hasPostfix(0) && p.postfix(0) instanceof Dot) {

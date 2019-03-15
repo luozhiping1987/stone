@@ -13,18 +13,18 @@ import chap7.FuncEvaluator.PrimaryEx;
 @Require({FuncEvaluator.class, ArrayParser.class})
 @Reviser public class ArrayEvaluator {
     @Reviser public static class ArrayLitEx extends ArrayLiteral {
-        public ArrayLitEx(List<ASTree> list) { super(list); }
+        public ArrayLitEx(List<语法树类> list) { super(list); }
         public Object eval(Environment env) {
-            int s = numChildren();
+            int s = 子个数();
             Object[] res = new Object[s];
             int i = 0;
-            for (ASTree t: this)
+            for (语法树类 t: this)
                 res[i++] = ((ASTreeEx)t).eval(env);
             return res;
         }
     }
     @Reviser public static class ArrayRefEx extends ArrayRef {
-        public ArrayRefEx(List<ASTree> c) { super(c); }
+        public ArrayRefEx(List<语法树类> c) { super(c); }
         public Object eval(Environment env, Object value) {
             if (value instanceof Object[]) {
                 Object index = ((ASTreeEx)index()).eval(env);
@@ -36,10 +36,10 @@ import chap7.FuncEvaluator.PrimaryEx;
         }
     }
     @Reviser public static class AssignEx extends BasicEvaluator.BinaryEx {
-        public AssignEx(List<ASTree> c) { super(c); }
+        public AssignEx(List<语法树类> c) { super(c); }
         @Override
         protected Object computeAssign(Environment env, Object rvalue) {
-            ASTree le = left();
+            语法树类 le = left();
             if (le instanceof PrimaryExpr) {
                 PrimaryEx p = (PrimaryEx)le;
                 if (p.hasPostfix(0) && p.postfix(0) instanceof ArrayRef) {

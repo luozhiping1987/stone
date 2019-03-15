@@ -2,17 +2,17 @@ package stone.ast;
 import java.util.List;
 import java.util.Iterator;
 
-public class ASTList extends ASTree {
-    protected List<ASTree> children;
-    public ASTList(List<ASTree> list) { children = list; }
-    public ASTree child(int i) { return children.get(i); }
-    public int numChildren() { return children.size(); }
-    public Iterator<ASTree> children() { return children.iterator(); }
+public class ASTList extends 语法树类 {
+    protected List<语法树类> children;
+    public ASTList(List<语法树类> list) { children = list; }
+    public 语法树类 子(int i) { return children.get(i); }
+    public int 子个数() { return children.size(); }
+    public Iterator<语法树类> children() { return children.iterator(); }
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append('(');
         String sep = "";
-        for (ASTree t: children) {
+        for (语法树类 t: children) {
             builder.append(sep);
             sep = " ";
             builder.append(t.toString());
@@ -20,7 +20,7 @@ public class ASTList extends ASTree {
         return builder.append(')').toString();
     }
     public String location() {
-        for (ASTree t: children) {
+        for (语法树类 t: children) {
             String s = t.location();
             if (s != null)
                 return s;

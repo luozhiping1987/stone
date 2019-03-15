@@ -26,25 +26,25 @@ public class OpPrecedenceParser {
         operators.put("/", new Precedence(3, true));
         operators.put("^", new Precedence(4, false));
     }
-    public ASTree expression() throws ParseException {
-        ASTree right = factor();
+    public 语法树类 expression() throws 分析例外 {
+        语法树类 right = factor();
         Precedence next;
         while ((next = nextOperator()) != null)
             right = doShift(right, next.value);
 
         return right;
     }
-    private ASTree doShift(ASTree left, int prec) throws ParseException {
-        ASTLeaf op = new ASTLeaf(lexer.读());
-        ASTree right = factor();
+    private 语法树类 doShift(语法树类 left, int prec) throws 分析例外 {
+        语法树叶类 op = new 语法树叶类(lexer.读());
+        语法树类 right = factor();
         Precedence next;
         while ((next = nextOperator()) != null && rightIsExpr(prec, next))
             right = doShift(right, next.value);
 
-        return new BinaryExpr(Arrays.asList(left, op, right));
+        return new 二元表达式(Arrays.asList(left, op, right));
     }
-    private Precedence nextOperator() throws ParseException {
-        词类 t = lexer.peek(0);
+    private Precedence nextOperator() throws 分析例外 {
+        词类 t = lexer.瞄(0);
         if (t.isIdentifier())
             return operators.get(t.getText());
         else
@@ -56,10 +56,10 @@ public class OpPrecedenceParser {
         else
             return prec <= nextPrec.value;
     }
-    public ASTree factor() throws ParseException {
+    public 语法树类 factor() throws 分析例外 {
         if (isToken("(")) {
             token("(");
-            ASTree e = expression();
+            语法树类 e = expression();
             token(")");
             return e;
         }
@@ -70,22 +70,22 @@ public class OpPrecedenceParser {
                 return n;
             }
             else
-                throw new ParseException(t);
+                throw new 分析例外(t);
         }
     }
-    void token(String name) throws ParseException {
+    void token(String name) throws 分析例外 {
         词类 t = lexer.读();
         if (!(t.isIdentifier() && name.equals(t.getText())))
-            throw new ParseException(t);
+            throw new 分析例外(t);
     }
-    boolean isToken(String name) throws ParseException {
-        词类 t = lexer.peek(0);
+    boolean isToken(String name) throws 分析例外 {
+        词类 t = lexer.瞄(0);
         return t.isIdentifier() && name.equals(t.getText());
     }
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws 分析例外 {
         词法分析器类 lexer = new 词法分析器类(new CodeDialog());
         OpPrecedenceParser p = new OpPrecedenceParser(lexer);
-        ASTree t = p.expression();
+        语法树类 t = p.expression();
         System.out.println("=> " + t);
     }
 }

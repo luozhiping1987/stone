@@ -19,19 +19,19 @@ public class 词法分析器类 {
         hasMore = true;
         reader = new LineNumberReader(r);
     }
-    public 词类 读() throws ParseException {
+    public 词类 读() throws 分析例外 {
         if (fillQueue(0))
             return queue.remove(0);
         else
             return 词类.EOF;
     }
-    public 词类 peek(int i) throws ParseException {
+    public 词类 瞄(int i) throws 分析例外 {
         if (fillQueue(i))
             return queue.get(i);
         else
             return 词类.EOF; 
     }
-    private boolean fillQueue(int i) throws ParseException {
+    private boolean fillQueue(int i) throws 分析例外 {
         while (i >= queue.size())
             if (hasMore)
                 readLine();
@@ -39,12 +39,12 @@ public class 词法分析器类 {
                 return false;
         return true;
     }
-    protected void readLine() throws ParseException {
+    protected void readLine() throws 分析例外 {
         String line;
         try {
             line = reader.readLine();
         } catch (IOException e) {
-            throw new ParseException(e);
+            throw new 分析例外(e);
         }
         if (line == null) {
             hasMore = false;
@@ -62,7 +62,7 @@ public class 词法分析器类 {
                 pos = matcher.end();
             }
             else
-                throw new ParseException("bad token at line " + lineNo);
+                throw new 分析例外("bad token at line " + lineNo);
         }
         queue.add(new IdToken(lineNo, 词类.EOL));
     }
