@@ -23,7 +23,7 @@ public class 环境优化解释器类 {
         while (lexer.瞄(0) != 词类.EOF) {
             语法树类 t = bp.分析(lexer);
             if (!(t instanceof 空声明类)) {
-                ((环境优化器类.语法树优化执行类)t).查找(
+                ((环境优化器类.语法树优化扩展类)t).查找(
                         ((环境优化器类.环境扩展类2)env).所有符号());
                 Object r = ((基本求值器类.语法树扩展类)t).求值(env);
                 System.out.println("=> " + r);

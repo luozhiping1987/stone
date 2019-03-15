@@ -26,7 +26,7 @@ public class 带类型解释器类 {
         while (lexer.瞄(0) != 词类.EOF) {
             语法树类 tree = bp.分析(lexer);
             if (!(tree instanceof 空声明类)) {
-                ((环境优化器类.语法树优化执行类)tree).查找(
+                ((环境优化器类.语法树优化扩展类)tree).查找(
                                         ((环境优化器类.环境扩展类2)env).所有符号());
                 类型信息类 type
                     = ((类型检查器类.语法树类型扩展类)tree).类型检查(typeEnv);

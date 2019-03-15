@@ -4,7 +4,7 @@ import javassist.gluonj.*;
 import stone.ast.*;
 import chap11.环境优化器类;
 import chap11.Symbols;
-import chap11.环境优化器类.语法树优化执行类;
+import chap11.环境优化器类.语法树优化扩展类;
 import chap6.环境类;
 import chap6.基本求值器类.语法树扩展类;
 
@@ -33,7 +33,7 @@ import chap6.基本求值器类.语法树扩展类;
         public VarStmntEx(List<语法树类> c) { super(c); }
         public void 查找(Symbols syms) {
             index = syms.putNew(name());
-            ((语法树优化执行类)initializer()).查找(syms);
+            ((语法树优化扩展类)initializer()).查找(syms);
         }
         public Object 求值(环境类 env) {
             Object value = ((语法树扩展类)initializer()).求值(env);

@@ -19,14 +19,14 @@ import chap7.闭包求值器类;
         void putNew(String name, Object value);
         环境类 where(String name);
     }
-    @Reviser public static abstract class 语法树优化执行类 extends 语法树类 {
+    @Reviser public static abstract class 语法树优化扩展类 extends 语法树类 {
         public void 查找(Symbols syms) {}
     }
     @Reviser public static class ASTListEx extends ASTList {
         public ASTListEx(List<语法树类> c) { super(c); }
         public void 查找(Symbols syms) {
             for (语法树类 t: this)
-                ((语法树优化执行类)t).查找(syms);
+                ((语法树优化扩展类)t).查找(syms);
         }
     }
     @Reviser public static class DefStmntEx extends DefStmnt {
@@ -56,7 +56,7 @@ import chap7.闭包求值器类;
         {
             Symbols newSyms = new Symbols(syms);
             ((ParamsEx)params).查找(newSyms);
-            ((语法树优化执行类)revise(body)).查找(newSyms);
+            ((语法树优化扩展类)revise(body)).查找(newSyms);
             return newSyms.size();
         }
     }
@@ -111,12 +111,12 @@ import chap7.闭包求值器类;
             if ("=".equals(operator())) {
                 if (left instanceof Name) {
                     ((NameEx)left).lookupForAssign(syms);
-                    ((语法树优化执行类)right()).查找(syms);
+                    ((语法树优化扩展类)right()).查找(syms);
                     return;
                 }
             }
-            ((语法树优化执行类)left).查找(syms);
-            ((语法树优化执行类)right()).查找(syms);
+            ((语法树优化扩展类)left).查找(syms);
+            ((语法树优化扩展类)right()).查找(syms);
         }
         @Override
         protected Object computeAssign(环境类 env, Object rvalue) {

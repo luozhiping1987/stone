@@ -12,7 +12,7 @@ import chap7.函数求值器类.PrimaryEx;
 import chap11.ArrayEnv;
 import chap11.环境优化器类;
 import chap11.Symbols;
-import chap11.环境优化器类.语法树优化执行类;
+import chap11.环境优化器类.语法树优化扩展类;
 import chap11.环境优化器类.环境扩展类2;
 import chap11.环境优化器类.ParamsEx;
 import chap12.OptStoneObject.AccessException;
@@ -63,7 +63,7 @@ import chap12.OptStoneObject.AccessException;
                     ((DefStmntEx2)def).lookupAsMethod(fieldNames);
                 }
                 else
-                    ((语法树优化执行类)t).查找(syms);
+                    ((语法树优化扩展类)t).查找(syms);
             }
         }
     }
@@ -74,7 +74,7 @@ import chap12.OptStoneObject.AccessException;
             Symbols newSyms = new Symbols(syms);
             newSyms.putNew(SymbolThis.NAME);
             ((ParamsEx)parameters()).查找(newSyms);
-            ((语法树优化执行类)revise(body())).查找(newSyms);
+            ((语法树优化扩展类)revise(body())).查找(newSyms);
             size = newSyms.size();
         }
     }
