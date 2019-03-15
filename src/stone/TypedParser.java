@@ -2,7 +2,7 @@ package stone;
 import static stone.Parser.rule;
 import stone.ast.*;
 
-public class TypedParser extends FuncParser {
+public class TypedParser extends 函数语法分析器类 {
     Parser typeTag = rule(TypeTag.class).sep(":").identifier(reserved);
     Parser variable = rule(VarStmnt.class)
                           .sep("var").identifier(reserved).maybe(typeTag)

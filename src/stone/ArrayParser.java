@@ -3,7 +3,7 @@ import static stone.Parser.rule;
 import javassist.gluonj.Reviser;
 import stone.ast.*;
 
-@Reviser public class ArrayParser extends FuncParser {
+@Reviser public class ArrayParser extends 函数语法分析器类 {
     Parser elements = rule(ArrayLiteral.class)
                           .ast(expr).repeat(rule().sep(",").ast(expr));
     public ArrayParser() {

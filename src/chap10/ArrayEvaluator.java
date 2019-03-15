@@ -7,10 +7,10 @@ import stone.ast.*;
 import chap6.Environment;
 import chap6.基本求值器类;
 import chap6.基本求值器类.ASTreeEx;
-import chap7.FuncEvaluator;
-import chap7.FuncEvaluator.PrimaryEx;
+import chap7.函数求值器类;
+import chap7.函数求值器类.PrimaryEx;
 
-@Require({FuncEvaluator.class, ArrayParser.class})
+@Require({函数求值器类.class, ArrayParser.class})
 @Reviser public class ArrayEvaluator {
     @Reviser public static class ArrayLitEx extends ArrayLiteral {
         public ArrayLitEx(List<语法树类> list) { super(list); }

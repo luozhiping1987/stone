@@ -4,7 +4,7 @@ import stone.ast.ParameterList;
 import stone.ast.Arguments;
 import stone.ast.DefStmnt;
 
-public class FuncParser extends 基本语法分析器类 {
+public class 函数语法分析器类 extends 基本语法分析器类 {
     Parser param = rule().identifier(reserved);
     Parser params = rule(ParameterList.class)
                         .ast(param).repeat(rule().sep(",").ast(param));
@@ -15,7 +15,7 @@ public class FuncParser extends 基本语法分析器类 {
                       .ast(expr).repeat(rule().sep(",").ast(expr));
     Parser postfix = rule().sep("(").maybe(args).sep(")");
 
-    public FuncParser() {
+    public 函数语法分析器类() {
         reserved.add(")");
         primary.repeat(postfix);
         simple.option(args);

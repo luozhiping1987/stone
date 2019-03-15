@@ -9,7 +9,7 @@ import chap6.基本求值器类.ASTreeEx;
 import chap6.基本求值器类.BlockEx;
 
 @Require(基本求值器类.class)
-@Reviser public class FuncEvaluator {
+@Reviser public class 函数求值器类 {
     @Reviser public static interface EnvEx extends Environment {
         void putNew(String name, Object value);
         Environment where(String name);

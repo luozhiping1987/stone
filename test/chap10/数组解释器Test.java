@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import chap7.NestedEnv;
+import chap7.嵌套环境类;
 import chap8.Natives;
 import chap9.ClassInterpreter;
 import javassist.gluonj.util.UTester;
@@ -23,7 +23,7 @@ public class 数组解释器Test extends ClassInterpreter {
   private static final String 多层数组取值 = "b[1][0] + \": \" + b[1][1]";
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClassParser(), new Natives().environment(new NestedEnv()), 源代码);
+    return 解释器功用.求值(new ClassParser(), new Natives().environment(new 嵌套环境类()), 源代码);
   }
 
   @Test

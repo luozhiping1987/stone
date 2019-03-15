@@ -4,7 +4,7 @@ import java.util.List;
 import chap11.ArrayEnv;
 import chap11.EnvOptimizer;
 import chap6.Environment;
-import chap7.FuncEvaluator;
+import chap7.函数求值器类;
 import stone.StoneException;
 import stone.词类;
 import stone.ast.*;
@@ -258,7 +258,7 @@ import static javassist.gluonj.GluonJ.revise;
                 return "Object";
         }
     }
-    @Reviser public static class PrimaryEx2 extends FuncEvaluator.PrimaryEx {
+    @Reviser public static class PrimaryEx2 extends 函数求值器类.PrimaryEx {
         public PrimaryEx2(List<语法树类> c) { super(c); }
         public String translate(TypeInfo result) { return translate(0); }
         public String translate(int nest) {

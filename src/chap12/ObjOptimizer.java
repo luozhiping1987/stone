@@ -8,7 +8,7 @@ import stone.ast.*;
 import chap6.Environment;
 import chap6.基本求值器类;
 import chap6.基本求值器类.ASTreeEx;
-import chap7.FuncEvaluator.PrimaryEx;
+import chap7.函数求值器类.PrimaryEx;
 import chap11.ArrayEnv;
 import chap11.EnvOptimizer;
 import chap11.Symbols;

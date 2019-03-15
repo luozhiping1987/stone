@@ -9,3 +9,9 @@ ParseException,分析例外
 BasicInterpreter,基本解释器类
 BasicEnv,基本环境类
 BasicEvaluator,基本求值器类
+FuncInterpreter,函数解释器类
+FuncParser,函数语法分析器类
+NestedEnv,嵌套环境类
+FuncEvaluator,函数求值器类
+ClosureInterpreter,闭包解释器类
+ClosureParser,闭包语法分析器类

@@ -6,13 +6,13 @@ import stone.ast.*;
 import chap6.Environment;
 import chap6.基本求值器类.ASTreeEx;
 import chap6.基本求值器类;
-import chap7.FuncEvaluator;
-import chap7.NestedEnv;
-import chap7.FuncEvaluator.EnvEx;
-import chap7.FuncEvaluator.PrimaryEx;
+import chap7.函数求值器类;
+import chap7.嵌套环境类;
+import chap7.函数求值器类.EnvEx;
+import chap7.函数求值器类.PrimaryEx;
 import chap9.StoneObject.AccessException;
 
-@Require(FuncEvaluator.class)
+@Require(函数求值器类.class)
 @Reviser public class ClassEvaluator {
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
@@ -37,7 +37,7 @@ import chap9.StoneObject.AccessException;
             if (value instanceof ClassInfo) {
                 if ("new".equals(member)) {
                     ClassInfo ci = (ClassInfo)value;
-                    NestedEnv e = new NestedEnv(ci.environment());
+                    嵌套环境类 e = new 嵌套环境类(ci.environment());
                     StoneObject so = new StoneObject(e);
                     e.putNew("this", so);
                     initObject(ci, e);

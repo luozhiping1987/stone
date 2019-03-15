@@ -8,9 +8,9 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap7.NestedEnv;
+import chap7.嵌套环境类;
 import javassist.gluonj.util.UTester;
-import stone.ClosureParser;
+import stone.闭包语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
@@ -28,7 +28,7 @@ public class 原生解释器Test extends NativeInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClosureParser(), new Natives().environment(new NestedEnv()), 源代码);
+    return 解释器功用.求值(new 闭包语法分析器类(), new Natives().environment(new 嵌套环境类()), 源代码);
   }
 
   @Test

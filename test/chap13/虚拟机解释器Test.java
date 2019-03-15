@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import chap8.Natives;
 import javassist.gluonj.util.UTester;
-import stone.FuncParser;
+import stone.函数语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
@@ -30,7 +30,7 @@ public class 虚拟机解释器Test extends VmInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.环境优化求值(new FuncParser(),
+    return 解释器功用.环境优化求值(new 函数语法分析器类(),
         new Natives().environment(new StoneVMEnv(100000, 100000, 1000)), 源代码);
   }
 

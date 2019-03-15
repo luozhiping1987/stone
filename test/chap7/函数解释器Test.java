@@ -8,12 +8,12 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
 import javassist.gluonj.util.UTester;
-import stone.FuncParser;
+import stone.函数语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
-public class 函数解释器Test extends FuncInterpreter {
+public class 函数解释器Test extends 函数解释器类 {
 
   private static final String 换行 = "\n";
   private static final String 求值 = "fib(20)";
@@ -26,12 +26,12 @@ public class 函数解释器Test extends FuncInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new FuncParser(), new NestedEnv(), 源代码);
+    return 解释器功用.求值(new 函数语法分析器类(), new 嵌套环境类(), 源代码);
   }
 
   @Test
   public void 例程() throws Throwable {
-    if (UTester.runTestWith("chap7.FuncEvaluator"))
+    if (UTester.runTestWith("chap7.函数求值器类"))
       return;
     assertEquals("fib", 求值(斐波那契函数));
     assertEquals(6765, 求值(斐波那契函数 + 换行 + 求值));

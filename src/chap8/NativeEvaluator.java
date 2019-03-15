@@ -5,11 +5,11 @@ import stone.ast.语法树类;
 import javassist.gluonj.*;
 import chap6.Environment;
 import chap6.基本求值器类.ASTreeEx;
-import chap7.FuncEvaluator;
+import chap7.函数求值器类;
 
-@Require(FuncEvaluator.class)
+@Require(函数求值器类.class)
 @Reviser public class NativeEvaluator {
-    @Reviser public static class NativeArgEx extends FuncEvaluator.ArgumentsEx {
+    @Reviser public static class NativeArgEx extends 函数求值器类.ArgumentsEx {
         public NativeArgEx(List<语法树类> c) { super(c); }
         @Override public Object eval(Environment callerEnv, Object value) {
             if (!(value instanceof NativeFunction))

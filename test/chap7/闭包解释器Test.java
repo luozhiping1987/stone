@@ -8,12 +8,12 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Test;
 
 import javassist.gluonj.util.UTester;
-import stone.ClosureParser;
+import stone.闭包语法分析器类;
 import stone.分析例外;
 import stone.util.文件功用;
 import stone.util.解释器功用;
 
-public class 闭包解释器Test extends ClosureInterpreter {
+public class 闭包解释器Test extends 闭包解释器类 {
 
   private static final String 换行 = "\n";
   private static final String 求值1 = "c1()";
@@ -30,7 +30,7 @@ public class 闭包解释器Test extends ClosureInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClosureParser(), new NestedEnv(), 源代码);
+    return 解释器功用.求值(new 闭包语法分析器类(), new 嵌套环境类(), 源代码);
   }
 
   @Test

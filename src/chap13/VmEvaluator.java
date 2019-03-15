@@ -5,7 +5,7 @@ import stone.词类;
 import chap11.EnvOptimizer;
 import chap6.Environment;
 import chap6.基本求值器类.ASTreeEx;
-import chap7.FuncEvaluator;
+import chap7.函数求值器类;
 import javassist.gluonj.*;
 import static chap13.Opcode.*;
 import static javassist.gluonj.GluonJ.revise;
@@ -162,7 +162,7 @@ import stone.ast.*;
                 throw new StoneException("bad operator", this);
         }
     }
-    @Reviser public static class PrimaryVmEx extends FuncEvaluator.PrimaryEx {
+    @Reviser public static class PrimaryVmEx extends 函数求值器类.PrimaryEx {
         public PrimaryVmEx(List<语法树类> c) { super(c); }
         public void compile(Code c) {
             compileSubExpr(c, 0);

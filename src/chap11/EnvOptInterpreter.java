@@ -3,7 +3,7 @@ import chap6.基本求值器类;
 import chap6.Environment;
 import chap8.Natives;
 import stone.基本语法分析器类;
-import stone.ClosureParser;
+import stone.闭包语法分析器类;
 import stone.CodeDialog;
 import stone.词法分析器类;
 import stone.分析例外;
@@ -13,7 +13,7 @@ import stone.ast.NullStmnt;
 
 public class EnvOptInterpreter {
     public static void main(String[] args) throws 分析例外 {
-        run(new ClosureParser(),
+        run(new 闭包语法分析器类(),
             new Natives().environment(new ResizableArrayEnv()));
     }
     public static void run(基本语法分析器类 bp, Environment env)

@@ -14,6 +14,6 @@ public class Function {
     }
     public ParameterList parameters() { return parameters; }
     public BlockStmnt body() { return body; }
-    public Environment makeEnv() { return new NestedEnv(env); }
+    public Environment makeEnv() { return new 嵌套环境类(env); }
     @Override public String toString() { return "<fun:" + hashCode() + ">"; }
 }

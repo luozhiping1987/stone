@@ -1,13 +1,13 @@
 package chap7;
 import java.util.HashMap;
 import chap6.Environment;
-import chap7.FuncEvaluator.EnvEx;
+import chap7.函数求值器类.EnvEx;
 
-public class NestedEnv implements Environment {
+public class 嵌套环境类 implements Environment {
     protected HashMap<String,Object> values;
     protected Environment outer;
-    public NestedEnv() { this(null); }
-    public NestedEnv(Environment e) {
+    public 嵌套环境类() { this(null); }
+    public 嵌套环境类(Environment e) {
         values = new HashMap<String,Object>();
         outer = e;
     }

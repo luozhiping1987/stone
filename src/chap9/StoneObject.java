@@ -1,6 +1,6 @@
 package chap9;
 import chap6.Environment;
-import chap7.FuncEvaluator.EnvEx;
+import chap7.函数求值器类.EnvEx;
 
 public class StoneObject {
     public static class AccessException extends Exception {}

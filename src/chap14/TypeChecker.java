@@ -1,6 +1,6 @@
 package chap14;
 import java.util.List;
-import chap7.FuncEvaluator;
+import chap7.函数求值器类;
 import chap11.EnvOptimizer;
 import stone.词类;
 import static javassist.gluonj.GluonJ.revise;
@@ -158,7 +158,7 @@ import javassist.gluonj.*;
             return result;
         }
     }
-    @Reviser public static class PrimaryEx2 extends FuncEvaluator.PrimaryEx {
+    @Reviser public static class PrimaryEx2 extends 函数求值器类.PrimaryEx {
         public PrimaryEx2(List<语法树类> c) { super(c); }
         public TypeInfo typeCheck(TypeEnv tenv) throws TypeException {
             return typeCheck(tenv, 0);

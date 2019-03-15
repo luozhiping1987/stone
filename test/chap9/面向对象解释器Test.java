@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import chap7.NestedEnv;
+import chap7.嵌套环境类;
 import chap8.Natives;
 import javassist.gluonj.util.UTester;
 import stone.ClassParser;
@@ -26,7 +26,7 @@ public class 面向对象解释器Test extends ClassInterpreter {
   }
 
   public static Object 求值(String 源代码) throws 分析例外 {
-    return 解释器功用.求值(new ClassParser(), new Natives().environment(new NestedEnv()), 源代码);
+    return 解释器功用.求值(new ClassParser(), new Natives().environment(new 嵌套环境类()), 源代码);
   }
 
   @Test

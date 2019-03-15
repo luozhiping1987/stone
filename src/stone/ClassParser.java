@@ -4,7 +4,7 @@ import stone.ast.ClassBody;
 import stone.ast.ClassStmnt;
 import stone.ast.Dot;
 
-public class ClassParser extends ClosureParser {
+public class ClassParser extends 闭包语法分析器类 {
     Parser member = rule().or(def, simple);
     Parser class_body = rule(ClassBody.class).sep("{").option(member)
                             .repeat(rule().sep(";", 词类.EOL).option(member))
