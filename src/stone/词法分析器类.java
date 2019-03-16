@@ -9,9 +9,10 @@ import java.util.regex.Pattern;
 public class 词法分析器类 {
     public static String regexPat
         = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")"
-          + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?";
-    private Pattern pattern = Pattern.compile(regexPat);
-    private ArrayList<词类> queue = new ArrayList<词类>();
+            + "|[\\p{script=Han}A-Z_a-z][\\p{script=Han}A-Z_a-z0-9]*" // 支持中文标识符
+            + "|==|<=|>=|&&|\\|\\||\\p{Punct})?";
+    private Pattern 模式 = Pattern.compile(regexPat);
+    private ArrayList<词类> queue = new ArrayList<>();
     private boolean hasMore;
     private LineNumberReader reader;
 
@@ -29,7 +30,7 @@ public class 词法分析器类 {
         if (fillQueue(i))
             return queue.get(i);
         else
-            return 词类.EOF; 
+            return 词类.EOF;
     }
     private boolean fillQueue(int i) throws 分析例外 {
         while (i >= queue.size())
@@ -40,33 +41,33 @@ public class 词法分析器类 {
         return true;
     }
     protected void readLine() throws 分析例外 {
-        String line;
+        String 行;
         try {
-            line = reader.readLine();
+            行 = reader.readLine();
         } catch (IOException e) {
             throw new 分析例外(e);
         }
-        if (line == null) {
+        if (行 == null) {
             hasMore = false;
             return;
         }
-        int lineNo = reader.getLineNumber();
-        Matcher matcher = pattern.matcher(line);
-        matcher.useTransparentBounds(true).useAnchoringBounds(false);
-        int pos = 0;
-        int endPos = line.length();
-        while (pos < endPos) {
-            matcher.region(pos, endPos);
-            if (matcher.lookingAt()) {
-                addToken(lineNo, matcher);
-                pos = matcher.end();
+        int 行数 = reader.getLineNumber();
+        Matcher 匹配器 = 模式.matcher(行);
+        匹配器.useTransparentBounds(true).useAnchoringBounds(false);
+        int 头 = 0;
+        int 尾 = 行.length();
+        while (头 < 尾) {
+            匹配器.region(头, 尾);
+            if (匹配器.lookingAt()) {
+                添加词(行数, 匹配器);
+                头 = 匹配器.end();
             }
             else
-                throw new 分析例外("bad token at line " + lineNo);
+                throw new 分析例外("bad token at line " + 行数);
         }
-        queue.add(new IdToken(lineNo, 词类.EOL));
+        queue.add(new IdToken(行数, 词类.EOL));
     }
-    protected void addToken(int lineNo, Matcher matcher) {
+    protected void 添加词(int lineNo, Matcher matcher) {
         String m = matcher.group(1);
         if (m != null) // if not a space
             if (matcher.group(2) == null) { // if not a comment
@@ -106,18 +107,23 @@ public class 词法分析器类 {
             super(line);
             value = v;
         }
+        @Override
         public boolean 为数() { return true; }
+        @Override
         public String 取文本() { return Integer.toString(value); }
+        @Override
         public int getNumber() { return value; }
     }
 
     protected static class IdToken extends 词类 {
-        private String text; 
+        private String text;
         protected IdToken(int line, String id) {
             super(line);
             text = id;
         }
+        @Override
         public boolean 为标识符() { return true; }
+        @Override
         public String 取文本() { return text; }
     }
 
@@ -127,7 +133,9 @@ public class 词法分析器类 {
             super(line);
             literal = str;
         }
+        @Override
         public boolean isString() { return true; }
+        @Override
         public String 取文本() { return literal; }
     }
 }
