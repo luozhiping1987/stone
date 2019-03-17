@@ -1,6 +1,6 @@
 类别 Position {
     x = y = 0
-    def move (nx, ny) {
+    定义 move (nx, ny) {
         x = nx; y = ny;
     }
 }

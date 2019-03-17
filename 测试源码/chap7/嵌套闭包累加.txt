@@ -1,4 +1,4 @@
-def counter (c) {
+定义 counter (c) {
     fun () { c = c + 1 }
 }
 c1 = counter(0)

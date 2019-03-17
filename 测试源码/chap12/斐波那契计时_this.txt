@@ -1,7 +1,7 @@
-class Fib {
+类别 Fib {
     fib0 = 0
     fib1 = 1
-    def fib (n) {
+    定义 fib (n) {
         如果 n == 0 {
             fib0
         } 不然 {
