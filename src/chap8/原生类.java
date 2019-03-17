@@ -1,10 +1,13 @@
 package chap8;
 import java.lang.reflect.Method;
+
 import javax.swing.JOptionPane;
-import stone.StoneException;
+
 import chap6.环境类;
+import stone.StoneException;
 
 public class 原生类 {
+  private static final String 方法名_当前时刻 = "当前时刻";
     public 环境类 环境(环境类 env) {
         appendNatives(env);
         return env;
@@ -14,18 +17,18 @@ public class 原生类 {
         append(env, "read", 原生类.class, "read");
         append(env, "length", 原生类.class, "length", String.class);
         append(env, "toInt", 原生类.class, "toInt", Object.class);
-        append(env, "currentTime", 原生类.class, "currentTime");
+        append(env, 方法名_当前时刻, 原生类.class, "currentTime");
     }
     protected void append(环境类 env, String name, Class<?> clazz,
-                          String methodName, Class<?> ... params) {
+                          String 内部方法名, Class<?> ... params) {
         Method m;
         try {
-            m = clazz.getMethod(methodName, params);
+            m = clazz.getMethod(内部方法名, params);
         } catch (Exception e) {
             throw new StoneException("cannot find a native function: "
-                                     + methodName);
+                                     + 内部方法名);
         }
-        env.put(name, new NativeFunction(methodName, m));
+        env.put(name, new NativeFunction(内部方法名, m));
     }
 
     // native methods

@@ -19,9 +19,9 @@ public class 虚拟机解释器Test extends 虚拟机解释器类 {
 
   private static final String 换行 = "\n";
   private static final String 打印 = "print 耗时 + \" 毫秒 静态类型\"";
-  private static final String 计时 = "时刻 = currentTime()";
+  private static final String 计时 = "时刻 = 当前时刻()";
   private static final String 求值 = "斐波那契(20)";
-  private static final String 计时结束 = "耗时 = currentTime() - 时刻";
+  private static final String 计时结束 = "耗时 = 当前时刻() - 时刻";
   private static String 斐波那契 = "";
   static {
     try {
