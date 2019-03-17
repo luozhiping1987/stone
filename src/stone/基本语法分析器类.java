@@ -38,7 +38,7 @@ public class 基本语法分析器类 {
     Parser simple = rule(PrimaryExpr.class).ast(expr);
     Parser statement = statement0.or(
             rule(IfStmnt.class).sep(IfStmnt.关键字_如果).ast(expr).ast(block)
-                               .option(rule().sep(IfStmnt.关键字_不然).ast(block)),
+                               .option(rule().sep(IfStmnt.关键字_否则).ast(block)),
             rule(While声明类.class).sep(While声明类.关键字).ast(expr).ast(block),
             simple);
 

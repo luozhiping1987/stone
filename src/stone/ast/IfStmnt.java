@@ -3,7 +3,7 @@ import java.util.List;
 
 public class IfStmnt extends ASTList {
   public static final String 关键字_如果 = "如果";
-  public static final String 关键字_不然 = "不然";
+  public static final String 关键字_否则 = "否则";
 
     public IfStmnt(List<语法树类> c) { super(c); }
     public 语法树类 condition() { return 子(0); }
@@ -14,6 +14,6 @@ public class IfStmnt extends ASTList {
     @Override
     public String toString() {
         return "(" + 关键字_如果 + " " + condition() + " " + thenBlock()
-                 + " " + 关键字_不然 + " " + elseBlock() + ")";
+                 + " " + 关键字_否则 + " " + elseBlock() + ")";
     }
 }
