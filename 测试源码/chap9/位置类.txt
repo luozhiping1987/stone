@@ -1,4 +1,4 @@
-class Position {
+类别 Position {
     x = y = 0
     def move (nx, ny) {
         x = nx; y = ny;
