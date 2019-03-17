@@ -19,7 +19,7 @@ import stone.util.解释器功用;
 public class 环境优化解释器Test extends 环境优化解释器类 {
 
   private static final String 换行 = "\n";
-  private static final String 打印 = "print 耗时 + \" 毫秒 环境优化\"";
+  private static final String 打印 = "打印 耗时 + \" 毫秒 环境优化\"";
   private static String 斐波那契计时 = "";
   static {
     try {

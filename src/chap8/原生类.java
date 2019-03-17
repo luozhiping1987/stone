@@ -8,12 +8,13 @@ import stone.StoneException;
 
 public class 原生类 {
   private static final String 方法名_当前时刻 = "当前时刻";
+  private static final String 方法名_打印 = "打印";
     public 环境类 环境(环境类 env) {
         appendNatives(env);
         return env;
     }
     protected void appendNatives(环境类 env) {
-        append(env, "print", 原生类.class, "print", Object.class);
+        append(env, 方法名_打印, 原生类.class, "print", Object.class);
         append(env, "read", 原生类.class, "read");
         append(env, "length", 原生类.class, "length", String.class);
         append(env, "toInt", 原生类.class, "toInt", Object.class);
