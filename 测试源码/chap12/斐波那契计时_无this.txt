@@ -14,6 +14,6 @@
     }
 }
 t = currentTime()
-f = Fib.new
+f = Fib.新建
 f.fib 20
 cost = currentTime() - t

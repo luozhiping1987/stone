@@ -4,7 +4,7 @@
         x = nx; y = ny;
     }
 }
-p = Position.new
+p = Position.新建
 p.move(3, 4)
 p.x = 10
 sum = p.x + p.y

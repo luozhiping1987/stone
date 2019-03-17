@@ -1,21 +1,30 @@
 package chap12;
+import static javassist.gluonj.GluonJ.revise;
+
 import java.util.ArrayList;
 import java.util.List;
-import static javassist.gluonj.GluonJ.revise;
-import javassist.gluonj.*;
-import stone.*;
-import stone.ast.*;
-import chap6.环境类;
+
+import chap11.ArrayEnv;
+import chap11.Symbols;
+import chap11.环境优化器类;
+import chap11.环境优化器类.ParamsEx;
+import chap11.环境优化器类.环境扩展类2;
+import chap11.环境优化器类.语法树优化扩展类;
+import chap12.OptStoneObject.AccessException;
 import chap6.基本求值器类;
 import chap6.基本求值器类.语法树扩展类;
+import chap6.环境类;
 import chap7.函数求值器类.PrimaryEx;
-import chap11.ArrayEnv;
-import chap11.环境优化器类;
-import chap11.Symbols;
-import chap11.环境优化器类.语法树优化扩展类;
-import chap11.环境优化器类.环境扩展类2;
-import chap11.环境优化器类.ParamsEx;
-import chap12.OptStoneObject.AccessException;
+import javassist.gluonj.Require;
+import javassist.gluonj.Reviser;
+import stone.StoneException;
+import stone.词类;
+import stone.ast.ClassBody;
+import stone.ast.ClassStmnt;
+import stone.ast.DefStmnt;
+import stone.ast.Dot;
+import stone.ast.PrimaryExpr;
+import stone.ast.语法树类;
 
 @Require(环境优化器类.class)
 @Reviser public class 对象优化器类 {
@@ -30,7 +39,7 @@ import chap12.OptStoneObject.AccessException;
             OptClassInfo ci = new OptClassInfo(this, env, methodNames,
                                                fieldNames);
             ((环境扩展类2)env).put(name(), ci);
-            ArrayList<DefStmnt> methods = new ArrayList<DefStmnt>();
+            ArrayList<DefStmnt> methods = new ArrayList<>();
             if (ci.superClass() != null)
                 ci.superClass().copyTo(fieldNames, methodNames, methods);
             Symbols newSyms = new SymbolThis(fieldNames);
@@ -83,7 +92,7 @@ import chap12.OptStoneObject.AccessException;
         public Object 求值(环境类 env, Object value) {
             String member = name();
             if (value instanceof OptClassInfo) {
-                if ("new".equals(member)) {
+                if (Dot.关键字_新建.equals(member)) {
                     OptClassInfo ci = (OptClassInfo)value;
                     ArrayEnv newEnv = new ArrayEnv(1, ci.environment());
                     OptStoneObject so = new OptStoneObject(ci, ci.size());

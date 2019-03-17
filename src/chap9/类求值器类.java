@@ -1,19 +1,26 @@
 package chap9;
 import java.util.List;
-import stone.StoneException;
-import javassist.gluonj.*;
-import stone.ast.*;
-import chap6.环境类;
-import chap6.基本求值器类.语法树扩展类;
+
 import chap6.基本求值器类;
+import chap6.基本求值器类.语法树扩展类;
+import chap6.环境类;
 import chap7.函数求值器类;
-import chap7.嵌套环境类;
 import chap7.函数求值器类.EnvEx;
 import chap7.函数求值器类.PrimaryEx;
+import chap7.嵌套环境类;
 import chap9.StoneObject.AccessException;
+import javassist.gluonj.Require;
+import javassist.gluonj.Reviser;
+import stone.StoneException;
+import stone.ast.ClassBody;
+import stone.ast.ClassStmnt;
+import stone.ast.Dot;
+import stone.ast.PrimaryExpr;
+import stone.ast.语法树类;
 
 @Require(函数求值器类.class)
 @Reviser public class 类求值器类 {
+
     @Reviser public static class ClassStmntEx extends ClassStmnt {
         public ClassStmntEx(List<语法树类> c) { super(c); }
         public Object 求值(环境类 env) {
@@ -35,7 +42,7 @@ import chap9.StoneObject.AccessException;
         public Object 求值(环境类 env, Object value) {
             String member = name();
             if (value instanceof ClassInfo) {
-                if ("new".equals(member)) {
+                if (Dot.关键字_新建.equals(member)) {
                     ClassInfo ci = (ClassInfo)value;
                     嵌套环境类 e = new 嵌套环境类(ci.environment());
                     StoneObject so = new StoneObject(e);
