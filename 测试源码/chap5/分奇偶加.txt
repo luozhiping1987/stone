@@ -2,9 +2,9 @@ even = 0
 odd = 0
 i = 1
 每当 i < 10 {
-  if i % 2 == 0 { // even number?
+  如果 i % 2 == 0 { // even number?
     even = even + i
-  } else {
+  } 不然 {
     odd = odd + i
   }
   i = i + 1

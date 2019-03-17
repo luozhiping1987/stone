@@ -2,12 +2,12 @@ class Fib {
     fib0 = 0
     fib1 = 1
     def fib (n) {
-        if n == 0 {
+        如果 n == 0 {
             fib0
-        } else {
-            if n == 1 {
+        } 不然 {
+            如果 n == 1 {
                 this.fib1
-            } else {
+            } 不然 {
                 this.fib(n-1) + this.fib(n-2)
             }
         }

@@ -1,7 +1,7 @@
 def fib (n) {
-    if n < 2 {
+    如果 n < 2 {
         n
-    } else {
+    } 不然 {
         fib(n-1) + fib(n-2)
     }
 }
