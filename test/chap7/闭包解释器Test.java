@@ -19,7 +19,7 @@ public class 闭包解释器Test extends 闭包解释器类 {
   private static final String 换行 = "\n";
   private static final String 求值1 = "c1()";
   private static final String 求值2 = "c2()";
-  private static final String 闭包累加函数 = "inc = fun (x) { x + 1 }";
+  private static final String 闭包累加函数 = "inc = 函数 (x) { x + 1 }";
   private static final String 求值 = "inc(3)";
 
   private static String 嵌套闭包累加函数 = "";
