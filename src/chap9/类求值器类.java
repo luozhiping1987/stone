@@ -46,7 +46,7 @@ import stone.ast.语法树类;
                     ClassInfo ci = (ClassInfo)value;
                     嵌套环境类 e = new 嵌套环境类(ci.environment());
                     StoneObject so = new StoneObject(e);
-                    e.putNew("this", so);
+                    e.putNew(Dot.关键字_本体, so);
                     initObject(ci, e);
                     return so;
                 }

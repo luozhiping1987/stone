@@ -6,9 +6,9 @@
             fib0
         } 不然 {
             如果 n == 1 {
-                this.fib1
+                本体.fib1
             } 不然 {
-                this.fib(n-1) + this.fib(n-2)
+                本体.fib(n-1) + 本体.fib(n-2)
             }
         }
     }
