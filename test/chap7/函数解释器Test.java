@@ -17,7 +17,7 @@ import stone.util.解释器功用;
 public class 函数解释器Test extends 函数解释器类 {
 
   private static final String 换行 = "\n";
-  private static final String 求值 = "fib(20)";
+  private static final String 求值 = "斐波那契(20)";
   private static String 斐波那契函数 = "";
   static {
     try {
@@ -34,7 +34,7 @@ public class 函数解释器Test extends 函数解释器类 {
   public void 例程() throws Throwable {
     if (UTester.runTestWith(类路径常量.函数求值器))
       return;
-    assertEquals("fib", 求值(斐波那契函数));
+    assertEquals("斐波那契", 求值(斐波那契函数));
     assertEquals(6765, 求值(斐波那契函数 + 换行 + 求值));
   }
 

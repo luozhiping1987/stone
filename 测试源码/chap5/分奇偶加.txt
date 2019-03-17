@@ -1,12 +1,12 @@
-even = 0
-odd = 0
+偶 = 0
+奇 = 0
 i = 1
 每当 i < 10 {
-  如果 i % 2 == 0 { // even number?
-    even = even + i
+  如果 i % 2 == 0 { // 偶数?
+    偶 = 偶 + i
   } 不然 {
-    odd = odd + i
+    奇 = 奇 + i
   }
   i = i + 1
 }
-even + odd
+偶 + 奇

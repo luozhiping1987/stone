@@ -1,19 +1,19 @@
-类别 Fib {
-    fib0 = 0
-    fib1 = 1
-    定义 fib (n) {
+类别 斐波那契类 {
+    值0 = 0
+    值1 = 1
+    定义 斐波那契 (n) {
         如果 n == 0 {
-            fib0
+            值0
         } 不然 {
             如果 n == 1 {
-                fib1
+                值1
             } 不然 {
-                fib(n-1) + fib(n-2)
+                斐波那契(n-1) + 斐波那契(n-2)
             }
         }
     }
 }
-t = currentTime()
-f = Fib.新建
-f.fib 20
-cost = currentTime() - t
+时刻 = currentTime()
+斐 = 斐波那契类.新建
+斐.斐波那契 20
+耗时 = currentTime() - 时刻

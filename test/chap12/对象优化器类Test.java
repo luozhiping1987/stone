@@ -20,7 +20,7 @@ import stone.util.解释器功用;
 public class 对象优化器类Test extends 对象优化解释器类 {
 
   private static final String 换行 = "\n";
-  private static final String 打印 = "print cost + \" 毫秒\"";
+  private static final String 打印 = "print 耗时 + \" 毫秒\"";
   private static String 斐波那契计时_this = "";
   private static String 斐波那契计时_无this = "";
   static {
