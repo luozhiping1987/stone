@@ -1,7 +1,7 @@
 even = 0
 odd = 0
 i = 1
-while i < 10 {
+每当 i < 10 {
   if i % 2 == 0 { // even number?
     even = even + i
   } else {

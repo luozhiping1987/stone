@@ -17,7 +17,7 @@ public class 基本解释器Test extends 基本解释器类 {
   private static final String 初始化和 = "sum = 0";
   private static final String 初始化计数器 = "i = 1";
   private static final String 循环累加 =
-    "while i < 10 {\n" +
+    "每当 i < 10 {\n" +
     "  sum = sum + i\n" +
     "  i = i + 1\n" +
     "}";
