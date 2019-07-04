@@ -8,3 +8,8 @@ The source of gluonj.jar is available from https://github.com/chibash/gluonj
 - [重拾《 两周自制脚本语言 》- 支持中文标识符](https://zhuanlan.zhihu.com/p/59491495)
 - [重拾《 两周自制脚本语言 》- 中文关键字与原生函数](https://zhuanlan.zhihu.com/p/59554958)
 - [重拾《 两周自制脚本语言 》- Eclipse插件实现语法高亮](https://zhuanlan.zhihu.com/p/59890614)
+
+开发环境：
+Adopt OpenJDK 8
+
+如果用JDK 10或9，会报错：`invalid constant type: 18`
